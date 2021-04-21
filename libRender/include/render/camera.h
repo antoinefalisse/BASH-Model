@@ -113,7 +113,13 @@ public:
 
 	void SetDefault();
 	void RotateToFront();
-	void RotateToSide();
+	void RotateToBack();
+	void Rotate90ToLeftSide();
+	void Rotate45ToLeftSide();
+	void Rotate135ToLeftSide();
+	void Rotate90ToRightSide();
+	void Rotate45ToRightSide();
+	void Rotate135ToRightSide();
 	void MoveOrbitCenter(const glm::vec3& c);
 	void Update();
 };

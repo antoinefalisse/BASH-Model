@@ -3,7 +3,7 @@
 #include "MatrixnD.h"
 #include "SCAPE_structs.h"
 #include "PCA_basis.h"
-#include <umfpack/umfpack.h>
+#include <umfpack.h>
 #include "operators/alignPointClouds.h"
 #include "RandAccSparseMatrix.h"
 #include <omp.h>

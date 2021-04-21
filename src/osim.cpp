@@ -22,10 +22,10 @@ OSIM::OSIM(const std::string& filepath_osim, const std::string& filepath_scale, 
 		if (filepath_mot != "") {
 			motStorage = LoadStorageFile(filepath_mot);
 
-			// load the muscle activation file (.sto)
-			if (filepath_sto != "") {
-				LoadMuscleActivationFile(filepath_sto);
-			}
+			//// load the muscle activation file (.sto)
+			//if (filepath_sto != "") {
+			//	LoadMuscleActivationFile(filepath_sto);
+			//}
 		}
 
 	} catch (const std::exception & ex) {
@@ -87,48 +87,48 @@ void OSIM::InverseKinematics(const std::string& filepath_input_trc, const std::s
 }
 
 
-// looad the muscle activation data from a .sto file
-void OSIM::LoadMuscleActivationFile(const std::string& filepath) {
-	try {
-		// load .sto file
-		OpenSim::TimeSeriesTable stoTable = OpenSim::STOFileAdapter().read(filepath);
-
-		// number of time states has to match the loaded .mot file
-		if (stoTable.getNumRows() != motStorage.getSize()) {
-			PRINT_ERR("Number of time states has to match in file: " + filepath);
-		}
-
-		muscleActivations.resize(stoTable.getNumRows());
-		for (int frameID = 0; frameID < stoTable.getNumRows(); frameID++) {
-			double time = stoTable.getIndependentColumn().at(frameID);
-
-			// match time
-			if (time != motStorage.getStateVector(frameID)->getTime()) {
-				PRINT_ERR("Time state values do not match in file: " + filepath);
-			}
-
-			// iterate through muscles
-			OpenSim::Array<std::string> muscleNames;
-			osimModel.getMuscles().getNames(muscleNames);
-
-			for (int muscleID = 0; muscleID < muscleNames.size(); muscleID++) {
-				std::string muscleName = muscleNames[muscleID];
-				const OpenSim::Muscle& m = osimModel.getMuscles().get(muscleName);
-
-				std::string muscleName_sto = stoTable.getColumnLabel(muscleID);
-				if (muscleName != muscleName_sto) {
-					PRINT_ERR("Muscle name '" + muscleName + "' does not match '" + muscleName_sto + "' in " + filepath);
-				}
-
-				double muscleActivation = stoTable.getRowAtIndex(frameID)[muscleID];
-
-				muscleActivations.at(frameID)[muscleName] = muscleActivation;
-			}
-		}
-	} catch (const std::exception & ex) {
-		PRINT_ERR(ex.what());
-	}
-}
+//// looad the muscle activation data from a .sto file
+//void OSIM::LoadMuscleActivationFile(const std::string& filepath) {
+//	try {
+//		// load .sto file
+//		OpenSim::TimeSeriesTable stoTable = OpenSim::STOFileAdapter().read(filepath);
+//
+//		// number of time states has to match the loaded .mot file
+//		if (stoTable.getNumRows() != motStorage.getSize()) {
+//			PRINT_ERR("Number of time states has to match in file: " + filepath);
+//		}
+//
+//		muscleActivations.resize(stoTable.getNumRows());
+//		for (int frameID = 0; frameID < stoTable.getNumRows(); frameID++) {
+//			double time = stoTable.getIndependentColumn().at(frameID);
+//
+//			// match time
+//			if (time != motStorage.getStateVector(frameID)->getTime()) {
+//				PRINT_ERR("Time state values do not match in file: " + filepath);
+//			}
+//
+//			// iterate through muscles
+//			OpenSim::Array<std::string> muscleNames;
+//			osimModel.getMuscles().getNames(muscleNames);
+//
+//			for (int muscleID = 0; muscleID < muscleNames.size(); muscleID++) {
+//				std::string muscleName = muscleNames[muscleID];
+//				const OpenSim::Muscle& m = osimModel.getMuscles().get(muscleName);
+//
+//				std::string muscleName_sto = stoTable.getColumnLabel(muscleID);
+//				if (muscleName != muscleName_sto) {
+//					PRINT_ERR("Muscle name '" + muscleName + "' does not match '" + muscleName_sto + "' in " + filepath);
+//				}
+//
+//				double muscleActivation = stoTable.getRowAtIndex(frameID)[muscleID];
+//
+//				muscleActivations.at(frameID)[muscleName] = muscleActivation;
+//			}
+//		}
+//	} catch (const std::exception & ex) {
+//		PRINT_ERR(ex.what());
+//	}
+//}
 
 // load OSIM storage format
 OpenSim::Storage OSIM::LoadStorageFile(const std::string& filepath) {

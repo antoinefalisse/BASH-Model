@@ -190,8 +190,38 @@ void OrbitCameraControl::RotateToFront() {
 	phi = glm::half_pi<float>();
 	Update();
 }
-void OrbitCameraControl::RotateToSide() {
+void OrbitCameraControl::RotateToBack() {
+	theta = glm::pi<float>();
+	phi = glm::half_pi<float>();
+	Update();
+}
+void OrbitCameraControl::Rotate90ToLeftSide() {
 	theta = glm::half_pi<float>();
+	phi = glm::half_pi<float>();
+	Update();
+}
+void OrbitCameraControl::Rotate45ToLeftSide() {
+	theta = glm::half_pi<float>() / 2;
+	phi = glm::half_pi<float>();
+	Update();
+}
+void OrbitCameraControl::Rotate135ToLeftSide() {
+	theta = 3 * glm::half_pi<float>() / 2;
+	phi = glm::half_pi<float>();
+	Update();
+}
+void OrbitCameraControl::Rotate90ToRightSide() {
+	theta = -glm::half_pi<float>();
+	phi = glm::half_pi<float>();
+	Update();
+}
+void OrbitCameraControl::Rotate45ToRightSide() {
+	theta = -glm::half_pi<float>() / 2;
+	phi = glm::half_pi<float>();
+	Update();
+}
+void OrbitCameraControl::Rotate135ToRightSide() {
+	theta = -3 * glm::half_pi<float>() / 2;
 	phi = glm::half_pi<float>();
 	Update();
 }

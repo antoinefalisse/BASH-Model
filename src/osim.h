@@ -75,7 +75,7 @@ private:
 	std::map<std::string, glm::vec3> scaleFactors;
 
 	OpenSim::Storage LoadStorageFile(const std::string& filepath);
-	void LoadMuscleActivationFile(const std::string& filepath);
+	//void LoadMuscleActivationFile(const std::string& filepath);
 	void SetStateToDefault();
 	void SetStateToFrame(int frameID);
 	std::map<std::string, Data::Marker> LoadMarkerData();

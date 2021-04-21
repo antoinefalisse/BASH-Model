@@ -9,7 +9,7 @@
 //#define FILEPATH_DEFAULT_STO "./data/OSIM/JK_Data/JK_SCALED_running1_kinetics_activation.sto"
 
 // Scale factors
-#define ESTIMATE_SCALEFACTORS_MARKERDATA false
+#define ESTIMATE_SCALEFACTORS_MARKERDATA true
 #define APPLY_SCALEFACTORS_INPUTMODEL false // only for test purposes!
 
 // Default Baseline model in static pose
@@ -78,8 +78,14 @@ enum class MuscleMode { LoadFromFile, kNN };
 #define KEY_RELOAD_SHADERS sf::Keyboard::Slash
 #define KEY_RESET_CAMERA sf::Keyboard::Num0
 #define KEY_CAMERA_FRONT sf::Keyboard::Num1
-#define KEY_CAMERA_SIDE sf::Keyboard::Num2
-#define KEY_CAMERA_DEFINED sf::Keyboard::Num3
+#define KEY_CAMERA_BACK sf::Keyboard::Num2
+#define KEY_CAMERA_45RIGHTSIDE sf::Keyboard::Num3
+#define KEY_CAMERA_90RIGHTSIDE sf::Keyboard::Num4
+#define KEY_CAMERA_135RIGHTSIDE sf::Keyboard::Num5
+#define KEY_CAMERA_45LEFTSIDE sf::Keyboard::Num6
+#define KEY_CAMERA_90LEFTSIDE sf::Keyboard::Num7
+#define KEY_CAMERA_135LEFTSIDE sf::Keyboard::Num8
+#define KEY_CAMERA_DEFINED sf::Keyboard::DD
 
 // Keys: Rendering
 #define KEY_SHOW_WIREFRAME sf::Keyboard::Comma

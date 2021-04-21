@@ -9,9 +9,9 @@
 #include <sstream>
 
 #ifndef NO_GSL
-#include "gsl/gsl_linalg.h"
-#include "gsl/gsl_matrix.h"
-#include "gsl/gsl_blas.h"
+#include "linalg/gsl_linalg.h"
+#include "matrix/gsl_matrix.h"
+#include "blas/gsl_blas.h"
 #endif
 
 

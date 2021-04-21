@@ -30,8 +30,12 @@ World::World(int w, int h) : windowWidth(w), windowHeight(h) {
 	originAxes->Transform = glm::identity<glm::mat4>();
 
 	// Camera
+	//PRINT(windowWidth);
+	//PRINT(windowHeight);
 	camera = new PerspectiveCamera(CAMERA_NAME, glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0), CAMERA_FOV, windowWidth, windowHeight, 0.01f, 1000.0f);
 	camera->Use();
+	//glm::mat4 test = camera->GetP();
+	//PRINT(test)
 	orbitCameraControl = new OrbitCameraControl(camera);
 	orbitCameraControl->distance = CAMERA_DISTANCE;
 	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
@@ -366,11 +370,47 @@ void World::ProcessInput() {
 		orbitCameraControl->Update();
 		PRINT("Camera to front");
 	}
-	if (Input::GetInstance().KeyPressed(KEY_CAMERA_SIDE)) {
-		orbitCameraControl->RotateToSide();
+	if (Input::GetInstance().KeyPressed(KEY_CAMERA_BACK)) {
+		orbitCameraControl->RotateToBack();
 		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
 		orbitCameraControl->Update();
-		PRINT("Camera to side");
+		PRINT("Camera to back");
+	}
+	if (Input::GetInstance().KeyPressed(KEY_CAMERA_45RIGHTSIDE)) {
+		orbitCameraControl->Rotate45ToRightSide();
+		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+		orbitCameraControl->Update();
+		PRINT("Camera to right side - 45 deg");
+	}
+	if (Input::GetInstance().KeyPressed(KEY_CAMERA_90RIGHTSIDE)) {
+		orbitCameraControl->Rotate90ToRightSide();
+		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+		orbitCameraControl->Update();
+		PRINT("Camera to right side - 90 deg");
+	}
+	if (Input::GetInstance().KeyPressed(KEY_CAMERA_135RIGHTSIDE)) {
+		orbitCameraControl->Rotate135ToRightSide();
+		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+		orbitCameraControl->Update();
+		PRINT("Camera to right side - 135 deg");
+	}
+	if (Input::GetInstance().KeyPressed(KEY_CAMERA_45LEFTSIDE)) {
+		orbitCameraControl->Rotate45ToLeftSide();
+		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+		orbitCameraControl->Update();
+		PRINT("Camera to left side - 45 deg");
+	}
+	if (Input::GetInstance().KeyPressed(KEY_CAMERA_90LEFTSIDE)) {
+		orbitCameraControl->Rotate90ToLeftSide();
+		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+		orbitCameraControl->Update();
+		PRINT("Camera to left side - 90 deg");
+	}
+	if (Input::GetInstance().KeyPressed(KEY_CAMERA_135LEFTSIDE)) {
+		orbitCameraControl->Rotate135ToLeftSide();
+		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+		orbitCameraControl->Update();
+		PRINT("Camera to left side - 135 deg");
 	}
 	if (Input::GetInstance().KeyPressed(KEY_CAMERA_DEFINED)) {
 		orbitCameraControl->theta = 0.6f;
