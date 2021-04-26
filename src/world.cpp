@@ -33,13 +33,54 @@ World::World(int w, int h) : windowWidth(w), windowHeight(h) {
 	//PRINT(windowWidth);
 	//PRINT(windowHeight);
 	camera = new PerspectiveCamera(CAMERA_NAME, glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0), CAMERA_FOV, windowWidth, windowHeight, 0.01f, 1000.0f);
-	camera->Use();
-	//glm::mat4 test = camera->GetP();
-	//PRINT(test)
+	camera->Use();	
 	orbitCameraControl = new OrbitCameraControl(camera);
 	orbitCameraControl->distance = CAMERA_DISTANCE;
 	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
 	orbitCameraControl->Update();
+	glm::mat4 test = camera->GetP();
+
+	// http://ksimek.github.io/2012/08/22/extrinsic/#comment-1396932776
+
+	//glm::vec3 C = orbitCameraControl->GetEye();
+	//glm::vec3 p = orbitCameraControl->GetOrbitCenter();
+	//glm::vec3 u(0.0, 1.0, 0.0);
+
+	//glm::vec3 L = p - C;
+	//glm::vec3 L_hat = glm::normalize(L);
+	//glm::vec3 s = glm::cross(L_hat, u);
+	//glm::vec3 s_hat = glm::normalize(s);
+	//glm::vec3 u_hat = glm::cross(s_hat, u);
+
+	//glm::mat3x3 R;
+	//R[0][0] = s_hat[0];
+	//R[0][1] = s_hat[1];
+	//R[0][2] = s_hat[2];
+	//R[1][0] = u_hat[0];
+	//R[1][1] = u_hat[1];
+	//R[1][2] = u_hat[2];
+	//R[2][0] = -L_hat[0];
+	//R[2][1] = -L_hat[1];
+	//R[2][2] = -L_hat[2];
+
+	//glm::vec3 t = -R * C;
+
+	//PRINT(C);
+	//PRINT(p);
+	//PRINT(L);
+	//PRINT(L_hat);
+	//PRINT(s);
+	//PRINT(s_hat);
+	//PRINT(u_hat);
+	//PRINT(R);
+	//PRINT(t);
+
+	//
+	//PRINT(windowWidth);
+	//PRINT(windowHeight);
+	//PRINT(modelRenderer->bounds.GetCenter());
+	//PRINT(test);
+	//PRINT(glm::cos(3.141592653589793));
 
 	// Lights
 	PointLight frontLight;
@@ -126,7 +167,7 @@ void World::Render(float alpha, sf::Time delta) {
 	}
 	if (Settings::GetInstance().showOrigin) {
 		// draw origin & axes
-		glPointSize(6.0f);
+		glPointSize(60.0f);
 		glLineWidth(2.0f);
 		originAxes->Draw();
 		glLineWidth(DEFAULT_LINE_WIDTH);

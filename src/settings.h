@@ -54,7 +54,7 @@ enum class MuscleMode { LoadFromFile, kNN };
 
 // Camera
 #define CAMERA_NAME "Camera"
-#define CAMERA_FOV 70.0f
+#define CAMERA_FOV (70.0*3.141592653589793)
 #define CAMERA_DISTANCE 3.0f
 #define CAMERA_SCROLL_SENSITIVITY 0.2f
 #define CAMERA_ROTATION_SENSITIVITY 0.006f
@@ -85,7 +85,7 @@ enum class MuscleMode { LoadFromFile, kNN };
 #define KEY_CAMERA_45LEFTSIDE sf::Keyboard::Num6
 #define KEY_CAMERA_90LEFTSIDE sf::Keyboard::Num7
 #define KEY_CAMERA_135LEFTSIDE sf::Keyboard::Num8
-#define KEY_CAMERA_DEFINED sf::Keyboard::DD
+#define KEY_CAMERA_DEFINED sf::Keyboard::D
 
 // Keys: Rendering
 #define KEY_SHOW_WIREFRAME sf::Keyboard::Comma

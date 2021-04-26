@@ -104,6 +104,7 @@ private:
 	Camera* camera = NULL;
 
 public:
+	//glm::vec3 eye = glm::vec3(0.0);
 	glm::vec3 orbitCenter = glm::vec3(0.0);
 	float distance = 1.0;
 	float phi = glm::half_pi<float>(); // yaw
@@ -122,6 +123,11 @@ public:
 	void Rotate135ToRightSide();
 	void MoveOrbitCenter(const glm::vec3& c);
 	void Update();
+
+	//inline glm::vec3 GetOrbitCenter() { return orbitCenter; }
+	//inline float GetPhi() { return phi; }
+	//inline float GetTheta() { return theta; }
+	//inline glm::vec3 GetEye() { return eye; }
 };
 
 
