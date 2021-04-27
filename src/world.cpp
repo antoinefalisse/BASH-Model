@@ -163,7 +163,9 @@ void World::Render(float alpha, sf::Time delta) {
 		decrementFrame = false;
 	}
 
-
+	if (frameID == Model::GetInstance().numFrames) {
+		#define STOP_VIDEO
+	}
 	// draw floor
 	if (Settings::GetInstance().showFloor) {
 		DrawFloor();
@@ -358,47 +360,66 @@ void World::ProcessInput() {
 		}
 	}
 
+	// Stop increasing when last frame is hit
+	frameID2 = std::min(frameID2 + 1, Model::GetInstance().numFrames - 1);
+	if (frameID2 < Model::GetInstance().numFrames)
+		incrementFrame = true;
+	else
+		incrementFrame = false;
+		
+	//Settings::GetInstance().repeatPlayback = !Settings::GetInstance().repeatPlayback;
 
-	// playback
-	if (Input::GetInstance().KeyPressedContinously(KEY_PLAYBACK_SINGLE_FRAME)) {
-		// frame by frame
-		if (Input::GetInstance().KeyPressed(KEY_PLAYBACK_NEXT_FRAME)) {
-			incrementFrame = true;
-		}
-		if (Input::GetInstance().KeyPressed(KEY_PLAYBACK_PREV_FRAME)) {
-			decrementFrame = true;
-		}
-	} else {
-		// continously
-		if (Input::GetInstance().KeyPressedContinously(KEY_PLAYBACK_NEXT_FRAME)) {
-			incrementFrame = true;
-		}
-		if (Input::GetInstance().KeyPressedContinously(KEY_PLAYBACK_PREV_FRAME)) {
-			decrementFrame = true;
-		}
-	}
-	if (Input::GetInstance().KeyPressed(KEY_TOGGLE_PLAYBACK_REPEAT)) {
-		Settings::GetInstance().repeatPlayback = !Settings::GetInstance().repeatPlayback;
-		PRINT_VAR(Settings::GetInstance().repeatPlayback);
-	}
+	//// playback
+	//if (Input::GetInstance().KeyPressedContinously(KEY_PLAYBACK_SINGLE_FRAME)) {
+	//	// frame by frame
+	//	if (Input::GetInstance().KeyPressed(KEY_PLAYBACK_NEXT_FRAME)) {
+	//		incrementFrame = true;
+	//	}
+	//	if (Input::GetInstance().KeyPressed(KEY_PLAYBACK_PREV_FRAME)) {
+	//		decrementFrame = true;
+	//	}
+	//} else {
+	//	// continously
+	//	if (Input::GetInstance().KeyPressedContinously(KEY_PLAYBACK_NEXT_FRAME)) {
+	//		incrementFrame = true;
+	//	}
+	//	if (Input::GetInstance().KeyPressedContinously(KEY_PLAYBACK_PREV_FRAME)) {
+	//		decrementFrame = true;
+	//	}
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_TOGGLE_PLAYBACK_REPEAT)) {
+	//	Settings::GetInstance().repeatPlayback = !Settings::GetInstance().repeatPlayback;
+	//	PRINT_VAR(Settings::GetInstance().repeatPlayback);
+	//}
 
-	if (Input::GetInstance().KeyPressed(KEY_PRESENTATION_MODE)) {
-		Settings::GetInstance().presentationMode = !Settings::GetInstance().presentationMode;
-		if (Settings::GetInstance().presentationMode) {
-			glClearColor(PRESENTATION_COLOR);
-			Settings::GetInstance().showFloor = false;
-			Settings::GetInstance().showOrigin = false;
-			Settings::GetInstance().showModelOsim = false;
-			Settings::GetInstance().showBonesOsim = false;
-			Settings::GetInstance().showMarkersOsim = false;
-			Settings::GetInstance().showMusclesOsim = false;
-			Settings::GetInstance().showBodyParts = false;
-			Settings::GetInstance().showBounds = false;
-			Settings::GetInstance().showNormals = false;
-		} else {
-			glClearColor(DEFAULT_CLEAR_COLOR);
-		}
-	}
+	glClearColor(PRESENTATION_COLOR);
+	Settings::GetInstance().showFloor = false;
+	Settings::GetInstance().showOrigin = false;
+	Settings::GetInstance().showModelOsim = false;
+	Settings::GetInstance().showBonesOsim = false;
+	Settings::GetInstance().showMarkersOsim = false;
+	Settings::GetInstance().showMusclesOsim = false;
+	Settings::GetInstance().showBodyParts = false;
+	Settings::GetInstance().showBounds = false;
+	Settings::GetInstance().showNormals = false;
+
+	//if (Input::GetInstance().KeyPressed(KEY_PRESENTATION_MODE)) {
+	//	Settings::GetInstance().presentationMode = !Settings::GetInstance().presentationMode;
+	//	if (Settings::GetInstance().presentationMode) {
+	//		glClearColor(PRESENTATION_COLOR);
+	//		Settings::GetInstance().showFloor = false;
+	//		Settings::GetInstance().showOrigin = false;
+	//		Settings::GetInstance().showModelOsim = false;
+	//		Settings::GetInstance().showBonesOsim = false;
+	//		Settings::GetInstance().showMarkersOsim = false;
+	//		Settings::GetInstance().showMusclesOsim = false;
+	//		Settings::GetInstance().showBodyParts = false;
+	//		Settings::GetInstance().showBounds = false;
+	//		Settings::GetInstance().showNormals = false;
+	//	} else {
+	//		glClearColor(DEFAULT_CLEAR_COLOR);
+	//	}
+	//}
 
 	// defined camera states
 	if (Input::GetInstance().KeyPressed(KEY_RESET_CAMERA)) {

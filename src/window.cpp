@@ -148,6 +148,11 @@ void Window::ProcessInput() {
 		PRINT_VAR(VSync);
 	}
 
+	//if (STOP_VIDEO) {
+	//	Stop();
+	//}
+	
+
 	world->ProcessInput();
 	world->ProcessMouseInput(mousePos, mouseButton, mouseWheel);
 }
@@ -177,4 +182,18 @@ void Window::Render(float alpha, sf::Time delta) {
 	// renderWindow->resetGLStates();
 
 	renderWindow->display();
+
+	// Save one image per frame
+	sf::Texture texture;
+	texture.create(renderWindow->getSize().x, renderWindow->getSize().y);
+	texture.update(*renderWindow);	
+	texture.copyToImage().saveToFile("test_" + std::to_string(frameID3) + ".png");
+	frameID3 = frameID3 + 1;
+	// Stop when last frame is hit
+	if (frameID3 >= Model::GetInstance().numFrames -1) {
+		renderWindow->close();
+		Stop();
+		return;
+	}
+
 }

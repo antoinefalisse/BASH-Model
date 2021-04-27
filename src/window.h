@@ -16,6 +16,8 @@ private:
 	int frameLimit;
 	bool VSync;
 
+	int frameID3 = 0;
+
 	int windowMode;
 	sf::RenderWindow* renderWindow;
 	int windowWidth, windowHeight;

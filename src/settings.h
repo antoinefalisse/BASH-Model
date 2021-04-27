@@ -53,9 +53,10 @@ enum class MuscleMode { LoadFromFile, kNN };
 #define DEFAULT_WINDOW_HEIGHT 720
 
 // Camera
+#define M_PI 3.14159265358979323846264338327950288
 #define CAMERA_NAME "Camera"
 #define CAMERA_FOV (70.0*M_PI/180)
-#define CAMERA_DISTANCE 3.0f
+#define CAMERA_DISTANCE 5.0f
 #define CAMERA_SCROLL_SENSITIVITY 0.2f
 #define CAMERA_ROTATION_SENSITIVITY 0.006f
 #define CAMERA_PANNING_SENSITIVITY 0.005f
@@ -147,7 +148,7 @@ public:
 	std::string filepathModelCache;
 
 	// scene
-	bool repeatPlayback = true;
+	bool repeatPlayback = false;
 
 	// render settings
 	bool showWireframe = false;
@@ -156,21 +157,21 @@ public:
 
 	// scene
 	bool showFloor = true;
-	bool showOrigin = true;
+	bool showOrigin = false;
 	bool showBounds = false;
 	bool showNormals = false;
 
 	// model
 	bool showModel = true;
 	bool showMarkers = false;
-	bool showMuscles = true;
+	bool showMuscles = false;
 	bool showBodyParts = false;
 
 	// osim model
-	bool showModelOsim = true;
-	bool showMarkersOsim = true;
-	bool showMusclesOsim = true;
-	bool showBonesOsim = true;
+	bool showModelOsim = false;
+	bool showMarkersOsim = false;
+	bool showMusclesOsim = false;
+	bool showBonesOsim = false;
 
 	// Colors
 	const std::vector<glm::vec3> COLOR_MAP = { {230, 25, 75}, {60, 180, 75}, {255, 225, 25}, {0, 130, 200}, {245, 130, 48}, {145, 30, 180}, {70, 240, 240}, {240, 50, 230}, {210, 245, 60}, {250, 190, 190}, {0, 128, 128}, {230, 190, 255}, {170, 110, 40}, {255, 250, 200}, {128, 0, 0}, {170, 255, 195}, {128, 128, 0}, {255, 215, 180}, {0, 0, 128}, {128, 128, 128}, {255, 255, 255}, {0, 0, 0} };
