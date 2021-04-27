@@ -11,3 +11,4 @@ packages/
 *.vcxproj.filters
 *.vcxproj.user
 *.png
+*/videos/

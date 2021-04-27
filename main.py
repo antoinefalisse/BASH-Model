@@ -7,6 +7,7 @@ Created on Tue Apr 27 09:00:09 2021
 
 import os
 import numpy as np
+import pickle
 
 # %% User inputs
 
@@ -21,7 +22,10 @@ Select camera:
     '6': 270deg clockwise
     '7': 315deg clockwise
 '''
-camera = '7'
+cameras = [str(i) for i in range(8)]
+# remove laterla cameras
+cameras.remove('2')
+cameras.remove('6')
 
 '''
 Select distance (m)
@@ -45,63 +49,77 @@ pathVideos = os.path.join(pathData, 'Videos')
 pathVideosDataset = os.path.join(pathVideos, 'DatasetTest')
 pathVideosSubject = os.path.join(pathVideosDataset, 'SubjectTest')
 pathVideosTrial = os.path.join(pathVideosSubject, 'TrialTest')
-pathVideosCam = os.path.join(pathVideosSubject, 'Cam{}'.format(camera))
-if not os.path.exists(pathVideosCam):
-    os.makedirs(pathVideosCam)
+
+# loop over camera
+for camera in cameras:
+
+    pathVideosCam = os.path.join(pathVideosSubject, 'Cam{}'.format(camera), "InputMedia", "tesTrial")
+    if not os.path.exists(pathVideosCam):
+        os.makedirs(pathVideosCam)
+        
+    baseModelDir = os.path.join(pathData, 'baselineModel/')
     
-baseModelDir = os.path.join(pathData, 'baselineModel/')
-
-# %% Generate images
-# command = "{} --osim {} --mot {} --model {} --output {} --camera {} --distance {}".format(
-#     pathExe, pathOsimModel, pathMotFile, baseModelDir, pathVideosCam, camera, distance)
-# os.system(command)
-
-# %% Create video from images
-# Extract framerate from mot file - we should have one image per frame.
-from utils import storage2numpy
-motion = storage2numpy(pathMotFile)
-time = motion['time']
-framerate_in = int(np.round(1/np.mean(np.diff(time))))
-# Fix output framerate to 60 Hz.
-framerate_out = 60
-
-# We start from image #2, since the first 2 are before presentation mode.
-# commande_ffmpeg = "ffmpeg -framerate {} -start_number 2 -i {}/image%d.png -c:v libx264 -r {} -pix_fmt yuv420p {}/output.mp4".format(
-#     framerate_in, pathVideosCam, framerate_out, pathVideosCam)
-# os.system(commande_ffmpeg)
-
-# %% Retrieve camera matrix
-# Intrinsics
-intrinsicsFile = open("{}/parameters4Intrinsics.txt".format(pathVideosCam), "r")
-intrinsics_str = intrinsicsFile.readlines()
-fov_deg = float(intrinsics_str[0][:-1])
-width = float(intrinsics_str[1][:-1])
-height  = float(intrinsics_str[2][:-1])
-fov_rad = fov_deg*np.pi/180
-f = 0.5 * height / np.tan(fov_rad/2) #cf http://paulbourke.net/miscellaneous/lens/  (NOTE: focal length is in pixels)
-
-# TODO: to confirm
-cx = 0
-cy = 0
-intrinsics = np.array([
-[f, 0, cx],
-[0., f, cy],
-[0.,0.,1.]
-], dtype=np.float64)
-
-# Extrinsics
-extrinsicsFile = open("{}/parameters4Extrinsics.txt".format(pathVideosCam), "r")
-extrinsics_str = extrinsicsFile.readlines()
-
-extrinsics = np.zeros((3,4))
-# Rotation
-for i in range(3):
-    row = extrinsics_str[i].split(" ")    
+    # %% Generate images
+    command = "{} --osim {} --mot {} --model {} --output {} --camera {} --distance {}".format(
+        pathExe, pathOsimModel, pathMotFile, baseModelDir, pathVideosCam, camera, distance)
+    os.system(command)
+    
+    # %% Create video from images
+    # Extract framerate from mot file - we should have one image per frame.
+    from utils import storage2numpy
+    motion = storage2numpy(pathMotFile)
+    time = motion['time']
+    framerate_in = int(np.round(1/np.mean(np.diff(time))))
+    # Fix output framerate to 60 Hz.
+    framerate_out = 60
+    
+    # We start from image #2, since the first 2 are before presentation mode.
+    commande_ffmpeg = "ffmpeg -framerate {} -start_number 2 -i {}/image%d.png -c:v libx264 -r {} -pix_fmt yuv420p {}/output.mp4".format(
+        framerate_in, pathVideosCam, framerate_out, pathVideosCam)
+    os.system(commande_ffmpeg)
+    
+    # %% Retrieve camera matrix
+    cameraParams = {}
+    
+    # Intrinsics
+    intrinsicsFile = open("{}/parameters4Intrinsics.txt".format(pathVideosCam), "r")
+    intrinsics_str = intrinsicsFile.readlines()
+    fov_deg = float(intrinsics_str[0][:-1])
+    width = float(intrinsics_str[1][:-1])
+    height  = float(intrinsics_str[2][:-1])
+    fov_rad = fov_deg*np.pi/180
+    f = 0.5 * height / np.tan(fov_rad/2) #cf http://paulbourke.net/miscellaneous/lens/  (NOTE: focal length is in pixels)
+    
+    # TODO: to confirm
+    cx = width/2
+    cy = height/2
+    intrinsics = np.array([
+    [f, 0, cx],
+    [0., f, cy],
+    [0.,0.,1.]
+    ], dtype=np.float64)
+    cameraParams['intrinsicMat'] = intrinsics
+    
+    # Extrinsics
+    extrinsicsFile = open("{}/parameters4Extrinsics.txt".format(pathVideosCam), "r")
+    extrinsics_str = extrinsicsFile.readlines()
+    
+    R = np.zeros((3,3))
+    # Rotation
+    for i in range(3):
+        row = extrinsics_str[i].split(" ")    
+        for j, elm in enumerate(row):
+            if j < 3:
+                R[i,j] = float(elm)
+    cameraParams['rotation'] = R
+    # Translation
+    t = np.zeros((3,1))
+    row = extrinsics_str[3].split(" ")  
     for j, elm in enumerate(row):
-        if j < 3:
-            extrinsics[i,j] = float(elm)
-# Translation
-row = extrinsics_str[3].split(" ")  
-for j, elm in enumerate(row):
-        if j < 3:
-            extrinsics[j,3] = float(elm)
+            if j < 3:
+                t[j,0] = float(elm)
+    cameraParams['translation'] = t
+    
+    open_file = open("{}/cameraIntrinsicsExtrinsics.pickle".format(pathVideosCam), "wb")
+    pickle.dump(cameraParams, open_file)
+    open_file.close()
