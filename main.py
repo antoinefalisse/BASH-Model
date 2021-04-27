@@ -8,6 +8,8 @@ Created on Tue Apr 27 09:00:09 2021
 import os
 import numpy as np
 
+# %% User inputs
+
 '''
 Select camera:
     '0': front
@@ -19,12 +21,14 @@ Select camera:
     '6': 270deg clockwise
     '7': 315deg clockwise
 '''
-camera = '5'
+camera = '7'
 
 '''
 Select distance (m)
 '''
-distance = '1'
+distance = '4'
+
+# %% Paths
 
 pathBase = os.getcwd()
 pathData = os.path.join(pathBase, 'data')
@@ -53,14 +57,15 @@ command = "{} --osim {} --mot {} --model {} --output {} --camera {} --distance {
 os.system(command)
 
 # %% Create video from images
-# Extract frame rate from mot file - we should have one image per frame.
+# Extract framerate from mot file - we should have one image per frame.
 from utils import storage2numpy
 motion = storage2numpy(pathMotFile)
 time = motion['time']
 framerate_in = int(np.round(1/np.mean(np.diff(time))))
+# Fix output framerate to 60 Hz.
 framerate_out = 60
 
+# We start from image #2, since the first 2 are before presentation mode.
 commande_ffmpeg = "ffmpeg -framerate {} -start_number 2 -i {}/image%d.png -c:v libx264 -r {} -pix_fmt yuv420p {}/output.mp4".format(
     framerate_in, pathVideosCam, framerate_out, pathVideosCam)
 os.system(commande_ffmpeg)
-

@@ -4,6 +4,10 @@
 #include <render/shader.h>
 #include <render/input.h>
 
+#include <iostream>
+#include <string>
+#include <fstream>
+
 
 //
 // World
@@ -91,15 +95,40 @@ World::World(int w, int h) : windowWidth(w), windowHeight(h) {
 	// And if you have a column - major matrix, you left - multiply it with the vector.
 	glm::vec3 t = -(C*R);
 
-	PRINT(C);
-	PRINT(p);
-	PRINT(L);
-	PRINT(L_hat);
-	PRINT(s);
-	PRINT(s_hat);
-	PRINT(u_hat);
-	PRINT(R);
-	PRINT(t);
+	//PRINT(C);
+	//PRINT(p);
+	//PRINT(L);
+	//PRINT(L_hat);
+	//PRINT(s);
+	//PRINT(s_hat);
+	//PRINT(u_hat);
+	//PRINT(R);
+	//PRINT(t);
+
+	try {
+		//cout << "\nWriting  array contents to file...";
+		//open file for writing
+		std::ofstream fw(Settings::GetInstance().outputDir + "/parameters4Extrinsics.txt", std::ofstream::out);
+		//check if file was successfully opened for writing
+		if (fw.is_open())
+		{
+			//store array contents to text file
+			for (int i = 0; i < 3; i++) {
+				for (int j = 0; j < 3; j++) {
+					fw << R[i][j] << " ";
+				}
+				fw << "\n";
+			}
+			for (int i = 0; i < 3; i++) {
+				fw << t[i] << " ";
+			}
+			fw.close();
+		}
+		//else cout << "Problem with opening file";
+	}
+	catch (const char* msg) {
+		std::cerr << msg << std::endl;
+	}
 
 	//
 	//PRINT(windowWidth);
