@@ -17,6 +17,12 @@
 #define FILENAME_BASELINEMODEL "baselineModel.dae" // exported mesh of the baseline model
 #define FILENAME_BASELINEMODEL_MARKERS "markers.obj" // exported marker placement of the baseline model
 
+// Default output dir
+#define FILEPATH_DEFAULT_OUTPUT_DIR "./data/Videos/Default/"
+
+// Default camera
+#define DEFAULT_INDEX_CAMERA "0"
+
 // SCAPE data
 #define FILEPATH_SCAPE_DATADIRECTORY "./data/SCAPE/"
 #define FILENAME_SCAPE_BINARYDATA "SCAPE_pose.bin"
@@ -141,6 +147,8 @@ public:
 	std::string inputModelMOT;
 	std::string inputModelSTO;
 	std::string baselineModelDir = FILEPATH_DEFAULT_BASELINEMODEL_DIR;
+	std::string outputDir = FILEPATH_DEFAULT_OUTPUT_DIR;
+	std::string idxCamera = DEFAULT_INDEX_CAMERA;
 
 	// other parameters
 	int limitFrames = -1;

@@ -131,6 +131,31 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
+	// Output
+	if (args.Exists("--output")) {
+		const std::string& outputDir = args.Get("--output");
+		if (!outputDir.empty()) {
+			Settings::GetInstance().outputDir = outputDir;
+		}
+	}
+	else {
+		PRINT("No Output directory was specified. Using default...");
+	}
+	PRINT("Output dir: " << Settings::GetInstance().outputDir);
+
+	// Camera
+	if (args.Exists("--camera")) {
+		const std::string& idxCamera = args.Get("--camera");
+		if (!idxCamera.empty()) {
+			Settings::GetInstance().idxCamera = idxCamera;
+		}
+	}
+	else {
+		PRINT("No Camera was specified. Using default...");
+	}
+	PRINT("Output dir: " << Settings::GetInstance().idxCamera);
+
+
 
 	PRINT("---------------------------------------------------------------");
 

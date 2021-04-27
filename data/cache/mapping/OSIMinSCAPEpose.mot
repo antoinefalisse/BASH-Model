@@ -1,12 +1,12 @@
 Coordinates
 version=1
 nRows=1
-nColumns=38
+nColumns=36
 inDegrees=yes
 
 Units are S.I. units (second, meters, Newtons, ...)
 If the header above contains a line with 'inDegrees', this indicates whether rotational values are in degrees (yes) or radians (no).
 
 endheader
-time	pelvis_rotation	pelvis_obliquity	pelvis_tilt	pelvis_tx	pelvis_ty	pelvis_tz	hip_flexion_r	hip_adduction_r	hip_rotation_r	knee_angle_r	ankle_angle_r	subtalar_angle_r	mtp_angle_r	hip_flexion_l	hip_adduction_l	hip_rotation_l	knee_angle_l	ankle_angle_l	subtalar_angle_l	mtp_angle_l	lumbar_extension	lumbar_bending	lumbar_rotation	arm_flex_r	arm_add_r	arm_rot_r	elbow_flex_r	pro_sup_r	wrist_flex_r	wrist_dev_r	arm_flex_l	arm_add_l	arm_rot_l	elbow_flex_l	pro_sup_l	wrist_flex_l	wrist_dev_l
-      0.00000000	     -6.74280897	     -2.91850378	     31.72350224	     -0.00369835	      0.22591390	      0.00447504	    -31.10057717	     -4.38136601	      1.36408651	     -4.71328251	      7.24267297	      4.06122742	     16.91934480	    -33.67244833	    -10.21408352	    -10.83888656	     -9.53801439	      9.41862069	     -3.50658670	      6.99366730	    -36.77875639	      3.28401529	      7.82529472	     -0.00608752	    -35.01031219	     33.60441556	     25.47862897	    127.64085442	      0.00000000	      0.00000000	      4.80676632	    -27.69024976	     15.09176568	     20.39049542	    138.99781427	      0.00000000	      0.00000000
+time	pelvis_tilt	pelvis_list	pelvis_rotation	pelvis_tx	pelvis_ty	pelvis_tz	hip_flexion_r	hip_adduction_r	hip_rotation_r	knee_angle_r	knee_adduction_r	ankle_angle_r	subtalar_angle_r	mtp_angle_r	hip_flexion_l	hip_adduction_l	hip_rotation_l	knee_angle_l	knee_adduction_l	ankle_angle_l	subtalar_angle_l	mtp_angle_l	lumbar_extension	lumbar_bending	lumbar_rotation	arm_flex_r	arm_add_r	arm_rot_r	elbow_flex_r	pro_sup_r	arm_flex_l	arm_add_l	arm_rot_l	elbow_flex_l	pro_sup_l
+      0.00000000	     28.62242004	     -4.86129149	     -3.95497015	     -0.01497946	      0.24874772	      0.00607841	    -27.59763326	     -2.68142509	      3.48189910	     -4.59294326	     -2.02713799	     15.47425652	      4.02456931	    -11.30706710	    -28.93717503	     -7.90461126	     -7.70187959	    -10.20238464	     -1.81285330	     13.78416406	     -4.14700239	     -3.89842459	    -33.09355445	      2.27956309	     12.99675979	     -8.10960793	    -25.85865277	      5.95842459	     26.05838112	    148.12272907	     10.48323538	    -23.65690991	     37.24893185	     17.94974564	    122.32531448

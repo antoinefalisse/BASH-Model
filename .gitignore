@@ -10,3 +10,4 @@ packages/
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.user
+*.png

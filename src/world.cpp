@@ -37,22 +37,45 @@ World::World(int w, int h) : windowWidth(w), windowHeight(h) {
 	orbitCameraControl = new OrbitCameraControl(camera);
 	orbitCameraControl->distance = CAMERA_DISTANCE;
 	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
-	//orbitCameraControl->theta = -3 * glm::half_pi<float>() / 2;
+	// Front camera
+	if (Settings::GetInstance().idxCamera == "0") {
+		orbitCameraControl->theta = 0;
+	}
+	else if (Settings::GetInstance().idxCamera == "1") {
+		orbitCameraControl->theta = glm::half_pi<float>() / 2;
+	}
+	else if (Settings::GetInstance().idxCamera == "2") {
+		orbitCameraControl->theta = 2 * glm::half_pi<float>() / 2;
+	}
+	else if (Settings::GetInstance().idxCamera == "3") {
+		orbitCameraControl->theta = 3 * glm::half_pi<float>() / 2;
+	}
+	else if (Settings::GetInstance().idxCamera == "4") {
+		orbitCameraControl->theta = 4 * glm::half_pi<float>() / 2;
+	}
+	else if (Settings::GetInstance().idxCamera == "5") {
+		orbitCameraControl->theta = 5 * glm::half_pi<float>() / 2;
+	}
+	else if (Settings::GetInstance().idxCamera == "6") {
+		orbitCameraControl->theta = 6 * glm::half_pi<float>() / 2;
+	}
+	else if (Settings::GetInstance().idxCamera == "7") {
+		orbitCameraControl->theta = 7 * glm::half_pi<float>() / 2;
+	}
+
+	//
 	orbitCameraControl->Update();
 	//glm::mat4 test = camera->GetP();
 
 	// http://ksimek.github.io/2012/08/22/extrinsic/#comment-1396932776
-
 	glm::vec3 C = orbitCameraControl->GetEye();
 	glm::vec3 p = orbitCameraControl->GetOrbitCenter();
 	glm::vec3 u(0.0, 1.0, 0.0);
-
 	glm::vec3 L = p - C;
 	glm::vec3 L_hat = glm::normalize(L);
 	glm::vec3 s = glm::cross(L_hat, u);
 	glm::vec3 s_hat = glm::normalize(s);
 	glm::vec3 u_hat = glm::cross(s_hat, L_hat);
-
 	glm::mat3x3 R;
 	R[0][0] = s_hat[0];
 	R[0][1] = s_hat[1];
@@ -63,7 +86,6 @@ World::World(int w, int h) : windowWidth(w), windowHeight(h) {
 	R[2][0] = -L_hat[0];
 	R[2][1] = -L_hat[1];
 	R[2][2] = -L_hat[2];
-
 	// Since GLM is designed to mimic GLSL and is designed to work with OpenGL, its matrices are column - major.
 	// And if you have a column - major matrix, you left - multiply it with the vector.
 	glm::vec3 t = -(C*R);
