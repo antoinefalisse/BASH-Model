@@ -52,9 +52,9 @@ if not os.path.exists(pathVideosCam):
 baseModelDir = os.path.join(pathData, 'baselineModel/')
 
 # %% Generate images
-command = "{} --osim {} --mot {} --model {} --output {} --camera {} --distance {}".format(
-    pathExe, pathOsimModel, pathMotFile, baseModelDir, pathVideosCam, camera, distance)
-os.system(command)
+# command = "{} --osim {} --mot {} --model {} --output {} --camera {} --distance {}".format(
+#     pathExe, pathOsimModel, pathMotFile, baseModelDir, pathVideosCam, camera, distance)
+# os.system(command)
 
 # %% Create video from images
 # Extract framerate from mot file - we should have one image per frame.
@@ -66,6 +66,42 @@ framerate_in = int(np.round(1/np.mean(np.diff(time))))
 framerate_out = 60
 
 # We start from image #2, since the first 2 are before presentation mode.
-commande_ffmpeg = "ffmpeg -framerate {} -start_number 2 -i {}/image%d.png -c:v libx264 -r {} -pix_fmt yuv420p {}/output.mp4".format(
-    framerate_in, pathVideosCam, framerate_out, pathVideosCam)
-os.system(commande_ffmpeg)
+# commande_ffmpeg = "ffmpeg -framerate {} -start_number 2 -i {}/image%d.png -c:v libx264 -r {} -pix_fmt yuv420p {}/output.mp4".format(
+#     framerate_in, pathVideosCam, framerate_out, pathVideosCam)
+# os.system(commande_ffmpeg)
+
+# %% Retrieve camera matrix
+# Intrinsics
+intrinsicsFile = open("{}/parameters4Intrinsics.txt".format(pathVideosCam), "r")
+intrinsics_str = intrinsicsFile.readlines()
+fov_deg = float(intrinsics_str[0][:-1])
+width = float(intrinsics_str[1][:-1])
+height  = float(intrinsics_str[2][:-1])
+fov_rad = fov_deg*np.pi/180
+f = 0.5 * height / np.tan(fov_rad/2) #cf http://paulbourke.net/miscellaneous/lens/  (NOTE: focal length is in pixels)
+
+# TODO: to confirm
+cx = 0
+cy = 0
+intrinsics = np.array([
+[f, 0, cx],
+[0., f, cy],
+[0.,0.,1.]
+], dtype=np.float64)
+
+# Extrinsics
+extrinsicsFile = open("{}/parameters4Extrinsics.txt".format(pathVideosCam), "r")
+extrinsics_str = extrinsicsFile.readlines()
+
+extrinsics = np.zeros((3,4))
+# Rotation
+for i in range(3):
+    row = extrinsics_str[i].split(" ")    
+    for j, elm in enumerate(row):
+        if j < 3:
+            extrinsics[i,j] = float(elm)
+# Translation
+row = extrinsics_str[3].split(" ")  
+for j, elm in enumerate(row):
+        if j < 3:
+            extrinsics[j,3] = float(elm)
