@@ -151,11 +151,21 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	else {
-		PRINT("No Camera was specified. Using default...");
+		PRINT("No Camera index was specified. Using default...");
 	}
-	PRINT("Output dir: " << Settings::GetInstance().idxCamera);
+	PRINT("Camera index: " << Settings::GetInstance().idxCamera);
 
-
+	// Distance
+	if (args.Exists("--distance")) {
+		const std::string& distanceCamera = args.Get("--distance");
+		if (!distanceCamera.empty()) {
+			Settings::GetInstance().cameraDistance = std::stof(distanceCamera);
+		}
+	}
+	else {
+		PRINT("No Camera distance was specified. Using default...");
+	}
+	PRINT("Camera distance: " << Settings::GetInstance().cameraDistance);
 
 	PRINT("---------------------------------------------------------------");
 

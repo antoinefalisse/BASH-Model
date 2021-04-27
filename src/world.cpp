@@ -35,7 +35,8 @@ World::World(int w, int h) : windowWidth(w), windowHeight(h) {
 	camera = new PerspectiveCamera(CAMERA_NAME, glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0), CAMERA_FOV, windowWidth, windowHeight, 0.01f, 1000.0f);
 	camera->Use();	
 	orbitCameraControl = new OrbitCameraControl(camera);
-	orbitCameraControl->distance = CAMERA_DISTANCE;
+	orbitCameraControl->distance = Settings::GetInstance().cameraDistance;
+	PRINT(Settings::GetInstance().cameraDistance);
 	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
 	// Front camera
 	if (Settings::GetInstance().idxCamera == "0") {
@@ -446,7 +447,7 @@ void World::ProcessInput() {
 	// defined camera states
 	if (Input::GetInstance().KeyPressed(KEY_RESET_CAMERA)) {
 		orbitCameraControl->SetDefault();
-		orbitCameraControl->distance = CAMERA_DISTANCE;
+		orbitCameraControl->distance = Settings::GetInstance().cameraDistance;
 		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
 		orbitCameraControl->Update();
 		PRINT("Reset camera");
@@ -502,7 +503,7 @@ void World::ProcessInput() {
 	if (Input::GetInstance().KeyPressed(KEY_CAMERA_DEFINED)) {
 		orbitCameraControl->theta = 0.6f;
 		orbitCameraControl->phi = 1.8f;
-		orbitCameraControl->distance = CAMERA_DISTANCE;
+		orbitCameraControl->distance = Settings::GetInstance().cameraDistance;
 		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
 		orbitCameraControl->Update();
 		PRINT("Camera to defined");

@@ -187,7 +187,7 @@ void Window::Render(float alpha, sf::Time delta) {
 	sf::Texture texture;
 	texture.create(renderWindow->getSize().x, renderWindow->getSize().y);
 	texture.update(*renderWindow);	
-	texture.copyToImage().saveToFile(Settings::GetInstance().outputDir + "/test_" + std::to_string(frameID3) + ".png");
+	texture.copyToImage().saveToFile(Settings::GetInstance().outputDir + "/image" + std::to_string(frameID3) + ".png");
 	frameID3 = frameID3 + 1;
 	// Stop when last frame is hit
 	if (frameID3 >= Model::GetInstance().numFrames -1) {

@@ -62,7 +62,7 @@ enum class MuscleMode { LoadFromFile, kNN };
 #define M_PI 3.14159265358979323846264338327950288
 #define CAMERA_NAME "Camera"
 #define CAMERA_FOV (70.0*M_PI/180)
-#define CAMERA_DISTANCE 5.0f
+#define DEFAULT_CAMERA_DISTANCE 5.0f
 #define CAMERA_SCROLL_SENSITIVITY 0.2f
 #define CAMERA_ROTATION_SENSITIVITY 0.006f
 #define CAMERA_PANNING_SENSITIVITY 0.005f
@@ -149,6 +149,7 @@ public:
 	std::string baselineModelDir = FILEPATH_DEFAULT_BASELINEMODEL_DIR;
 	std::string outputDir = FILEPATH_DEFAULT_OUTPUT_DIR;
 	std::string idxCamera = DEFAULT_INDEX_CAMERA;
+	float cameraDistance = DEFAULT_CAMERA_DISTANCE;
 
 	// other parameters
 	int limitFrames = -1;
