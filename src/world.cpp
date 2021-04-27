@@ -37,43 +37,46 @@ World::World(int w, int h) : windowWidth(w), windowHeight(h) {
 	orbitCameraControl = new OrbitCameraControl(camera);
 	orbitCameraControl->distance = CAMERA_DISTANCE;
 	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+	//orbitCameraControl->theta = -3 * glm::half_pi<float>() / 2;
 	orbitCameraControl->Update();
-	glm::mat4 test = camera->GetP();
+	//glm::mat4 test = camera->GetP();
 
 	// http://ksimek.github.io/2012/08/22/extrinsic/#comment-1396932776
 
-	//glm::vec3 C = orbitCameraControl->GetEye();
-	//glm::vec3 p = orbitCameraControl->GetOrbitCenter();
-	//glm::vec3 u(0.0, 1.0, 0.0);
+	glm::vec3 C = orbitCameraControl->GetEye();
+	glm::vec3 p = orbitCameraControl->GetOrbitCenter();
+	glm::vec3 u(0.0, 1.0, 0.0);
 
-	//glm::vec3 L = p - C;
-	//glm::vec3 L_hat = glm::normalize(L);
-	//glm::vec3 s = glm::cross(L_hat, u);
-	//glm::vec3 s_hat = glm::normalize(s);
-	//glm::vec3 u_hat = glm::cross(s_hat, u);
+	glm::vec3 L = p - C;
+	glm::vec3 L_hat = glm::normalize(L);
+	glm::vec3 s = glm::cross(L_hat, u);
+	glm::vec3 s_hat = glm::normalize(s);
+	glm::vec3 u_hat = glm::cross(s_hat, L_hat);
 
-	//glm::mat3x3 R;
-	//R[0][0] = s_hat[0];
-	//R[0][1] = s_hat[1];
-	//R[0][2] = s_hat[2];
-	//R[1][0] = u_hat[0];
-	//R[1][1] = u_hat[1];
-	//R[1][2] = u_hat[2];
-	//R[2][0] = -L_hat[0];
-	//R[2][1] = -L_hat[1];
-	//R[2][2] = -L_hat[2];
+	glm::mat3x3 R;
+	R[0][0] = s_hat[0];
+	R[0][1] = s_hat[1];
+	R[0][2] = s_hat[2];
+	R[1][0] = u_hat[0];
+	R[1][1] = u_hat[1];
+	R[1][2] = u_hat[2];
+	R[2][0] = -L_hat[0];
+	R[2][1] = -L_hat[1];
+	R[2][2] = -L_hat[2];
 
-	//glm::vec3 t = -R * C;
+	// Since GLM is designed to mimic GLSL and is designed to work with OpenGL, its matrices are column - major.
+	// And if you have a column - major matrix, you left - multiply it with the vector.
+	glm::vec3 t = -(C*R);
 
-	//PRINT(C);
-	//PRINT(p);
-	//PRINT(L);
-	//PRINT(L_hat);
-	//PRINT(s);
-	//PRINT(s_hat);
-	//PRINT(u_hat);
-	//PRINT(R);
-	//PRINT(t);
+	PRINT(C);
+	PRINT(p);
+	PRINT(L);
+	PRINT(L_hat);
+	PRINT(s);
+	PRINT(s_hat);
+	PRINT(u_hat);
+	PRINT(R);
+	PRINT(t);
 
 	//
 	//PRINT(windowWidth);

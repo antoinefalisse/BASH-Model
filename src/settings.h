@@ -54,7 +54,7 @@ enum class MuscleMode { LoadFromFile, kNN };
 
 // Camera
 #define CAMERA_NAME "Camera"
-#define CAMERA_FOV (70.0*3.141592653589793)
+#define CAMERA_FOV (70.0*M_PI/180)
 #define CAMERA_DISTANCE 3.0f
 #define CAMERA_SCROLL_SENSITIVITY 0.2f
 #define CAMERA_ROTATION_SENSITIVITY 0.006f
@@ -99,7 +99,7 @@ enum class MuscleMode { LoadFromFile, kNN };
 #define KEY_TOOGLE_BOUNDING_BOX sf::Keyboard::F3
 
 // Keys: model
-#define KEY_MODEL_OSIM sf::Keyboard::LShift
+#define KEY_MODEL_OSIM sf::Keyboard::O
 #define KEY_TOOGLE_MODEL sf::Keyboard::M
 #define KEY_TOOGLE_BONES sf::Keyboard::B
 #define KEY_TOOGLE_MARKERS sf::Keyboard::P
@@ -117,7 +117,7 @@ enum class MuscleMode { LoadFromFile, kNN };
 // Keys: Playback
 #define KEY_PLAYBACK_NEXT_FRAME sf::Keyboard::Right
 #define KEY_PLAYBACK_PREV_FRAME sf::Keyboard::Left
-#define KEY_PLAYBACK_SINGLE_FRAME sf::Keyboard::LShift
+#define KEY_PLAYBACK_SINGLE_FRAME sf::Keyboard::S
 #define KEY_TOGGLE_PLAYBACK_REPEAT sf::Keyboard::R
 
 //

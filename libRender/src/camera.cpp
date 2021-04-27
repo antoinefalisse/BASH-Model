@@ -229,7 +229,7 @@ void OrbitCameraControl::MoveOrbitCenter(const glm::vec3& c) {
 	orbitCenter = c;
 }
 void OrbitCameraControl::Update() {
-	glm::vec3 eye;
+	//glm::vec3 eye;
 	eye.x = orbitCenter.x + distance * sin(phi) * cos(theta);
 	eye.y = orbitCenter.y + distance * cos(phi) * -1;
 	eye.z = orbitCenter.z + distance * sin(phi) * sin(theta);
