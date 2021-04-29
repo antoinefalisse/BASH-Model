@@ -5,4 +5,4 @@ nColumns=4
 inDegrees=no
 endheader
 time	total_squared_error	marker_error_RMS	marker_error_max
-      0.00000000	      0.03073959	      0.02585057	      0.05513682
+      0.00000000	      0.02634283	      0.02393053	      0.04780684

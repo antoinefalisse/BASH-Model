@@ -198,18 +198,16 @@ void Window::Render(float alpha, sf::Time delta) {
 
 	// Save parameters for intrinsics (ony once)
 	try {
-		//cout << "\nWriting  array contents to file...";
 		//open file for writing
 		std::ofstream fw(Settings::GetInstance().outputDir + "/parameters4Intrinsics.txt", std::ofstream::out);
 		//check if file was successfully opened for writing
 		if (fw.is_open())
 		{
-			fw << (CAMERA_FOV / M_PI * 180) << "\n";
+			fw << (Settings::GetInstance().fov / M_PI * 180) << "\n";
 			fw << renderWindow->getSize().x << "\n";
 			fw << renderWindow->getSize().y << "\n";
 			fw.close();
 		}
-		//else cout << "Problem with opening file";
 	}
 	catch (const char* msg) {
 		std::cerr << msg << std::endl;

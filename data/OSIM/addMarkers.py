@@ -11,7 +11,7 @@ import numpy as np
 
 pathMain = os.getcwd()
 
-modelName = "subject3_c33"
+modelName = "RajagopalModified2016_withArms_lockedSubtalarMTP_KA_Mocap_scaled"
 referenceModelName = "runMaD_Scaled"
 pathReferenceModel = os.path.join(pathMain, referenceModelName + ".osim")
 pathMyModel = os.path.join(pathMain, modelName + ".osim")

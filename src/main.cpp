@@ -167,6 +167,18 @@ int main(int argc, char* argv[]) {
 	}
 	PRINT("Camera distance: " << Settings::GetInstance().cameraDistance);
 
+	// fov
+	if (args.Exists("--fov")) {
+		const std::string& fov = args.Get("--fov");
+		if (!fov.empty()) {
+			Settings::GetInstance().fov = std::stof(fov) * M_PI / 180;
+		}
+	}
+	else {
+		PRINT("No fov was specified. Using default...");
+	}
+	PRINT("Camera fov: " << Settings::GetInstance().fov);
+
 	PRINT("---------------------------------------------------------------");
 
 	// create necessary folders
@@ -187,7 +199,7 @@ int main(int argc, char* argv[]) {
 	Model::GetInstance().InitModel();
 
 	// create and start the render window for the application
-	Window window(WindowMode::desktop);
-	//Window window(WindowMode::window);
+	//Window window(WindowMode::desktop);
+	Window window(WindowMode::window);
 	window.Run();
 }

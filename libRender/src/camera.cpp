@@ -153,7 +153,7 @@ void PerspectiveCamera::Resize(int w, int h) {
 
 void PerspectiveCamera::Update() {
 	Camera::Update();
-
+	//std::cout << "fov in camera.cpp: " << fovy << std::endl;
 	P = glm::perspective(fovy, (width * 1.0f) / height, frustum_near, frustum_far);
 }
 

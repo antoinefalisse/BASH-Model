@@ -1,12 +1,12 @@
 Coordinates
 version=1
 nRows=1
-nColumns=36
+nColumns=42
 inDegrees=yes
 
 Units are S.I. units (second, meters, Newtons, ...)
 If the header above contains a line with 'inDegrees', this indicates whether rotational values are in degrees (yes) or radians (no).
 
 endheader
-time	pelvis_tilt	pelvis_list	pelvis_rotation	pelvis_tx	pelvis_ty	pelvis_tz	hip_flexion_r	hip_adduction_r	hip_rotation_r	knee_angle_r	knee_adduction_r	ankle_angle_r	subtalar_angle_r	mtp_angle_r	hip_flexion_l	hip_adduction_l	hip_rotation_l	knee_angle_l	knee_adduction_l	ankle_angle_l	subtalar_angle_l	mtp_angle_l	lumbar_extension	lumbar_bending	lumbar_rotation	arm_flex_r	arm_add_r	arm_rot_r	elbow_flex_r	pro_sup_r	arm_flex_l	arm_add_l	arm_rot_l	elbow_flex_l	pro_sup_l
-      0.00000000	     28.62242004	     -4.86129149	     -3.95497015	     -0.01497946	      0.24874772	      0.00607841	    -27.59763326	     -2.68142509	      3.48189910	     -4.59294326	     -2.02713799	     15.47425652	      4.02456931	    -11.30706710	    -28.93717503	     -7.90461126	     -7.70187959	    -10.20238464	     -1.81285330	     13.78416406	     -4.14700239	     -3.89842459	    -33.09355445	      2.27956309	     12.99675979	     -8.10960793	    -25.85865277	      5.95842459	     26.05838112	    148.12272907	     10.48323538	    -23.65690991	     37.24893185	     17.94974564	    122.32531448
+time	pelvis_tilt	pelvis_list	pelvis_rotation	pelvis_tx	pelvis_ty	pelvis_tz	hip_flexion_r	hip_adduction_r	hip_rotation_r	knee_angle_r	knee_adduction_r	knee_angle_r_beta	ankle_angle_r	subtalar_angle_r	mtp_angle_r	hip_flexion_l	hip_adduction_l	hip_rotation_l	knee_angle_l	knee_adduction_l	knee_angle_l_beta	ankle_angle_l	subtalar_angle_l	mtp_angle_l	lumbar_extension	lumbar_bending	lumbar_rotation	arm_flex_r	arm_add_r	arm_rot_r	elbow_flex_r	pro_sup_r	wrist_flex_r	wrist_dev_r	arm_flex_l	arm_add_l	arm_rot_l	elbow_flex_l	pro_sup_l	wrist_flex_l	wrist_dev_l
+      0.00000000	     20.36714485	     -4.39504647	     -5.20389405	     -0.01955214	      0.22759524	      0.00539010	    -19.47598958	     -3.90542150	      4.23803635	      3.99754332	     -0.51541092	      0.06977029	      6.15603023	      0.00000000	      0.00000000	    -21.52087418	     -8.56906561	    -13.12318261	      9.25006460	     -1.87975932	      0.16144408	      7.76849387	      0.00000000	      0.00000000	    -22.68577627	      2.62205523	     11.67071014	     -7.24335757	    -29.03658025	     28.50536916	     26.10491635	    116.46523714	      0.00000000	      0.00000000	      7.18658843	    -24.91302019	     39.50429562	     19.86606658	    113.25996389	      0.00000000	      0.00000000

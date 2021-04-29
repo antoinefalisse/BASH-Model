@@ -36,41 +36,85 @@ World::World(int w, int h) : windowWidth(w), windowHeight(h) {
 	// Camera
 	//PRINT(windowWidth);
 	//PRINT(windowHeight);
-	camera = new PerspectiveCamera(CAMERA_NAME, glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0), CAMERA_FOV, windowWidth, windowHeight, 0.01f, 1000.0f);
+	camera = new PerspectiveCamera(CAMERA_NAME, glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0), Settings::GetInstance().fov, windowWidth, windowHeight, 0.01f, 1000.0f);
 	camera->Use();	
 	orbitCameraControl = new OrbitCameraControl(camera);
 	orbitCameraControl->distance = Settings::GetInstance().cameraDistance;
-	PRINT(Settings::GetInstance().cameraDistance);
 	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
-	// Front camera
 	if (Settings::GetInstance().idxCamera == "0") {
 		orbitCameraControl->theta = 0;
 	}
 	else if (Settings::GetInstance().idxCamera == "1") {
-		orbitCameraControl->theta = glm::half_pi<float>() / 2;
+		orbitCameraControl->theta = 1 * glm::half_pi<float>() / 6;
 	}
 	else if (Settings::GetInstance().idxCamera == "2") {
-		orbitCameraControl->theta = 2 * glm::half_pi<float>() / 2;
+		orbitCameraControl->theta = 2 * glm::half_pi<float>() / 6;
 	}
 	else if (Settings::GetInstance().idxCamera == "3") {
-		orbitCameraControl->theta = 3 * glm::half_pi<float>() / 2;
+		orbitCameraControl->theta = 3 * glm::half_pi<float>() / 6;
 	}
 	else if (Settings::GetInstance().idxCamera == "4") {
-		orbitCameraControl->theta = 4 * glm::half_pi<float>() / 2;
+		orbitCameraControl->theta = 4 * glm::half_pi<float>() / 6;
 	}
 	else if (Settings::GetInstance().idxCamera == "5") {
-		orbitCameraControl->theta = 5 * glm::half_pi<float>() / 2;
+		orbitCameraControl->theta = 5 * glm::half_pi<float>() / 6;
 	}
 	else if (Settings::GetInstance().idxCamera == "6") {
-		orbitCameraControl->theta = 6 * glm::half_pi<float>() / 2;
+		orbitCameraControl->theta = 6 * glm::half_pi<float>() / 6;
 	}
 	else if (Settings::GetInstance().idxCamera == "7") {
-		orbitCameraControl->theta = 7 * glm::half_pi<float>() / 2;
+		orbitCameraControl->theta = 7 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "8") {
+		orbitCameraControl->theta = 8 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "9") {
+		orbitCameraControl->theta = 9 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "10") {
+		orbitCameraControl->theta = 10 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "11") {
+		orbitCameraControl->theta = 11 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "12") {
+		orbitCameraControl->theta = 12 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "13") {
+		orbitCameraControl->theta = 13 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "14") {
+		orbitCameraControl->theta = 14 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "15") {
+		orbitCameraControl->theta = 15 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "16") {
+		orbitCameraControl->theta = 16 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "17") {
+		orbitCameraControl->theta = 17 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "18") {
+		orbitCameraControl->theta = 18 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "19") {
+		orbitCameraControl->theta = 19 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "20") {
+		orbitCameraControl->theta = 20 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "21") {
+		orbitCameraControl->theta = 21 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "22") {
+		orbitCameraControl->theta = 22 * glm::half_pi<float>() / 6;
+	}
+	else if (Settings::GetInstance().idxCamera == "23") {
+		orbitCameraControl->theta = 23 * glm::half_pi<float>() / 6;
 	}
 
-	//
 	orbitCameraControl->Update();
-	//glm::mat4 test = camera->GetP();
 
 	// http://ksimek.github.io/2012/08/22/extrinsic/#comment-1396932776
 	glm::vec3 C = orbitCameraControl->GetEye();
@@ -95,18 +139,7 @@ World::World(int w, int h) : windowWidth(w), windowHeight(h) {
 	// And if you have a column - major matrix, you left - multiply it with the vector.
 	glm::vec3 t = -(C*R);
 
-	//PRINT(C);
-	//PRINT(p);
-	//PRINT(L);
-	//PRINT(L_hat);
-	//PRINT(s);
-	//PRINT(s_hat);
-	//PRINT(u_hat);
-	//PRINT(R);
-	//PRINT(t);
-
 	try {
-		//cout << "\nWriting  array contents to file...";
 		//open file for writing
 		std::ofstream fw(Settings::GetInstance().outputDir + "/parameters4Extrinsics.txt", std::ofstream::out);
 		//check if file was successfully opened for writing
@@ -124,18 +157,10 @@ World::World(int w, int h) : windowWidth(w), windowHeight(h) {
 			}
 			fw.close();
 		}
-		//else cout << "Problem with opening file";
 	}
 	catch (const char* msg) {
 		std::cerr << msg << std::endl;
 	}
-
-	//
-	//PRINT(windowWidth);
-	//PRINT(windowHeight);
-	//PRINT(modelRenderer->bounds.GetCenter());
-	//PRINT(test);
-	//PRINT(glm::cos(3.141592653589793));
 
 	// Lights
 	PointLight frontLight;

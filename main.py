@@ -14,23 +14,26 @@ import pickle
 '''
 Select camera:
     '0': front
-    '1': 45deg clockwise
-    '2': 90deg clockwise
-    '3': 135deg clockwise
-    '4': 180deg clockwise (back)
-    '5': 225deg clockwise
-    '6': 270deg clockwise
-    '7': 315deg clockwise
+    '1': 15deg clockwise
+    '2': 30deg clockwise
+    '3': 45deg clockwise
+    '4': 60deg clockwise (back)
+    '5': 75deg clockwise
+    '6': 90deg clockwise
+    '7': 105deg clockwise
+    ...
 '''
-cameras = [str(i) for i in range(8)]
-# remove laterla cameras
-cameras.remove('2')
-cameras.remove('6')
+cameras = ['0','2','4','20','22']
 
 '''
 Select distance (m)
 '''
-distance = '4'
+distance = '3.5'
+
+'''
+Select fovy (deg)
+'''
+fov = 85.0
 
 # %% Paths
 
@@ -39,10 +42,10 @@ pathData = os.path.join(pathBase, 'data')
 pathOsim = os.path.join(pathData, 'OSIM')
 pathExe = os.path.join(pathBase, 'build', 'x64', 'Release', 'SCAPE.exe')
 
-osimModelName = 'subject3_c33_new.osim'
+osimModelName = 'RajagopalModified2016_withArms_lockedSubtalarMTP_KA_Mocap_scaled_new.osim'
 pathOsimModel = os.path.join(pathOsim, osimModelName)
 
-motFileName = 'IK_c33_99.mot'
+motFileName = 'DJ1_tr.mot'
 pathMotFile = os.path.join(pathOsim, motFileName)
 
 pathVideos = os.path.join(pathData, 'Videos')
@@ -53,15 +56,15 @@ pathVideosTrial = os.path.join(pathVideosSubject, 'TrialTest')
 # loop over camera
 for camera in cameras:
 
-    pathVideosCam = os.path.join(pathVideosSubject, 'Cam{}'.format(camera), "InputMedia", "tesTrial")
+    pathVideosCam = os.path.join(pathVideosSubject, 'Cam{}'.format(camera), "InputMedia", "testTrial2")
     if not os.path.exists(pathVideosCam):
         os.makedirs(pathVideosCam)
         
     baseModelDir = os.path.join(pathData, 'baselineModel/')
     
     # %% Generate images
-    command = "{} --osim {} --mot {} --model {} --output {} --camera {} --distance {}".format(
-        pathExe, pathOsimModel, pathMotFile, baseModelDir, pathVideosCam, camera, distance)
+    command = "{} --osim {} --mot {} --model {} --output {} --camera {} --distance {} --fov {}".format(
+        pathExe, pathOsimModel, pathMotFile, baseModelDir, pathVideosCam, camera, distance, fov)
     os.system(command)
     
     # %% Create video from images
@@ -101,24 +104,33 @@ for camera in cameras:
     cameraParams['intrinsicMat'] = intrinsics
     
     # Extrinsics
-    extrinsicsFile = open("{}/parameters4Extrinsics.txt".format(pathVideosCam), "r")
-    extrinsics_str = extrinsicsFile.readlines()
+    # We need to transform from openGL (G) to openCV (C)
+    # R_CG = [1 0 0; 0 -1 0; 0 0 -1]    
+    R_CG = np.array([
+        [1., 0., 0.],
+        [0., -1., 0.],
+        [0., 0., -1.]
+        ], dtype=np.float64)   
     
-    R = np.zeros((3,3))
+    extrinsicsFile = open("{}/parameters4Extrinsics.txt".format(pathVideosCam), "r")
+    extrinsics_str = extrinsicsFile.readlines()    
     # Rotation
+    R = np.zeros((3,3))
     for i in range(3):
         row = extrinsics_str[i].split(" ")    
         for j, elm in enumerate(row):
             if j < 3:
                 R[i,j] = float(elm)
-    cameraParams['rotation'] = R
+    cameraParams['rotation'] = np.dot(R_CG, R)
+    print(cameraParams['rotation'])
     # Translation
     t = np.zeros((3,1))
     row = extrinsics_str[3].split(" ")  
     for j, elm in enumerate(row):
             if j < 3:
                 t[j,0] = float(elm)
-    cameraParams['translation'] = t
+    cameraParams['translation'] = np.dot(R_CG, t)
+    print(cameraParams['translation'])
     
     open_file = open("{}/cameraIntrinsicsExtrinsics.pickle".format(pathVideosCam), "wb")
     pickle.dump(cameraParams, open_file)

@@ -12,3 +12,4 @@ packages/
 *.vcxproj.user
 *.png
 */videos/
+data/cache/*
