@@ -1,20 +1,26 @@
-# -*- coding: utf-8 -*-
 """
-Created on Wed Apr 14 18:29:23 2021
+This script adds markers to the scaled model, so that it can be used by BASH.
+The baseline model of BASH contains specific markers that need to be part of 
+the OpenSim model so that the BASH model can be scaled based on the dimensions
+of the OpenSim model. Here, we add markers to the OpenSim model using as
+reference the OpenSim model 'provided' with BASH. We extract the position of
+the markers as well as the scaling factors of the corresponding segments and
+add the markers to the OpenSim model while scaling their positions
+accordingly.
 
-@author: u0101727
+@author: Antoine Falisse
 """
 
 import os
 import opensim
-import numpy as np
 
 pathMain = os.getcwd()
+pathOSIM = os.path.join(pathMain, 'data', 'OSIM')
 
-modelName = "RajagopalModified2016_withArms_lockedSubtalarMTP_KA_Mocap_scaled"
-referenceModelName = "runMaD_Scaled"
-pathReferenceModel = os.path.join(pathMain, referenceModelName + ".osim")
-pathMyModel = os.path.join(pathMain, modelName + ".osim")
+modelName = "testModel"
+referenceModelName = "referenceScaledModel"
+pathReferenceModel = os.path.join(pathOSIM, referenceModelName + ".osim")
+pathMyModel = os.path.join(pathOSIM, modelName + ".osim")
 
 
 referenceModel = opensim.Model(pathReferenceModel)   
@@ -39,14 +45,11 @@ for c_idx in range(markerSet.getSize()):
     my_attached_geometry = myBody.get_attached_geometry(0)
     my_scale_factors = my_attached_geometry.get_scale_factors().to_numpy()
     
-    # # diff in scale factors
+    # diff in scale factors
     ratio_scale_factors = c_scale_factors / my_scale_factors
-    
-    # ratio_scale_factors = np.array([1.25200731, 1.25200731, 1.25200731])
     
     # scaled location
     my_marker_location = c_marker_location / ratio_scale_factors
-    # my_marker_location = np.array([ 0.        , -0.01597435, -0.02396152])
     
     newMkr = opensim.Marker()
     newMkr.setName(c_marker.getName())
@@ -56,5 +59,5 @@ for c_idx in range(markerSet.getSize()):
     
 myModel.finalizeConnections
 myModel.initSystem()
-pathNewModel = os.path.join(pathMain, modelName + "_new.osim")
+pathNewModel = os.path.join(pathOSIM, modelName + "_markersBASH.osim")
 myModel.printToXML(pathNewModel)

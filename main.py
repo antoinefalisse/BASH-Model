@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 """
-Created on Tue Apr 27 09:00:09 2021
+This script calls SCAPE.exe, reconstruct a video from frame-per-frame images,
+and reconstruct the intrinsic and extrinsic matrices. 
 
-@author: u0101727
+@author: Antoine Falisse
 """
 
 import os
@@ -10,17 +10,16 @@ import numpy as np
 import pickle
 
 # %% User inputs
-
 '''
-Select camera:
+Select camera index (0-23):
     '0': front
-    '1': 15deg clockwise
-    '2': 30deg clockwise
-    '3': 45deg clockwise
-    '4': 60deg clockwise (back)
-    '5': 75deg clockwise
-    '6': 90deg clockwise
-    '7': 105deg clockwise
+    '1': (1*15) 15deg clockwise
+    '2': (2*15) 30deg clockwise
+    '3': (3*15) 45deg clockwise
+    '4': (4*15) 60deg clockwise (back)
+    '5': (5*15) 75deg clockwise
+    '6': (6*15) 90deg clockwise
+    '7': (7*15) 105deg clockwise
     ...
 '''
 # cameras = ['0','2','4','20','22']
@@ -42,13 +41,17 @@ pathBase = os.getcwd()
 pathData = os.path.join(pathBase, 'data')
 pathOsim = os.path.join(pathData, 'OSIM')
 
-pathBuild = 'C:/Users/antoi/Documents/VS2017/BASH/build'
+computername = os.environ.get('COMPUTERNAME', None)
+if computername == "GBW-L-W2003": # Antoine's laptop
+    pathBuild = 'C:/Users/u0101727/Documents/Visual Studio 2017/Projects/BASH/build'
+elif computername == "DESKTOP-2SV6M42": # Antoine's desktop
+    pathBuild = 'C:/Users/antoi/Documents/VS2017/BASH/build'
 pathExe = os.path.join(pathBuild, 'Release', 'SCAPE.exe')
 
-osimModelName = 'runMaD_Scaled.osim'
+osimModelName = 'referenceScaledModel.osim'
 pathOsimModel = os.path.join(pathOsim, osimModelName)
 
-motFileName = 'Curved_Mean_Exp_Kinem.mot'
+motFileName = 'referenceMotion.mot'
 pathMotFile = os.path.join(pathOsim, motFileName)
 
 pathVideos = os.path.join(pathData, 'Videos')
@@ -56,17 +59,16 @@ pathVideosDataset = os.path.join(pathVideos, 'DatasetTest')
 pathVideosSubject = os.path.join(pathVideosDataset, 'SubjectTest')
 pathVideosTrial = os.path.join(pathVideosSubject, 'TrialTest')
 
-# loop over camera
-for camera in cameras:
+baseModelDir = os.path.join(pathData, 'baselineModel/')
 
-    pathVideosCam = os.path.join(pathVideosSubject, 'Cam{}'.format(camera), "InputMedia", "example")
+# loop over cameras
+for camera in cameras:
+    pathVideosCam = os.path.join(pathVideosSubject, 'Cam{}'.format(camera), "InputMedia", motFileName[:-4])
     if not os.path.exists(pathVideosCam):
         os.makedirs(pathVideosCam)
-        
-    baseModelDir = os.path.join(pathData, 'baselineModel/')
     
     # %% Generate images
-    command = "{} --osim {} --mot {} --model {} --output {} --camera {} --distance {} --fov {}".format(
+    command = '"{}" --osim {} --mot {} --model {} --output {} --camera {} --distance {} --fov {}'.format(
         pathExe, pathOsimModel, pathMotFile, baseModelDir, pathVideosCam, camera, distance, fov)
     os.system(command)
     
@@ -77,11 +79,13 @@ for camera in cameras:
     time = motion['time']
     framerate_in = int(np.round(1/np.mean(np.diff(time))))
     # Fix output framerate to 60 Hz.
+    # TODO not sure since we later want to use together with model based markers, so we should maybe keep the same frame rate
     framerate_out = 60
     
     # We start from image #2, since the first 2 are before presentation mode.
-    commande_ffmpeg = "ffmpeg -framerate {} -start_number 2 -i {}/image%d.png -c:v libx264 -r {} -pix_fmt yuv420p {}/output.mp4".format(
-        framerate_in, pathVideosCam, framerate_out, pathVideosCam)
+    # TODO check that out, risk of mismatch between this and model-base data
+    commande_ffmpeg = "ffmpeg -framerate {} -start_number 2 -i {}/image%d.png -c:v libx264 -r {} -pix_fmt yuv420p {}/{}.mp4".format(
+        framerate_in, pathVideosCam, framerate_out, pathVideosCam, motFileName[:-4])
     os.system(commande_ffmpeg)
     
     # %% Retrieve camera matrix
@@ -125,7 +129,8 @@ for camera in cameras:
             if j < 3:
                 R[i,j] = float(elm)
     cameraParams['rotation'] = np.dot(R_CG, R)
-    print(cameraParams['rotation'])
+    # print(cameraParams['rotation'])
+    
     # Translation
     t = np.zeros((3,1))
     row = extrinsics_str[3].split(" ")  
@@ -133,7 +138,7 @@ for camera in cameras:
             if j < 3:
                 t[j,0] = float(elm)
     cameraParams['translation'] = np.dot(R_CG, t)
-    print(cameraParams['translation'])
+    # print(cameraParams['translation'])
     
     open_file = open("{}/cameraIntrinsicsExtrinsics.pickle".format(pathVideosCam), "wb")
     pickle.dump(cameraParams, open_file)

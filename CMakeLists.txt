@@ -24,7 +24,6 @@ set(SUITESPARSE_CONFIG_DIR "Path to SuiteSparse_config directory" CACHE PATH "Lo
 set(GLEW_INCLUDE_DIR "Path to GLEW include directory" CACHE PATH "Location of directory")
 set(GSL_DIR "Path to GSL directory" CACHE PATH "Location of directory")
 set(OPENSIM_INCLUDE_DIR "Path to OpenSim include directory" CACHE PATH "Location of directory")
-set(OPENSIM_INCLUDE_OPENSIM_DIR "Path to OpenSim include OpenSim directory" CACHE PATH "Location of directory")
 set(SIMBODY_INCLUDE_DIR "Path to Simbody include directory" CACHE PATH "Location of directory")
 set(SPDLOG_INCLUDE_DIR "Path to spdlog include directory" CACHE PATH "Location of directory")
 set(ASSIMP_INCLUDE_DIR "Path to Assimp include directory" CACHE PATH "Location of directory")
@@ -39,10 +38,9 @@ set(ASSIMP_LIB_DIR "Path to assimp lib directory" CACHE PATH "Location of direct
 
 	
 target_include_directories(SCAPE PRIVATE ${INCLUDE_FILES})
-target_include_directories(SCAPE PUBLIC ${INCLUDE_RENDER_FILES} ${GLM_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} ${OPENSIM_INCLUDE_DIR} ${OPENSIM_INCLUDE_OPENSIM_DIR} ${ASSIMP_INCLUDE_DIR} ${SPDLOG_INCLUDE_DIR} ${INCLUDE_SCAPE_FILES}  ${SIMBODY_INCLUDE_DIR} ${SFML_INCLUDE_DIR} ${AMD_INCLUDE_DIR} ${UMFPACK_INCLUDE_DIR} ${SUITESPARSE_CONFIG_DIR} ${GSL_DIR})
+target_include_directories(SCAPE PUBLIC ${INCLUDE_RENDER_FILES} ${GLM_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} ${OPENSIM_INCLUDE_DIR} ${OPENSIM_INCLUDE_DIR}/OpenSim ${ASSIMP_INCLUDE_DIR} ${SPDLOG_INCLUDE_DIR} ${INCLUDE_SCAPE_FILES}  ${SIMBODY_INCLUDE_DIR} ${SFML_INCLUDE_DIR} ${AMD_INCLUDE_DIR} ${UMFPACK_INCLUDE_DIR} ${SUITESPARSE_CONFIG_DIR} ${GSL_DIR})
 
 # I don't get where opengl32.lib and glu32.lib are but that seems okay.
-# TODO: not sure that's where libRender.lib and libSCAPE.lib will be.
 target_link_libraries(SCAPE PUBLIC ${OPENSIM_LIB_DIR}/osimActuators.lib ${OPENSIM_LIB_DIR}/osimAnalyses.lib ${OPENSIM_LIB_DIR}/osimCommon.lib 
 ${OPENSIM_LIB_DIR}/osimSimulation.lib ${OPENSIM_LIB_DIR}/osimTools.lib ${OPENSIM_LIB_DIR}/osimLepton.lib ${SIMBODY_LIB_DIR}/liblapack.lib ${SIMBODY_LIB_DIR}/libblas.lib
 ${SIMBODY_LIB_DIR}/SimTKcommon.lib ${SIMBODY_LIB_DIR}/SimTKmath.lib ${SIMBODY_LIB_DIR}/SimTKsimbody.lib ${SUITESPARSE_LIB_DIR}/libamd.lib ${SUITESPARSE_LIB_DIR}/libbtf.lib
