@@ -6,7 +6,6 @@ output/
 packages/
 *.mp4
 *.log
-*.txt
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.user

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "util.h"
+#include <corecrt_io.h>
 
 
 // helpful functions
