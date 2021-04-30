@@ -24,6 +24,7 @@ set(SUITESPARSE_CONFIG_DIR "Path to SuiteSparse_config directory" CACHE PATH "Lo
 set(GLEW_INCLUDE_DIR "Path to GLEW include directory" CACHE PATH "Location of directory")
 set(GSL_DIR "Path to GSL directory" CACHE PATH "Location of directory")
 set(OPENSIM_INCLUDE_DIR "Path to OpenSim include directory" CACHE PATH "Location of directory")
+set(OPENSIM_INCLUDE_OPENSIM_DIR "Path to OpenSim include OpenSim directory" CACHE PATH "Location of directory")
 set(SIMBODY_INCLUDE_DIR "Path to Simbody include directory" CACHE PATH "Location of directory")
 set(SPDLOG_INCLUDE_DIR "Path to spdlog include directory" CACHE PATH "Location of directory")
 set(ASSIMP_INCLUDE_DIR "Path to Assimp include directory" CACHE PATH "Location of directory")
@@ -38,7 +39,7 @@ set(ASSIMP_LIB_DIR "Path to assimp lib directory" CACHE PATH "Location of direct
 
 	
 target_include_directories(SCAPE PRIVATE ${INCLUDE_FILES})
-target_include_directories(SCAPE PUBLIC ${INCLUDE_RENDER_FILES} ${GLM_INCLUDE_DIR} ${GLEW_INCLUDE_DIR}  ${OPENSIM_INCLUDE_DIR} ${ASSIMP_INCLUDE_DIR} ${SPDLOG_INCLUDE_DIR} ${INCLUDE_SCAPE_FILES}  ${SIMBODY_INCLUDE_DIR} ${SFML_INCLUDE_DIR} ${AMD_INCLUDE_DIR} ${UMFPACK_INCLUDE_DIR} ${SUITESPARSE_CONFIG_DIR} ${GSL_DIR})
+target_include_directories(SCAPE PUBLIC ${INCLUDE_RENDER_FILES} ${GLM_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} ${OPENSIM_INCLUDE_DIR} ${OPENSIM_INCLUDE_OPENSIM_DIR} ${ASSIMP_INCLUDE_DIR} ${SPDLOG_INCLUDE_DIR} ${INCLUDE_SCAPE_FILES}  ${SIMBODY_INCLUDE_DIR} ${SFML_INCLUDE_DIR} ${AMD_INCLUDE_DIR} ${UMFPACK_INCLUDE_DIR} ${SUITESPARSE_CONFIG_DIR} ${GSL_DIR})
 
 # I don't get where opengl32.lib and glu32.lib are but that seems okay.
 # TODO: not sure that's where libRender.lib and libSCAPE.lib will be.
@@ -48,5 +49,5 @@ ${SIMBODY_LIB_DIR}/SimTKcommon.lib ${SIMBODY_LIB_DIR}/SimTKmath.lib ${SIMBODY_LI
 ${SUITESPARSE_LIB_DIR}/libcamd.lib ${SUITESPARSE_LIB_DIR}/libccolamd.lib ${SUITESPARSE_LIB_DIR}/libcholmod.lib ${SUITESPARSE_LIB_DIR}/libcolamd.lib
 ${SUITESPARSE_LIB_DIR}/libcxsparse.lib ${SUITESPARSE_LIB_DIR}/libklu.lib ${SUITESPARSE_LIB_DIR}/libldl.lib ${SUITESPARSE_LIB_DIR}/libspqr.lib
 ${SUITESPARSE_LIB_DIR}/libumfpack.lib ${SUITESPARSE_LIB_DIR}/metis.lib ${SUITESPARSE_LIB_DIR}/suitesparseconfig.lib ${GSL_LIB_DIR}/gsl.lib ${GLEW_LIB_DIR}/glew32.lib
-${SFML_LIB_DIR}/sfml-graphics.lib  ${SFML_LIB_DIR}/sfml-window.lib  ${SFML_LIB_DIR}/sfml-system.lib ${CMAKE_CURRENT_LIST_DIR}/libRender/build/Release/libRender.lib ${CMAKE_CURRENT_LIST_DIR}/libSCAPE/build/Release/libSCAPE.lib
+${SFML_LIB_DIR}/sfml-graphics.lib  ${SFML_LIB_DIR}/sfml-window.lib  ${SFML_LIB_DIR}/sfml-system.lib ${CMAKE_CURRENT_BINARY_DIR}/libRender/Release/libRender.lib ${CMAKE_CURRENT_BINARY_DIR}/libSCAPE/Release/libSCAPE.lib
 ${ASSIMP_LIB_DIR}/assimp.lib opengl32.lib glu32.lib)

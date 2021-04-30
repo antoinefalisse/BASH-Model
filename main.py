@@ -23,7 +23,8 @@ Select camera:
     '7': 105deg clockwise
     ...
 '''
-cameras = ['0','2','4','20','22']
+# cameras = ['0','2','4','20','22']
+cameras = ['0']
 
 '''
 Select distance (m)
@@ -40,12 +41,14 @@ fov = 85.0
 pathBase = os.getcwd()
 pathData = os.path.join(pathBase, 'data')
 pathOsim = os.path.join(pathData, 'OSIM')
-pathExe = os.path.join(pathBase, 'build', 'x64', 'Release', 'SCAPE.exe')
 
-osimModelName = 'RajagopalModified2016_withArms_lockedSubtalarMTP_KA_Mocap_scaled_new.osim'
+pathBuild = 'C:/Users/antoi/Documents/VS2017/BASH/build'
+pathExe = os.path.join(pathBuild, 'Release', 'SCAPE.exe')
+
+osimModelName = 'runMaD_Scaled.osim'
 pathOsimModel = os.path.join(pathOsim, osimModelName)
 
-motFileName = 'DJ1_tr.mot'
+motFileName = 'Curved_Mean_Exp_Kinem.mot'
 pathMotFile = os.path.join(pathOsim, motFileName)
 
 pathVideos = os.path.join(pathData, 'Videos')
@@ -56,7 +59,7 @@ pathVideosTrial = os.path.join(pathVideosSubject, 'TrialTest')
 # loop over camera
 for camera in cameras:
 
-    pathVideosCam = os.path.join(pathVideosSubject, 'Cam{}'.format(camera), "InputMedia", "testTrial2")
+    pathVideosCam = os.path.join(pathVideosSubject, 'Cam{}'.format(camera), "InputMedia", "example")
     if not os.path.exists(pathVideosCam):
         os.makedirs(pathVideosCam)
         
