@@ -57,3 +57,26 @@ def storage2df(storage_file, headers):
         out.insert(count + 1, header, data[header])    
     
     return out
+
+def numpy2storage(labels, data, storage_file):
+    
+    assert data.shape[1] == len(labels), "# labels doesn't match columns"
+    assert labels[0] == "time"
+    
+    f = open(storage_file, 'w')
+    f.write('name %s\n' %storage_file)
+    f.write('datacolumns %d\n' %data.shape[1])
+    f.write('datarows %d\n' %data.shape[0])
+    f.write('range %f %f\n' %(np.min(data[:, 0]), np.max(data[:, 0])))
+    f.write('endheader \n')
+    
+    for i in range(len(labels)):
+        f.write('%s\t' %labels[i])
+    f.write('\n')
+    
+    for i in range(data.shape[0]):
+        for j in range(data.shape[1]):
+            f.write('%20.8f\t' %data[i, j])
+        f.write('\n')
+        
+    f.close()  

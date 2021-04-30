@@ -8,6 +8,7 @@ and reconstruct the intrinsic and extrinsic matrices.
 import os
 import numpy as np
 import pickle
+from utils import storage2numpy
 
 # %% User inputs
 '''
@@ -35,6 +36,12 @@ Select fovy (deg)
 '''
 fov = 85.0
 
+'''
+Set to True if you want to fix the ground_pelvis coordinates. This might help
+keeping the model within the window.
+'''
+fixPelvis = True
+
 # %% Paths
 
 pathBase = os.getcwd()
@@ -54,6 +61,23 @@ pathOsimModel = os.path.join(pathOsim, osimModelName)
 motFileName = 'referenceMotion.mot'
 pathMotFile = os.path.join(pathOsim, motFileName)
 
+motion = storage2numpy(pathMotFile)
+time = motion['time']
+if fixPelvis:    
+    headers = motion.dtype.names
+    # set pelvis coordinates to 0
+    pelvis_headers = ['pelvis_tilt', 'pelvis_list', 'pelvis_rotation',
+                      'pelvis_tx', 'pelvis_ty', 'pelvis_tz',
+                      'pelvis_obliquity']
+    
+    motion_fixedPelvis = np.zeros((time.shape[0], len(headers)))
+    for count, header in enumerate(headers):
+        if not header in pelvis_headers:
+            motion_fixedPelvis[:, count] = motion[header]
+    from utils import numpy2storage
+    pathMotFile = os.path.join(pathOsim, motFileName[:-4] + "_fixedPelvis.mot")
+    numpy2storage(headers, motion_fixedPelvis, pathMotFile)
+                
 pathVideos = os.path.join(pathData, 'Videos')
 pathVideosDataset = os.path.join(pathVideos, 'DatasetTest')
 pathVideosSubject = os.path.join(pathVideosDataset, 'SubjectTest')
@@ -73,10 +97,7 @@ for camera in cameras:
     os.system(command)
     
     # %% Create video from images
-    # Extract framerate from mot file - we should have one image per frame.
-    from utils import storage2numpy
-    motion = storage2numpy(pathMotFile)
-    time = motion['time']
+    # Extract framerate from mot file - we should have one image per frame.    
     framerate_in = int(np.round(1/np.mean(np.diff(time))))
     # Fix output framerate to 60 Hz.
     # TODO not sure since we later want to use together with model based markers, so we should maybe keep the same frame rate
