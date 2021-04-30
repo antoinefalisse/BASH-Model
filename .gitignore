@@ -1,15 +1,3 @@
-.vs/
-*.user
-build/
-video/
-output/
-packages/
-*.mp4
-*.log
-*.txt
-*.vcxproj
-*.vcxproj.filters
-*.vcxproj.user
-*.png
-*/videos/
 data/cache/*
+data/videos/*
+*.log
