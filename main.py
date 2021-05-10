@@ -17,24 +17,23 @@ Select camera index (0-23):
     '1': (1*15) 15deg clockwise
     '2': (2*15) 30deg clockwise
     '3': (3*15) 45deg clockwise
-    '4': (4*15) 60deg clockwise (back)
+    '4': (4*15) 60deg clockwise
     '5': (5*15) 75deg clockwise
     '6': (6*15) 90deg clockwise
     '7': (7*15) 105deg clockwise
     ...
 '''
-# cameras = ['0','2','4','20','22']
-cameras = ['0']
+cameras = ['0', '2', '4', '20', '22']
 
 '''
 Select distance (m)
 '''
-distance = '3.5'
+distance = '2.0'
 
 '''
 Select fovy (deg)
 '''
-fov = 85.0
+fov = 80.0
 
 '''
 Set to True if you want to fix the ground_pelvis coordinates. This might help
@@ -51,14 +50,14 @@ pathOsim = os.path.join(pathData, 'OSIM')
 computername = os.environ.get('COMPUTERNAME', None)
 if computername == "GBW-L-W2003": # Antoine's laptop
     pathBuild = 'C:/Users/u0101727/Documents/Visual Studio 2017/Projects/BASH/build'
-elif computername == "DESKTOP-2SV6M42": # Antoine's desktop
+elif computername == "DESKTOP-RV5S4TL": # Antoine's desktop
     pathBuild = 'C:/Users/antoi/Documents/VS2017/BASH/build'
 pathExe = os.path.join(pathBuild, 'Release', 'SCAPE.exe')
 
-osimModelName = 'referenceScaledModel.osim'
+osimModelName = 'testModel_markersBASH.osim'
 pathOsimModel = os.path.join(pathOsim, osimModelName)
 
-motFileName = 'referenceMotion.mot'
+motFileName = 'testMotion.mot'
 pathMotFile = os.path.join(pathOsim, motFileName)
 
 motion = storage2numpy(pathMotFile)

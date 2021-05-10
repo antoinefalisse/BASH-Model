@@ -348,7 +348,8 @@ std::map<std::string, glm::vec3> Model::EstimateBoneScales(const std::map<std::s
 	// TODO: maybe generate automatically? -> all combinations of the markers that belong to a bone
 	std::map<std::string, std::vector<std::pair<std::string, std::string>>> measurementSet;
 	measurementSet["pelvis"] = { std::make_pair("RASI", "LASI"), std::make_pair("SACR", "RASI"), std::make_pair("SACR", "LASI") };
-	measurementSet["torso"] = { std::make_pair("SACR", "C7"), std::make_pair("STRN", "CLAV") };
+	/*measurementSet["torso"] = { std::make_pair("SACR", "C7"), std::make_pair("STRN", "CLAV") };*/
+	measurementSet["torso"] = { std::make_pair("SACR", "C7"), std::make_pair("RSHO", "RASI"), std::make_pair("LSHO", "LASI") };
 
 	measurementSet["humerus_r"] = { std::make_pair("RSHO", "RELB"), std::make_pair("RSHO", "RUPA") };
 	measurementSet["ulna_r"] = { std::make_pair("RELB", "RFRA"), std::make_pair("RELB", "RWRB") };
