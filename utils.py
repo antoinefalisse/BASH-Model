@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import os
 
 # %%  Found here: https://github.com/chrisdembia/perimysium/ => thanks Chris
 def storage2numpy(storage_file, excess_header_entries=0):
@@ -57,3 +58,69 @@ def storage2df(storage_file, headers):
         out.insert(count + 1, header, data[header])    
     
     return out
+
+def numpy2storage(labels, data, storage_file):
+    
+    assert data.shape[1] == len(labels), "# labels doesn't match columns"
+    assert labels[0] == "time"
+    
+    f = open(storage_file, 'w')
+    f.write('name %s\n' %storage_file)
+    f.write('datacolumns %d\n' %data.shape[1])
+    f.write('datarows %d\n' %data.shape[0])
+    f.write('range %f %f\n' %(np.min(data[:, 0]), np.max(data[:, 0])))
+    f.write('endheader \n')
+    
+    for i in range(len(labels)):
+        f.write('%s\t' %labels[i])
+    f.write('\n')
+    
+    for i in range(data.shape[0]):
+        for j in range(data.shape[1]):
+            f.write('%20.8f\t' %data[i, j])
+        f.write('\n')
+        
+    f.close()
+    
+def addMarkers(pathReferenceModel, pathScaledModel, pathScaledModelBASH):
+    
+    import opensim 
+    
+    referenceModel = opensim.Model(pathReferenceModel)   
+    referenceModel.initSystem()
+    markerSet = referenceModel.get_MarkerSet()
+    
+    myModel = opensim.Model(pathScaledModel)
+    myModel.initSystem()
+    myBodySet = myModel.get_BodySet()
+    
+    for c_idx in range(markerSet.getSize()):
+        
+        # reference model
+        c_marker = markerSet.get(c_idx)
+        c_marker_parentFrame = c_marker.getParentFrame()
+        c_marker_location = c_marker.get_location().to_numpy()  
+        c_attached_geometry = c_marker_parentFrame.get_attached_geometry(0)
+        c_scale_factors = c_attached_geometry.get_scale_factors().to_numpy()
+        
+        # my model
+        myBody = myBodySet.get(c_marker_parentFrame.getName())
+        my_attached_geometry = myBody.get_attached_geometry(0)
+        my_scale_factors = my_attached_geometry.get_scale_factors().to_numpy()
+        
+        # diff in scale factors
+        ratio_scale_factors = c_scale_factors / my_scale_factors
+        
+        # scaled location
+        my_marker_location = c_marker_location / ratio_scale_factors
+        
+        newMkr = opensim.Marker()
+        newMkr.setName(c_marker.getName())
+        newMkr.setParentFrameName("/bodyset/{}".format(myBody.getName()))
+        newMkr.set_location(opensim.Vec3(my_marker_location))
+        myModel.addMarker(newMkr)
+        
+    myModel.finalizeConnections
+    myModel.initSystem()
+    myModel.printToXML(pathScaledModelBASH)
+    

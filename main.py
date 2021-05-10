@@ -8,6 +8,10 @@ and reconstruct the intrinsic and extrinsic matrices.
 import os
 import numpy as np
 import pickle
+from utils import storage2numpy
+from joblib import Parallel, delayed
+import glob
+from utils import addMarkers
 
 # %% User inputs
 '''
@@ -16,24 +20,39 @@ Select camera index (0-23):
     '1': (1*15) 15deg clockwise
     '2': (2*15) 30deg clockwise
     '3': (3*15) 45deg clockwise
-    '4': (4*15) 60deg clockwise (back)
+    '4': (4*15) 60deg clockwise
     '5': (5*15) 75deg clockwise
     '6': (6*15) 90deg clockwise
     '7': (7*15) 105deg clockwise
     ...
 '''
-# cameras = ['0','2','4','20','22']
-cameras = ['0']
+cameras = ['0', '3', '21']
 
 '''
 Select distance (m)
 '''
-distance = '3.5'
+distance = '2'
 
 '''
 Select fovy (deg)
 '''
-fov = 85.0
+fov = 70.0
+
+'''
+Set to True if you want to fix the ground_pelvis coordinates. This might help
+keeping the model within the window.
+'''
+fixPelvis = True
+
+# Fix output framerate to 60 Hz.
+framerate_out = 60
+
+# Multi-processing
+useMultiProcessing = True
+nThreads = 3
+
+# Clean image and text files.
+cleanPgnTxt = True
 
 # %% Paths
 
@@ -44,16 +63,38 @@ pathOsim = os.path.join(pathData, 'OSIM')
 computername = os.environ.get('COMPUTERNAME', None)
 if computername == "GBW-L-W2003": # Antoine's laptop
     pathBuild = 'C:/Users/u0101727/Documents/Visual Studio 2017/Projects/BASH/build'
-elif computername == "DESKTOP-2SV6M42": # Antoine's desktop
+elif computername == "DESKTOP-RV5S4TL": # Antoine's desktop
     pathBuild = 'C:/Users/antoi/Documents/VS2017/BASH/build'
 pathExe = os.path.join(pathBuild, 'Release', 'SCAPE.exe')
 
-osimModelName = 'referenceScaledModel.osim'
-pathOsimModel = os.path.join(pathOsim, osimModelName)
+# Generate model with BASH markers
+referenceModelName = "referenceScaledModel"
+pathReferenceModel = os.path.join(pathOsim, referenceModelName + ".osim")
+scaledModelName = 'testModel'
+pathScaledModel = os.path.join(pathOsim, scaledModelName + ".osim")   
+pathScaledModelBASH = os.path.join(pathOsim, scaledModelName + "_markersBASH.osim")
+addMarkers(pathReferenceModel, pathScaledModel, pathScaledModelBASH)
 
-motFileName = 'referenceMotion.mot'
+motFileName = 'testMotion.mot'
 pathMotFile = os.path.join(pathOsim, motFileName)
 
+motion = storage2numpy(pathMotFile)
+time = motion['time']
+if fixPelvis:    
+    headers = motion.dtype.names
+    # set pelvis coordinates to 0
+    pelvis_headers = ['pelvis_tilt', 'pelvis_list', 'pelvis_rotation',
+                      'pelvis_tx', 'pelvis_ty', 'pelvis_tz',
+                      'pelvis_obliquity']
+    
+    motion_fixedPelvis = np.zeros((time.shape[0], len(headers)))
+    for count, header in enumerate(headers):
+        if not header in pelvis_headers:
+            motion_fixedPelvis[:, count] = motion[header]
+    from utils import numpy2storage
+    pathMotFile = os.path.join(pathOsim, motFileName[:-4] + "_fixedPelvis.mot")
+    numpy2storage(headers, motion_fixedPelvis, pathMotFile)
+                
 pathVideos = os.path.join(pathData, 'Videos')
 pathVideosDataset = os.path.join(pathVideos, 'DatasetTest')
 pathVideosSubject = os.path.join(pathVideosDataset, 'SubjectTest')
@@ -61,30 +102,41 @@ pathVideosTrial = os.path.join(pathVideosSubject, 'TrialTest')
 
 baseModelDir = os.path.join(pathData, 'baselineModel/')
 
-# loop over cameras
-for camera in cameras:
+# %% Setups
+
+
+# setup = {'cameras': cameras,
+#          'paths': {
+#              'pathVideosSubject': pathVideosSubject,
+#              'pathExe': pathExe,
+#              'pathScaledModelBASH': pathScaledModelBASH,
+#              'pathMotFile': pathMotFile,
+#              'baseModelDir': baseModelDir,
+#              },
+#          'motFileName': motFileName,
+#          'distance': distance,
+#          'fov': fov,
+#          'time': time,
+#          'framerate_out': framerate_out}
+   
+def getBASHAnimation(camera):
     pathVideosCam = os.path.join(pathVideosSubject, 'Cam{}'.format(camera), "InputMedia", motFileName[:-4])
     if not os.path.exists(pathVideosCam):
         os.makedirs(pathVideosCam)
     
     # %% Generate images
     command = '"{}" --osim {} --mot {} --model {} --output {} --camera {} --distance {} --fov {}'.format(
-        pathExe, pathOsimModel, pathMotFile, baseModelDir, pathVideosCam, camera, distance, fov)
+        pathExe, pathScaledModelBASH, pathMotFile, baseModelDir, pathVideosCam, camera, distance, fov)
     os.system(command)
     
     # %% Create video from images
-    # Extract framerate from mot file - we should have one image per frame.
-    from utils import storage2numpy
-    motion = storage2numpy(pathMotFile)
-    time = motion['time']
+    # Extract framerate from mot file - we should have one image per frame.    
     framerate_in = int(np.round(1/np.mean(np.diff(time))))
-    # Fix output framerate to 60 Hz.
-    # TODO not sure since we later want to use together with model based markers, so we should maybe keep the same frame rate
-    framerate_out = 60
     
-    # We start from image #2, since the first 2 are before presentation mode.
-    # TODO check that out, risk of mismatch between this and model-base data
-    commande_ffmpeg = "ffmpeg -framerate {} -start_number 2 -i {}/image%d.png -c:v libx264 -r {} -pix_fmt yuv420p {}/{}.mp4".format(
+    # We start from image #1, since the first image (idx = -1) is black, and
+    # the second image is bad.
+    # Make sure to select the same interval from the .mot file when extracting the data for the ML model.
+    commande_ffmpeg = "ffmpeg -framerate {} -start_number 1 -i {}/image%d.png -c:v libx264 -r {} -pix_fmt yuv420p {}/{}.mp4".format(
         framerate_in, pathVideosCam, framerate_out, pathVideosCam, motFileName[:-4])
     os.system(commande_ffmpeg)
     
@@ -143,3 +195,32 @@ for camera in cameras:
     open_file = open("{}/cameraIntrinsicsExtrinsics.pickle".format(pathVideosCam), "wb")
     pickle.dump(cameraParams, open_file)
     open_file.close()
+    
+# %% Remove .png and .txt files to save space.
+def clean_folder(camera): 
+    pathVideosCam = os.path.join(pathVideosSubject, 'Cam{}'.format(camera),
+                                  "InputMedia", motFileName[:-4])
+    for CleanUp in glob.glob(pathVideosCam + '/*.*'):
+        if ((not CleanUp.endswith(".mp4")) and 
+            (not CleanUp.endswith(".pickle"))):    
+            os.remove(CleanUp)
+    
+# %% Run in parallel
+# It is pretty slow for the first view, but much faster for any other views,
+# since files have been generated already in cache/. Therefore, we first run
+# the script for the first view, and then run the script in parallel for the
+# other views.
+if __name__ == "__main__":
+    if useMultiProcessing:
+        Njobs = nThreads
+    else:
+        Njobs = 1
+    # Get animation and camera parameters.
+    getBASHAnimation(cameras[0])
+    Parallel(n_jobs=Njobs)(delayed(getBASHAnimation)(camera) 
+                            for camera in cameras[1:])
+    # Clean folder.
+    if cleanPgnTxt:
+        Njobs = 1
+        Parallel(n_jobs=Njobs)(delayed(clean_folder)(camera) 
+								for camera in cameras) 

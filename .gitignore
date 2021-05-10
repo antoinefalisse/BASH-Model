@@ -1,3 +1,5 @@
+__pycache__/
 data/cache/*
 data/videos/*
 *.log
+*_fixedPelvis.mot

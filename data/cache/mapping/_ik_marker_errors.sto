@@ -1,8 +1,0 @@
-Model Marker Errors from IK
-version=1
-nRows=1
-nColumns=4
-inDegrees=no
-endheader
-time	total_squared_error	marker_error_RMS	marker_error_max
-      0.00000000	      0.00086485	      0.00433601	      0.01282002

@@ -55,10 +55,10 @@ enum class MuscleMode { LoadFromFile, kNN };
 
 // Window
 #define DEFAULT_WINDOW_MODE WindowMode::window
-//#define DEFAULT_WINDOW_WIDTH 1280
-//#define DEFAULT_WINDOW_HEIGHT 720
-#define DEFAULT_WINDOW_WIDTH 1080
-#define DEFAULT_WINDOW_HEIGHT 1920
+#define DEFAULT_WINDOW_WIDTH 1280
+#define DEFAULT_WINDOW_HEIGHT 720
+//#define DEFAULT_WINDOW_WIDTH 1080
+//#define DEFAULT_WINDOW_HEIGHT 1920
 
 // Camera
 #define M_PI 3.14159265358979323846264338327950288
@@ -168,7 +168,7 @@ public:
 	bool presentationMode = false;
 
 	// scene
-	bool showFloor = true;
+	bool showFloor = false;
 	bool showOrigin = false;
 	bool showBounds = false;
 	bool showNormals = false;

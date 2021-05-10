@@ -18,7 +18,7 @@ private:
 	int windowWidth, windowHeight;
 
 	int frameID = 0;
-	int frameID2 = 0;
+
 	bool incrementFrame = false;
 	bool decrementFrame = false;
 
