@@ -11,6 +11,7 @@ import pickle
 from utils import storage2numpy
 from joblib import Parallel, delayed
 import glob
+from utils import addMarkers
 
 # %% User inputs
 '''
@@ -30,7 +31,7 @@ cameras = ['0', '3', '21']
 '''
 Select distance (m)
 '''
-distance = '2.5'
+distance = '2'
 
 '''
 Select fovy (deg)
@@ -50,6 +51,9 @@ framerate_out = 60
 useMultiProcessing = True
 nThreads = 3
 
+# Clean image and text files.
+cleanPgnTxt = True
+
 # %% Paths
 
 pathBase = os.getcwd()
@@ -63,10 +67,15 @@ elif computername == "DESKTOP-RV5S4TL": # Antoine's desktop
     pathBuild = 'C:/Users/antoi/Documents/VS2017/BASH/build'
 pathExe = os.path.join(pathBuild, 'Release', 'SCAPE.exe')
 
-osimModelName = 'referenceScaledModel.osim'
-pathOsimModel = os.path.join(pathOsim, osimModelName)
+# Generate model with BASH markers
+referenceModelName = "referenceScaledModel"
+pathReferenceModel = os.path.join(pathOsim, referenceModelName + ".osim")
+scaledModelName = 'testModel'
+pathScaledModel = os.path.join(pathOsim, scaledModelName + ".osim")   
+pathScaledModelBASH = os.path.join(pathOsim, scaledModelName + "_markersBASH.osim")
+addMarkers(pathReferenceModel, pathScaledModel, pathScaledModelBASH)
 
-motFileName = 'referenceMotion.mot'
+motFileName = 'testMotion.mot'
 pathMotFile = os.path.join(pathOsim, motFileName)
 
 motion = storage2numpy(pathMotFile)
@@ -100,7 +109,7 @@ baseModelDir = os.path.join(pathData, 'baselineModel/')
 #          'paths': {
 #              'pathVideosSubject': pathVideosSubject,
 #              'pathExe': pathExe,
-#              'pathOsimModel': pathOsimModel,
+#              'pathScaledModelBASH': pathScaledModelBASH,
 #              'pathMotFile': pathMotFile,
 #              'baseModelDir': baseModelDir,
 #              },
@@ -117,7 +126,7 @@ def getBASHAnimation(camera):
     
     # %% Generate images
     command = '"{}" --osim {} --mot {} --model {} --output {} --camera {} --distance {} --fov {}'.format(
-        pathExe, pathOsimModel, pathMotFile, baseModelDir, pathVideosCam, camera, distance, fov)
+        pathExe, pathScaledModelBASH, pathMotFile, baseModelDir, pathVideosCam, camera, distance, fov)
     os.system(command)
     
     # %% Create video from images
@@ -190,7 +199,7 @@ def getBASHAnimation(camera):
 # %% Remove .png and .txt files to save space.
 def clean_folder(camera): 
     pathVideosCam = os.path.join(pathVideosSubject, 'Cam{}'.format(camera),
-                                 "InputMedia", motFileName[:-4])
+                                  "InputMedia", motFileName[:-4])
     for CleanUp in glob.glob(pathVideosCam + '/*.*'):
         if ((not CleanUp.endswith(".mp4")) and 
             (not CleanUp.endswith(".pickle"))):    
@@ -211,6 +220,7 @@ if __name__ == "__main__":
     Parallel(n_jobs=Njobs)(delayed(getBASHAnimation)(camera) 
                             for camera in cameras[1:])
     # Clean folder.
-    Njobs = 1
-    Parallel(n_jobs=Njobs)(delayed(clean_folder)(camera) 
-                            for camera in cameras) 
+    if cleanPgnTxt:
+        Njobs = 1
+        Parallel(n_jobs=Njobs)(delayed(clean_folder)(camera) 
+								for camera in cameras) 

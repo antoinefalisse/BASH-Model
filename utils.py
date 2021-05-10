@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import os
 
 # %%  Found here: https://github.com/chrisdembia/perimysium/ => thanks Chris
 def storage2numpy(storage_file, excess_header_entries=0):
@@ -79,4 +80,47 @@ def numpy2storage(labels, data, storage_file):
             f.write('%20.8f\t' %data[i, j])
         f.write('\n')
         
-    f.close()  
+    f.close()
+    
+def addMarkers(pathReferenceModel, pathScaledModel, pathScaledModelBASH):
+    
+    import opensim 
+    
+    referenceModel = opensim.Model(pathReferenceModel)   
+    referenceModel.initSystem()
+    markerSet = referenceModel.get_MarkerSet()
+    
+    myModel = opensim.Model(pathScaledModel)
+    myModel.initSystem()
+    myBodySet = myModel.get_BodySet()
+    
+    for c_idx in range(markerSet.getSize()):
+        
+        # reference model
+        c_marker = markerSet.get(c_idx)
+        c_marker_parentFrame = c_marker.getParentFrame()
+        c_marker_location = c_marker.get_location().to_numpy()  
+        c_attached_geometry = c_marker_parentFrame.get_attached_geometry(0)
+        c_scale_factors = c_attached_geometry.get_scale_factors().to_numpy()
+        
+        # my model
+        myBody = myBodySet.get(c_marker_parentFrame.getName())
+        my_attached_geometry = myBody.get_attached_geometry(0)
+        my_scale_factors = my_attached_geometry.get_scale_factors().to_numpy()
+        
+        # diff in scale factors
+        ratio_scale_factors = c_scale_factors / my_scale_factors
+        
+        # scaled location
+        my_marker_location = c_marker_location / ratio_scale_factors
+        
+        newMkr = opensim.Marker()
+        newMkr.setName(c_marker.getName())
+        newMkr.setParentFrameName("/bodyset/{}".format(myBody.getName()))
+        newMkr.set_location(opensim.Vec3(my_marker_location))
+        myModel.addMarker(newMkr)
+        
+    myModel.finalizeConnections
+    myModel.initSystem()
+    myModel.printToXML(pathScaledModelBASH)
+    

@@ -201,5 +201,6 @@ int main(int argc, char* argv[]) {
 	// create and start the render window for the application
 	//Window window(WindowMode::desktop);
 	Window window(WindowMode::window);
+	//Window window(WindowMode::fullscreen);
 	window.Run();
 }
