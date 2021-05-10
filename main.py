@@ -9,6 +9,8 @@ import os
 import numpy as np
 import pickle
 from utils import storage2numpy
+from joblib import Parallel, delayed
+import glob
 
 # %% User inputs
 '''
@@ -23,23 +25,30 @@ Select camera index (0-23):
     '7': (7*15) 105deg clockwise
     ...
 '''
-cameras = ['0', '2', '4', '20', '22']
+cameras = ['0', '3', '21']
 
 '''
 Select distance (m)
 '''
-distance = '2.0'
+distance = '2.5'
 
 '''
 Select fovy (deg)
 '''
-fov = 80.0
+fov = 70.0
 
 '''
 Set to True if you want to fix the ground_pelvis coordinates. This might help
 keeping the model within the window.
 '''
 fixPelvis = True
+
+# Fix output framerate to 60 Hz.
+framerate_out = 60
+
+# Multi-processing
+useMultiProcessing = True
+nThreads = 3
 
 # %% Paths
 
@@ -54,10 +63,10 @@ elif computername == "DESKTOP-RV5S4TL": # Antoine's desktop
     pathBuild = 'C:/Users/antoi/Documents/VS2017/BASH/build'
 pathExe = os.path.join(pathBuild, 'Release', 'SCAPE.exe')
 
-osimModelName = 'testModel_markersBASH.osim'
+osimModelName = 'referenceScaledModel.osim'
 pathOsimModel = os.path.join(pathOsim, osimModelName)
 
-motFileName = 'testMotion.mot'
+motFileName = 'referenceMotion.mot'
 pathMotFile = os.path.join(pathOsim, motFileName)
 
 motion = storage2numpy(pathMotFile)
@@ -84,8 +93,24 @@ pathVideosTrial = os.path.join(pathVideosSubject, 'TrialTest')
 
 baseModelDir = os.path.join(pathData, 'baselineModel/')
 
-# loop over cameras
-for camera in cameras:
+# %% Setups
+
+
+# setup = {'cameras': cameras,
+#          'paths': {
+#              'pathVideosSubject': pathVideosSubject,
+#              'pathExe': pathExe,
+#              'pathOsimModel': pathOsimModel,
+#              'pathMotFile': pathMotFile,
+#              'baseModelDir': baseModelDir,
+#              },
+#          'motFileName': motFileName,
+#          'distance': distance,
+#          'fov': fov,
+#          'time': time,
+#          'framerate_out': framerate_out}
+   
+def getBASHAnimation(camera):
     pathVideosCam = os.path.join(pathVideosSubject, 'Cam{}'.format(camera), "InputMedia", motFileName[:-4])
     if not os.path.exists(pathVideosCam):
         os.makedirs(pathVideosCam)
@@ -98,8 +123,6 @@ for camera in cameras:
     # %% Create video from images
     # Extract framerate from mot file - we should have one image per frame.    
     framerate_in = int(np.round(1/np.mean(np.diff(time))))
-    # Fix output framerate to 60 Hz.
-    framerate_out = 60
     
     # We start from image #1, since the first image (idx = -1) is black, and
     # the second image is bad.
@@ -163,3 +186,31 @@ for camera in cameras:
     open_file = open("{}/cameraIntrinsicsExtrinsics.pickle".format(pathVideosCam), "wb")
     pickle.dump(cameraParams, open_file)
     open_file.close()
+    
+# %% Remove .png and .txt files to save space.
+def clean_folder(camera): 
+    pathVideosCam = os.path.join(pathVideosSubject, 'Cam{}'.format(camera),
+                                 "InputMedia", motFileName[:-4])
+    for CleanUp in glob.glob(pathVideosCam + '/*.*'):
+        if ((not CleanUp.endswith(".mp4")) and 
+            (not CleanUp.endswith(".pickle"))):    
+            os.remove(CleanUp)
+    
+# %% Run in parallel
+# It is pretty slow for the first view, but much faster for any other views,
+# since files have been generated already in cache/. Therefore, we first run
+# the script for the first view, and then run the script in parallel for the
+# other views.
+if __name__ == "__main__":
+    if useMultiProcessing:
+        Njobs = nThreads
+    else:
+        Njobs = 1
+    # Get animation and camera parameters.
+    getBASHAnimation(cameras[0])
+    Parallel(n_jobs=Njobs)(delayed(getBASHAnimation)(camera) 
+                            for camera in cameras[1:])
+    # Clean folder.
+    Njobs = 1
+    Parallel(n_jobs=Njobs)(delayed(clean_folder)(camera) 
+                            for camera in cameras) 
