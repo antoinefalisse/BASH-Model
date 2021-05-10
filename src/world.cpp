@@ -230,15 +230,16 @@ void World::Render(float alpha, sf::Time delta) {
 			frameID = (frameID + 1) % Model::GetInstance().numFrames;
 		} else {
 			frameID = std::min(frameID + 1, Model::GetInstance().numFrames - 1);
-		}
-		PRINT_VAR(frameID);
+		}		
 		incrementFrame = false;
 	}
 	if (decrementFrame) {
 		frameID = std::max(0, frameID - 1);
-		PRINT_VAR(frameID);
 		decrementFrame = false;
 	}
+	// Not entirely clear to me, but the last frameID is printed out twice.
+	// The printed out images look okay though.
+	PRINT_VAR(frameID);
 
 	if (frameID == Model::GetInstance().numFrames) {
 		#define STOP_VIDEO
@@ -437,12 +438,8 @@ void World::ProcessInput() {
 		}
 	}
 
-	// Stop increasing when last frame is hit
-	frameID2 = std::min(frameID2 + 1, Model::GetInstance().numFrames - 1);
-	if (frameID2 < Model::GetInstance().numFrames)
-		incrementFrame = true;
-	else
-		incrementFrame = false;
+	// Set incrementFrame to True so that it runs by itself
+	incrementFrame = true;
 		
 	//Settings::GetInstance().repeatPlayback = !Settings::GetInstance().repeatPlayback;
 

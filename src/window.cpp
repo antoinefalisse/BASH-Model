@@ -52,7 +52,8 @@ Window::Window(int wm) :
 	glewInit();
 	PRINT("GL_Version: " << glGetString(GL_VERSION));
 
-	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+	/*glClearColor(0.2f, 0.2f, 0.2f, 1.0f);*/
+	glClearColor(PRESENTATION_COLOR);
 	glEnable(GL_POINT_SMOOTH);
 
 	sf::ContextSettings settings = renderWindow->getSettings();
@@ -183,14 +184,17 @@ void Window::Render(float alpha, sf::Time delta) {
 
 	renderWindow->display();
 
-	// Save one image per frame
+	// Save one image per frame; not 100% sure it is really one per frame - might be time-based?
+	// But fairly confident, based on some tests + how BASH was initially designed.
 	sf::Texture texture;
 	texture.create(renderWindow->getSize().x, renderWindow->getSize().y);
 	texture.update(*renderWindow);	
-	texture.copyToImage().saveToFile(Settings::GetInstance().outputDir + "/image" + std::to_string(frameID3) + ".png");
+	// frameID3-1 because the first one is always a black one.
+	// The remaining ones should correspond to the frames of the mot file [0, ...]
+	texture.copyToImage().saveToFile(Settings::GetInstance().outputDir + "/image" + std::to_string(frameID3-1) + ".png");
 	frameID3 = frameID3 + 1;
 	// Stop when last frame is hit
-	if (frameID3 >= Model::GetInstance().numFrames -1) {
+	if (frameID3 > Model::GetInstance().numFrames) {
 		renderWindow->close();
 		Stop();
 		return;

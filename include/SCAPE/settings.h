@@ -168,7 +168,7 @@ public:
 	bool presentationMode = false;
 
 	// scene
-	bool showFloor = true;
+	bool showFloor = false;
 	bool showOrigin = false;
 	bool showBounds = false;
 	bool showNormals = false;

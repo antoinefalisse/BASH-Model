@@ -100,12 +100,12 @@ for camera in cameras:
     # Extract framerate from mot file - we should have one image per frame.    
     framerate_in = int(np.round(1/np.mean(np.diff(time))))
     # Fix output framerate to 60 Hz.
-    # TODO not sure since we later want to use together with model based markers, so we should maybe keep the same frame rate
     framerate_out = 60
     
-    # We start from image #2, since the first 2 are before presentation mode.
-    # TODO check that out, risk of mismatch between this and model-base data
-    commande_ffmpeg = "ffmpeg -framerate {} -start_number 2 -i {}/image%d.png -c:v libx264 -r {} -pix_fmt yuv420p {}/{}.mp4".format(
+    # We start from image #1, since the first image (idx = -1) is black, and
+    # the second image is bad.
+    # Make sure to select the same interval from the .mot file when extracting the data for the ML model.
+    commande_ffmpeg = "ffmpeg -framerate {} -start_number 1 -i {}/image%d.png -c:v libx264 -r {} -pix_fmt yuv420p {}/{}.mp4".format(
         framerate_in, pathVideosCam, framerate_out, pathVideosCam, motFileName[:-4])
     os.system(commande_ffmpeg)
     
