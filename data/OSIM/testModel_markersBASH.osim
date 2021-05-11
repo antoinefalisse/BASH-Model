@@ -15066,373 +15066,373 @@
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.066270028775813117 -0.25797581368227629 0.0051771771267097866</location>
 				</Marker>
-				<Marker name="CP_RCPM">
+				<Marker name="CP_RCPM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0 -0.017478850590785151 -0.030822411868993177</location>
 				</Marker>
-				<Marker name="CP_RCPL">
+				<Marker name="CP_RCPL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0 -0.017478850590785151 0.030822411868993177</location>
 				</Marker>
-				<Marker name="CP_RCAM">
+				<Marker name="CP_RCAM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.13456667923581972 -0.017478850590785151 -0.030822411868993177</location>
 				</Marker>
-				<Marker name="CP_RCAL">
+				<Marker name="CP_RCAL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.13456667923581972 -0.017478850590785151 0.030822411868993177</location>
 				</Marker>
-				<Marker name="CP_RTPM">
+				<Marker name="CP_RTPM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/toes_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0 -0.02025874924733119 -0.039693908933519505</location>
 				</Marker>
-				<Marker name="CP_RTPL">
+				<Marker name="CP_RTPL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/toes_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0 -0.02025874924733119 0.039693908933519505</location>
 				</Marker>
-				<Marker name="CP_RTAM">
+				<Marker name="CP_RTAM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/toes_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.057766164155442515 -0.02025874924733119 -0.039693908933519505</location>
 				</Marker>
-				<Marker name="CP_RTAL">
+				<Marker name="CP_RTAL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/toes_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.057766164155442515 -0.02025874924733119 0.039693908933519505</location>
 				</Marker>
-				<Marker name="CP_LCPM">
+				<Marker name="CP_LCPM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0 -0.017478850590785151 0.030445698652355951</location>
 				</Marker>
-				<Marker name="CP_LCPL">
+				<Marker name="CP_LCPL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0 -0.017478850590785151 -0.030445698652355951</location>
 				</Marker>
-				<Marker name="CP_LCAM">
+				<Marker name="CP_LCAM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.14233165946293924 -0.017478850590785151 0.030445698652355951</location>
 				</Marker>
-				<Marker name="CP_LCAL">
+				<Marker name="CP_LCAL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.14233165946293924 -0.017478850590785151 -0.030445698652355951</location>
 				</Marker>
-				<Marker name="CP_LTPM">
+				<Marker name="CP_LTPM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/toes_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0 -0.02025874924733119 0.03920876779080789</location>
 				</Marker>
-				<Marker name="CP_LTPL">
+				<Marker name="CP_LTPL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/toes_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0 -0.02025874924733119 -0.03920876779080789</location>
 				</Marker>
-				<Marker name="CP_LTAM">
+				<Marker name="CP_LTAM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/toes_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.061099479096487393 -0.02025874924733119 0.03920876779080789</location>
 				</Marker>
-				<Marker name="CP_LTAL">
+				<Marker name="CP_LTAL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/toes_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.061099479096487393 -0.02025874924733119 -0.03920876779080789</location>
 				</Marker>
-				<Marker name="STRN">
+				<Marker name="STRN_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/torso</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.12871125580603232 0.22952921624748301 -0.0042804146920081883</location>
 				</Marker>
-				<Marker name="RSHO">
+				<Marker name="RSHO_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/torso</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.0085920730992254737 0.43042314640678903 0.1800770987386886</location>
 				</Marker>
-				<Marker name="LSHO">
+				<Marker name="LSHO_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/torso</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.0014005891263505999 0.44653204666313184 -0.18047383481286977</location>
 				</Marker>
-				<Marker name="C7_0">
+				<Marker name="C7_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/torso</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.043929954065863648 0.43603900379550531 0.00031727102764987668</location>
 				</Marker>
-				<Marker name="CLAV">
+				<Marker name="CLAV_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/torso</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.10088070174658513 0.36265687107982009 -1.3503296048533479e-05</location>
 				</Marker>
-				<Marker name="RUPA">
+				<Marker name="RUPA_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/humerus_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.021390809522302157 -0.17764466803365042 0.043766166329868079</location>
 				</Marker>
-				<Marker name="RELB">
+				<Marker name="RELB_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/humerus_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.019089187396357104 -0.34399367707965356 0.038868873964517908</location>
 				</Marker>
-				<Marker name="RFRA">
+				<Marker name="RFRA_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/ulna_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.030945201031488224 -0.09415447853554694 0.041709672941059893</location>
 				</Marker>
-				<Marker name="RWRB">
+				<Marker name="RWRB_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/radius_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.053913918260998964 -0.30534451445465094 -0.0046458585642519422</location>
 				</Marker>
-				<Marker name="RWBA">
+				<Marker name="RWBA_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/radius_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.017810446027448724 -0.31805524133001573 0.091092067213152814</location>
 				</Marker>
-				<Marker name="LUPA">
+				<Marker name="LUPA_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/humerus_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.019502120547184275 -0.096046968471951502 -0.079497958322173407</location>
 				</Marker>
-				<Marker name="LELB">
+				<Marker name="LELB_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/humerus_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.01617885613380186 -0.33341303042104409 -0.042584078354596197</location>
 				</Marker>
-				<Marker name="LFRA">
+				<Marker name="LFRA_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/ulna_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.044758676308032895 -0.14779173006779192 -0.026820584213585658</location>
 				</Marker>
-				<Marker name="LWRE">
+				<Marker name="LWRE_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/radius_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.047324287971648074 -0.27954165327055497 0.0072596957537735046</location>
 				</Marker>
-				<Marker name="LWRA">
+				<Marker name="LWRA_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/radius_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.011299357924322274 -0.28267219990876774 -0.07724944067352324</location>
 				</Marker>
-				<Marker name="RASI">
+				<Marker name="RASI_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/pelvis</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.022030324580298345 0.0099302675313933126 0.17586091009945301</location>
 				</Marker>
-				<Marker name="LASI">
+				<Marker name="LASI_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/pelvis</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.020822111869048997 0.012389731718109965 -0.17007165511270458</location>
 				</Marker>
-				<Marker name="SACR">
+				<Marker name="SACR_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/pelvis</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.17923063623214661 0.024358730559691906 -0.0044283173871413192</location>
 				</Marker>
-				<Marker name="TRO">
+				<Marker name="TRO_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/femur_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.014760619831453903 -0.021651701114349633 0.12300710806710101</location>
 				</Marker>
-				<Marker name="KneL">
+				<Marker name="KneL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/femur_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.0052711231116479539 -0.5330198183758772 0.078289283134071491</location>
 				</Marker>
-				<Marker name="KneM">
+				<Marker name="KneM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/femur_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.0061199204801694902 -0.53119736504920678 -0.043387674669014352</location>
 				</Marker>
-				<Marker name="AnkL">
+				<Marker name="AnkL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/tibia_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.019416996437292663 -0.52449024673990119 0.053390251425569663</location>
 				</Marker>
-				<Marker name="AnkM">
+				<Marker name="AnkM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/tibia_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.001083734728346684 -0.50576108262712671 -0.03953468172368365</location>
 				</Marker>
-				<Marker name="Hee">
+				<Marker name="Hee_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.028370065005451438 0.043659721736698597 -0.008001117978110912</location>
 				</Marker>
-				<Marker name="Toe2">
+				<Marker name="Toe2_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/toes_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.061590630819517739 0.029999943725696535 0.011756078852325585</location>
 				</Marker>
-				<Marker name="MFL">
+				<Marker name="MFL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.083760491223619046 0.026860798433894991 0.057651163832120912</location>
 				</Marker>
-				<Marker name="MFM">
+				<Marker name="MFM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.096767796149672861 0.029391735999440678 -0.054080284675725149</location>
 				</Marker>
-				<Marker name="ToeL">
+				<Marker name="ToeL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/toes_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.0043243750486764267 0.0076187078294438415 0.076251999061290973</location>
 				</Marker>
-				<Marker name="ToeM">
+				<Marker name="ToeM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/toes_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.013456627940010334 0.018811374162216309 -0.059544171226023727</location>
 				</Marker>
-				<Marker name="LTRO">
+				<Marker name="LTRO_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/femur_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.0054175580567511275 -0.026795914143482487 -0.11394172070261856</location>
 				</Marker>
-				<Marker name="LKneL">
+				<Marker name="LKneL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/femur_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.0090792671518785829 -0.53132939546342539 -0.074190971776552747</location>
 				</Marker>
-				<Marker name="LKneM">
+				<Marker name="LKneM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/femur_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.0065351539250988813 -0.53512234433442618 0.047699108350480066</location>
 				</Marker>
-				<Marker name="LAnkL">
+				<Marker name="LAnkL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/tibia_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.010850793710961303 -0.5186266860151475 -0.054061195158370552</location>
 				</Marker>
-				<Marker name="LAnkM">
+				<Marker name="LAnkM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/tibia_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.0051960943682378222 -0.48654788424757833 0.036471063078911452</location>
 				</Marker>
-				<Marker name="LHee">
+				<Marker name="LHee_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>-0.030475675373112653 0.043409511990491506 0.013823463530453522</location>
 				</Marker>
-				<Marker name="LToe2">
+				<Marker name="LToe2_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/toes_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.065144631209549428 0.029999943725696535 -0.011612395408657257</location>
 				</Marker>
-				<Marker name="LMFL">
+				<Marker name="LMFL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.096095694325268308 0.030125148570230024 -0.054163405330852114</location>
 				</Marker>
-				<Marker name="LMFM">
+				<Marker name="LMFM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.10007528752385209 0.028378312242186957 0.052078179430152256</location>
 				</Marker>
-				<Marker name="LToeL">
+				<Marker name="LToeL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/toes_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0 0 -0.081286702512654477</location>
 				</Marker>
-				<Marker name="LToeM">
+				<Marker name="LToeM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/toes_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.010857438534924907 0.02 0.05806191169533996</location>
 				</Marker>
-				<Marker name="LPat">
+				<Marker name="LPat_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/femur_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.060530097619534644 -0.51490391138531455 -0.024037594716795736</location>
 				</Marker>
-				<Marker name="Pat">
+				<Marker name="Pat_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/femur_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.062322287378020008 -0.5159658871523336 0.018066814707729348</location>
 				</Marker>
-				<Marker name="CalL">
+				<Marker name="CalL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.036307615146855494 0.013039659511990492 0.051768706526923558</location>
 				</Marker>
-				<Marker name="CalM">
+				<Marker name="CalM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_r</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.035159133395137522 0.021249737817241141 -0.058235454019784125</location>
 				</Marker>
-				<Marker name="LCalL">
+				<Marker name="LCalL_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
 					<location>0.03787568812413681 0.011591361952038035 -0.050389965439879114</location>
 				</Marker>
-				<Marker name="LCalM">
+				<Marker name="LCalM_BASH">
 					<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame to which this station is fixed.).-->
 					<socket_parent_frame>/bodyset/calcn_l</socket_parent_frame>
 					<!--The fixed location of the station expressed in its parent frame.-->
