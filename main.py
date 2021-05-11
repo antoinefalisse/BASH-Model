@@ -102,22 +102,7 @@ pathVideosTrial = os.path.join(pathVideosSubject, 'TrialTest')
 
 baseModelDir = os.path.join(pathData, 'baselineModel/')
 
-# %% Setups
-
-
-# setup = {'cameras': cameras,
-#          'paths': {
-#              'pathVideosSubject': pathVideosSubject,
-#              'pathExe': pathExe,
-#              'pathScaledModelBASH': pathScaledModelBASH,
-#              'pathMotFile': pathMotFile,
-#              'baseModelDir': baseModelDir,
-#              },
-#          'motFileName': motFileName,
-#          'distance': distance,
-#          'fov': fov,
-#          'time': time,
-#          'framerate_out': framerate_out}
+# %% Main function
    
 def getBASHAnimation(camera):
     pathVideosCam = os.path.join(pathVideosSubject, 'Cam{}'.format(camera), "InputMedia", motFileName[:-4])
