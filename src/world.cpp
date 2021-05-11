@@ -14,11 +14,11 @@
 //
 World::World(int w, int h) : windowWidth(w), windowHeight(h) {
 	// Shader
-	ShaderManager::GetInstance().LoadShader("standard", "shader/standard.vert", "shader/standard.frag");
-	ShaderManager::GetInstance().LoadShader("model", "shader/model.vert", "shader/model.frag");
-	ShaderManager::GetInstance().LoadShader("floor", "shader/floor.vert", "shader/floor.frag");
-	ShaderManager::GetInstance().LoadShader("color", "shader/color.vert", "shader/color.frag");
-	ShaderManager::GetInstance().LoadShader("skinned", "shader/skinned.vert", "shader/skinned.frag");
+	ShaderManager::GetInstance().LoadShader("standard", Settings::GetInstance().bashDir + "shader/standard.vert", Settings::GetInstance().bashDir + "shader/standard.frag");
+	ShaderManager::GetInstance().LoadShader("model", Settings::GetInstance().bashDir + "shader/model.vert", Settings::GetInstance().bashDir + "shader/model.frag");
+	ShaderManager::GetInstance().LoadShader("floor", Settings::GetInstance().bashDir + "shader/floor.vert", Settings::GetInstance().bashDir + "shader/floor.frag");
+	ShaderManager::GetInstance().LoadShader("color", Settings::GetInstance().bashDir + "shader/color.vert", Settings::GetInstance().bashDir + "shader/color.frag");
+	ShaderManager::GetInstance().LoadShader("skinned", Settings::GetInstance().bashDir + "shader/skinned.vert", Settings::GetInstance().bashDir + "shader/skinned.frag");
 
 	// Model
 	modelRenderer = new ModelRenderer();

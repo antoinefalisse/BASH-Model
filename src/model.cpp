@@ -23,7 +23,7 @@ void Model::InitModel() {
 	scaleFactors = osimInput.GetScaleFactors();
 
 	// load the SCAPE model
-	SCAPE::GetInstance().InitSCAPEModel(std::string(FILEPATH_SCAPE_DATADIRECTORY) + std::string(FILENAME_SCAPE_BINARYDATA), FILEPATH_SCAPE_DATADIRECTORY);
+	SCAPE::GetInstance().InitSCAPEModel(std::string(Settings::GetInstance().scapeDataDir) + std::string(FILENAME_SCAPE_BINARYDATA), Settings::GetInstance().scapeDataDir);
 
 	// OSIM model in default pose
 	OSIM osimZeros(Settings::GetInstance().inputModelOSIM);
@@ -39,13 +39,13 @@ void Model::InitModel() {
 	ComputeModelPose_Scaled();
 
 	// write SCAPE markers to a .trc file that will be input for IK
-	IO::GetInstance().WriteTRC_Markers(std::string(FILEPATH_CACHE_MAPPING) + std::string(FILENAME_MARKERSONSCAPE_TRC), markers_scaled);
+	IO::GetInstance().WriteTRC_Markers(std::string(Settings::GetInstance().cacheMappingDir) + std::string(FILENAME_MARKERSONSCAPE_TRC), markers_scaled);
 
 	// compute inverse kinematics and store the inverse pose mapping matrix in a .mot file
-	osimInput.InverseKinematics(std::string(FILEPATH_CACHE_MAPPING) + std::string(FILENAME_MARKERSONSCAPE_TRC), std::string(FILEPATH_CACHE_MAPPING) + std::string(FILENAME_POSEMAPPING_MOT));
+	osimInput.InverseKinematics(std::string(Settings::GetInstance().cacheMappingDir) + std::string(FILENAME_MARKERSONSCAPE_TRC), std::string(Settings::GetInstance().cacheMappingDir) + std::string(FILENAME_POSEMAPPING_MOT));
 
 	// receive OSIM model that stores the inverse pose mapping transformed components in the first frame
-	OSIM osimInScapePose(Settings::GetInstance().inputModelOSIM, Settings::GetInstance().inputModelScale, std::string(FILEPATH_CACHE_MAPPING) + std::string(FILENAME_POSEMAPPING_MOT));
+	OSIM osimInScapePose(Settings::GetInstance().inputModelOSIM, Settings::GetInstance().inputModelScale, std::string(Settings::GetInstance().cacheMappingDir) + std::string(FILENAME_POSEMAPPING_MOT));
 	osimBodies_scapePose = osimInScapePose.GetBodies(0);
 	osimJoints_scapePose = osimInScapePose.GetJoints(0);
 	osimMarkers_scapePose = osimInScapePose.GetMarkers(0);

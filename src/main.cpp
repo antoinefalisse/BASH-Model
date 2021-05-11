@@ -109,6 +109,21 @@ int main(int argc, char* argv[]) {
 		PRINT("No .sto file was specified. Skipping visualization of muscle activity...");
 	}
 
+	// BASH dir
+	if (args.Exists("--bash")) {
+		const std::string& bash = args.Get("--bash");
+		if (!bash.empty()) {
+			Settings::GetInstance().bashDir = bash;
+		}
+		else {
+			PRINT("No BASH directory was specified. Using default...");
+		}
+	}
+	else {
+		PRINT("No BASH directory was specified. Using default...");
+	}
+	PRINT("BASH: " << Settings::GetInstance().bashDir);
+
 	// Baseline Model
 	if (args.Exists("--model")) {
 		const std::string& filenameModel = args.Get("--model");
@@ -121,6 +136,51 @@ int main(int argc, char* argv[]) {
 		PRINT("No Baseline-Model directory was specified. Using default...");
 	}
 	PRINT("Baseline-Model: " << Settings::GetInstance().baselineModelDir);
+
+	// SCAPE data dir
+	if (args.Exists("--scapedata")) {
+		const std::string& scapeData = args.Get("--scapedata");
+		if (!scapeData.empty()) {
+			Settings::GetInstance().scapeDataDir = scapeData;
+		}
+		else {
+			PRINT("No Scape-data directory was specified. Using default...");
+		}
+	}
+	else {
+		PRINT("No Scape-data directory was specified. Using default...");
+	}
+	PRINT("Scape-data directory: " << Settings::GetInstance().scapeDataDir);
+
+	// Cache mapping dir
+	if (args.Exists("--cachemapping")) {
+		const std::string& cachemapping = args.Get("--cachemapping");
+		if (!cachemapping.empty()) {
+			Settings::GetInstance().cacheMappingDir = cachemapping;
+		}
+		else {
+			PRINT("No Cache-mapping directory was specified. Using default...");
+		}
+	}
+	else {
+		PRINT("No Cache-mapping directory was specified. Using default...");
+	}
+	PRINT("Cache-mapping directory: " << Settings::GetInstance().cacheMappingDir);
+
+	// Cache mesh dir
+	if (args.Exists("--cachemesh")) {
+		const std::string& cachemesh = args.Get("--cachemesh");
+		if (!cachemesh.empty()) {
+			Settings::GetInstance().cacheMeshDir = cachemesh;
+		}
+		else {
+			PRINT("No Cache-mesh directory was specified. Using default...");
+		}
+	}
+	else {
+		PRINT("No Cache-mesh directory was specified. Using default...");
+	}
+	PRINT("Cache-mesh directory: " << Settings::GetInstance().cacheMeshDir);
 	
 	// Frames
 	if (args.Exists("--frames")) {
@@ -182,14 +242,14 @@ int main(int argc, char* argv[]) {
 	PRINT("---------------------------------------------------------------");
 
 	// create necessary folders
-	if (!CreateFolder(FILEPATH_CACHE_MAPPING)) {
-		PRINT_ERR("Unable to create folder: " + std::string(FILEPATH_CACHE_MAPPING));
+	if (!CreateFolder(Settings::GetInstance().cacheMappingDir)) {
+		PRINT_ERR("Unable to create folder: " + std::string(Settings::GetInstance().cacheMappingDir));
 	}
 	if (CACHE_ALL_MESHES) {
 		std::string osimfile = GetFileFromPath(Settings::GetInstance().inputModelOSIM);
 		std::string scaleFile = GetFileFromPath(Settings::GetInstance().inputModelScale);
 		std::string motFile = GetFileFromPath(Settings::GetInstance().inputModelMOT);
-		Settings::GetInstance().filepathModelCache = std::string(FILEPATH_CACHE_MESH) + osimfile + "/" + scaleFile + "/" + motFile + "/";
+		Settings::GetInstance().filepathModelCache = std::string(Settings::GetInstance().cacheMeshDir) + osimfile + "/" + scaleFile + "/" + motFile + "/";
 		if (!CreateFolder(Settings::GetInstance().filepathModelCache)) {
 			PRINT_ERR("Unable to create folder: " + Settings::GetInstance().filepathModelCache);
 		}
