@@ -53,7 +53,7 @@ enum class MuscleMode { LoadFromFile, kNN };
 #define BIND_ID_BUFFER_POINTLIGHTS 1
 #define BIND_ID_BUFFER_MUSCLEDATA 2
 
-
+// Main BASH directory
 #define FILEPATH_BASH_DIR "./"
 
 // Window
@@ -156,7 +156,6 @@ public:
 	std::string cacheMeshDir = FILEPATH_CACHE_MESH;
 	std::string cacheMappingDir = FILEPATH_CACHE_MAPPING;
 	std::string bashDir = FILEPATH_BASH_DIR;
-
 	std::string outputDir = FILEPATH_DEFAULT_OUTPUT_DIR;
 	std::string idxCamera = DEFAULT_INDEX_CAMERA;
 	float cameraDistance = DEFAULT_CAMERA_DISTANCE;

@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
 	else {
 		PRINT("No BASH directory was specified. Using default...");
 	}
-	PRINT("BASH: " << Settings::GetInstance().bashDir);
+	PRINT("BASH directory: " << Settings::GetInstance().bashDir);
 
 	// Baseline Model
 	if (args.Exists("--model")) {
