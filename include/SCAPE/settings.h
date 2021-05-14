@@ -71,10 +71,10 @@ enum class MuscleMode { LoadFromFile, kNN };
 #define CAMERA_SCROLL_SENSITIVITY 0.2f
 #define CAMERA_ROTATION_SENSITIVITY 0.006f
 #define CAMERA_PANNING_SENSITIVITY 0.005f
-#define MOUSE_BUTTON_ROTATE_PRESSED MouseButton::LeftPressed
-#define MOUSE_BUTTON_ROTATE_RELEASED MouseButton::LeftReleased
-#define MOUSE_BUTTON_PAN_PPRESSED MouseButton::MiddlePressed
-#define MOUSE_BUTTON_PAN_RELEASED MouseButton::MiddleReleased
+//#define MOUSE_BUTTON_ROTATE_PRESSED MouseButton::LeftPressed
+//#define MOUSE_BUTTON_ROTATE_RELEASED MouseButton::LeftReleased
+//#define MOUSE_BUTTON_PAN_PPRESSED MouseButton::MiddlePressed
+//#define MOUSE_BUTTON_PAN_RELEASED MouseButton::MiddleReleased
 
 // OpenGL
 #define DEFAULT_POINT_SIZE 1.0f
@@ -84,53 +84,53 @@ enum class MuscleMode { LoadFromFile, kNN };
 #define POSITION_FRONT_LIGHT glm::vec3(8.0, 3.0, 0.0)
 #define POSITION_BACK_LIGHT glm::vec3(-8.0, 5.0, 3.0)
 
-// Keys: Window
-#define KEY_CLOSE_WINDOW sf::Keyboard::F9
-#define KEY_TOGGLE_VSYNC sf::Keyboard::V
-#define KEY_RELOAD_SHADERS sf::Keyboard::Slash
-#define KEY_RESET_CAMERA sf::Keyboard::Num0
-#define KEY_CAMERA_FRONT sf::Keyboard::Num1
-#define KEY_CAMERA_BACK sf::Keyboard::Num2
-#define KEY_CAMERA_45RIGHTSIDE sf::Keyboard::Num3
-#define KEY_CAMERA_90RIGHTSIDE sf::Keyboard::Num4
-#define KEY_CAMERA_135RIGHTSIDE sf::Keyboard::Num5
-#define KEY_CAMERA_45LEFTSIDE sf::Keyboard::Num6
-#define KEY_CAMERA_90LEFTSIDE sf::Keyboard::Num7
-#define KEY_CAMERA_135LEFTSIDE sf::Keyboard::Num8
-#define KEY_CAMERA_DEFINED sf::Keyboard::D
-
-// Keys: Rendering
-#define KEY_SHOW_WIREFRAME sf::Keyboard::Comma
-#define KEY_SHOW_POINTS sf::Keyboard::Period
-#define KEY_SHOW_NORMALS sf::Keyboard::N
-
-// Keys: Scene
-#define KEY_PRESENTATION_MODE sf::Keyboard::Enter
-#define KEY_TOOGLE_FLOOR sf::Keyboard::F1
-#define KEY_TOOGLE_ORIGIN sf::Keyboard::F2
-#define KEY_TOOGLE_BOUNDING_BOX sf::Keyboard::F3
-
-// Keys: model
-#define KEY_MODEL_OSIM sf::Keyboard::O
-#define KEY_TOOGLE_MODEL sf::Keyboard::M
-#define KEY_TOOGLE_BONES sf::Keyboard::B
-#define KEY_TOOGLE_MARKERS sf::Keyboard::P
-#define KEY_TOOGLE_MUSCLES sf::Keyboard::F
-
-// Keys: Model state
-#define KEY_MODEL_STATE_DEFAULT sf::Keyboard::Numpad0
-#define KEY_MODEL_STATE_SCALED sf::Keyboard::Numpad1
-#define KEY_MODEL_STATE_TRANSFORMED sf::Keyboard::Numpad2
-#define KEY_MODEL_STATE_SCAPESPACE sf::Keyboard::Numpad3
-#define KEY_OSIM_STATE_DEFAULT sf::Keyboard::Numpad7
-#define KEY_OSIM_STATE_SCAPE sf::Keyboard::Numpad8
-#define KEY_OSIM_STATE_ANIMATION sf::Keyboard::Numpad9
-
-// Keys: Playback
-#define KEY_PLAYBACK_NEXT_FRAME sf::Keyboard::Right
-#define KEY_PLAYBACK_PREV_FRAME sf::Keyboard::Left
-#define KEY_PLAYBACK_SINGLE_FRAME sf::Keyboard::S
-#define KEY_TOGGLE_PLAYBACK_REPEAT sf::Keyboard::R
+//// Keys: Window
+//#define KEY_CLOSE_WINDOW sf::Keyboard::F9
+//#define KEY_TOGGLE_VSYNC sf::Keyboard::V
+//#define KEY_RELOAD_SHADERS sf::Keyboard::Slash
+//#define KEY_RESET_CAMERA sf::Keyboard::Num0
+//#define KEY_CAMERA_FRONT sf::Keyboard::Num1
+//#define KEY_CAMERA_BACK sf::Keyboard::Num2
+//#define KEY_CAMERA_45RIGHTSIDE sf::Keyboard::Num3
+//#define KEY_CAMERA_90RIGHTSIDE sf::Keyboard::Num4
+//#define KEY_CAMERA_135RIGHTSIDE sf::Keyboard::Num5
+//#define KEY_CAMERA_45LEFTSIDE sf::Keyboard::Num6
+//#define KEY_CAMERA_90LEFTSIDE sf::Keyboard::Num7
+//#define KEY_CAMERA_135LEFTSIDE sf::Keyboard::Num8
+//#define KEY_CAMERA_DEFINED sf::Keyboard::D
+//
+//// Keys: Rendering
+//#define KEY_SHOW_WIREFRAME sf::Keyboard::Comma
+//#define KEY_SHOW_POINTS sf::Keyboard::Period
+//#define KEY_SHOW_NORMALS sf::Keyboard::N
+//
+//// Keys: Scene
+//#define KEY_PRESENTATION_MODE sf::Keyboard::Enter
+//#define KEY_TOOGLE_FLOOR sf::Keyboard::F1
+//#define KEY_TOOGLE_ORIGIN sf::Keyboard::F2
+//#define KEY_TOOGLE_BOUNDING_BOX sf::Keyboard::F3
+//
+//// Keys: model
+//#define KEY_MODEL_OSIM sf::Keyboard::O
+//#define KEY_TOOGLE_MODEL sf::Keyboard::M
+//#define KEY_TOOGLE_BONES sf::Keyboard::B
+//#define KEY_TOOGLE_MARKERS sf::Keyboard::P
+//#define KEY_TOOGLE_MUSCLES sf::Keyboard::F
+//
+//// Keys: Model state
+//#define KEY_MODEL_STATE_DEFAULT sf::Keyboard::Numpad0
+//#define KEY_MODEL_STATE_SCALED sf::Keyboard::Numpad1
+//#define KEY_MODEL_STATE_TRANSFORMED sf::Keyboard::Numpad2
+//#define KEY_MODEL_STATE_SCAPESPACE sf::Keyboard::Numpad3
+//#define KEY_OSIM_STATE_DEFAULT sf::Keyboard::Numpad7
+//#define KEY_OSIM_STATE_SCAPE sf::Keyboard::Numpad8
+//#define KEY_OSIM_STATE_ANIMATION sf::Keyboard::Numpad9
+//
+//// Keys: Playback
+//#define KEY_PLAYBACK_NEXT_FRAME sf::Keyboard::Right
+//#define KEY_PLAYBACK_PREV_FRAME sf::Keyboard::Left
+//#define KEY_PLAYBACK_SINGLE_FRAME sf::Keyboard::S
+//#define KEY_TOGGLE_PLAYBACK_REPEAT sf::Keyboard::R
 
 //
 // Settings

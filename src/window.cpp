@@ -135,19 +135,19 @@ void Window::ProcessInput() {
 	//	return;
 	//}
 
-	// Close Window
-	if (Input::GetInstance().KeyPressed(KEY_CLOSE_WINDOW)) {
-		PRINT("--- Window closed ---");
-		Stop();
-		return;
-	}
+	//// Close Window
+	//if (Input::GetInstance().KeyPressed(KEY_CLOSE_WINDOW)) {
+	//	PRINT("--- Window closed ---");
+	//	Stop();
+	//	return;
+	//}
 
-	// Toggle VSync
-	if (Input::GetInstance().KeyPressed(KEY_TOGGLE_VSYNC)) {
-		VSync = !VSync;
-		renderWindow->setVerticalSyncEnabled(VSync);
-		PRINT_VAR(VSync);
-	}
+	//// Toggle VSync
+	//if (Input::GetInstance().KeyPressed(KEY_TOGGLE_VSYNC)) {
+	//	VSync = !VSync;
+	//	renderWindow->setVerticalSyncEnabled(VSync);
+	//	PRINT_VAR(VSync);
+	//}
 
 	//if (STOP_VIDEO) {
 	//	Stop();

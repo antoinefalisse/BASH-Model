@@ -295,148 +295,148 @@ void World::Resize(int w, int h) {
 // Input
 //
 void World::ProcessInput() {
-	// Reload all Shader
-	if (Input::GetInstance().KeyPressed(KEY_RELOAD_SHADERS)) { // "/" in EN, "#" in DE
-		ShaderManager::GetInstance().Reload();
-		PRINT("Shader reloaded");
-	}
+	//// Reload all Shader
+	//if (Input::GetInstance().KeyPressed(KEY_RELOAD_SHADERS)) { // "/" in EN, "#" in DE
+	//	ShaderManager::GetInstance().Reload();
+	//	PRINT("Shader reloaded");
+	//}
 
-	// Show wireframe
-	if (Input::GetInstance().KeyPressed(KEY_SHOW_WIREFRAME)) {
-		Settings::GetInstance().showWireframe = !Settings::GetInstance().showWireframe;
-		Settings::GetInstance().showPoints = false;
-		PRINT_VAR(Settings::GetInstance().showWireframe);
-	}
-	// Show points
-	if (Input::GetInstance().KeyPressed(KEY_SHOW_POINTS)) {
-		Settings::GetInstance().showPoints = !Settings::GetInstance().showPoints;
-		Settings::GetInstance().showWireframe = false;
-		PRINT_VAR(Settings::GetInstance().showPoints);
-	}
-	// Show normals
-	if (Input::GetInstance().KeyPressed(KEY_SHOW_NORMALS)) {
-		Settings::GetInstance().showNormals = !Settings::GetInstance().showNormals;
-		PRINT_VAR(Settings::GetInstance().showNormals);
-	}
+	//// Show wireframe
+	//if (Input::GetInstance().KeyPressed(KEY_SHOW_WIREFRAME)) {
+	//	Settings::GetInstance().showWireframe = !Settings::GetInstance().showWireframe;
+	//	Settings::GetInstance().showPoints = false;
+	//	PRINT_VAR(Settings::GetInstance().showWireframe);
+	//}
+	//// Show points
+	//if (Input::GetInstance().KeyPressed(KEY_SHOW_POINTS)) {
+	//	Settings::GetInstance().showPoints = !Settings::GetInstance().showPoints;
+	//	Settings::GetInstance().showWireframe = false;
+	//	PRINT_VAR(Settings::GetInstance().showPoints);
+	//}
+	//// Show normals
+	//if (Input::GetInstance().KeyPressed(KEY_SHOW_NORMALS)) {
+	//	Settings::GetInstance().showNormals = !Settings::GetInstance().showNormals;
+	//	PRINT_VAR(Settings::GetInstance().showNormals);
+	//}
 
-	// Show floor
-	if (Input::GetInstance().KeyPressed(KEY_TOOGLE_FLOOR)) {
-		Settings::GetInstance().showFloor = !Settings::GetInstance().showFloor;
-		PRINT_VAR(Settings::GetInstance().showFloor);
-	}
-	// Show origin
-	if (Input::GetInstance().KeyPressed(KEY_TOOGLE_ORIGIN)) {
-		Settings::GetInstance().showOrigin = !Settings::GetInstance().showOrigin;
-		PRINT_VAR(Settings::GetInstance().showOrigin);
-	}
-	// Show bounding box
-	if (Input::GetInstance().KeyPressed(KEY_TOOGLE_BOUNDING_BOX)) {
-		Settings::GetInstance().showBounds = !Settings::GetInstance().showBounds;
-		PRINT_VAR(Settings::GetInstance().showBounds);
-	}
+	//// Show floor
+	//if (Input::GetInstance().KeyPressed(KEY_TOOGLE_FLOOR)) {
+	//	Settings::GetInstance().showFloor = !Settings::GetInstance().showFloor;
+	//	PRINT_VAR(Settings::GetInstance().showFloor);
+	//}
+	//// Show origin
+	//if (Input::GetInstance().KeyPressed(KEY_TOOGLE_ORIGIN)) {
+	//	Settings::GetInstance().showOrigin = !Settings::GetInstance().showOrigin;
+	//	PRINT_VAR(Settings::GetInstance().showOrigin);
+	//}
+	//// Show bounding box
+	//if (Input::GetInstance().KeyPressed(KEY_TOOGLE_BOUNDING_BOX)) {
+	//	Settings::GetInstance().showBounds = !Settings::GetInstance().showBounds;
+	//	PRINT_VAR(Settings::GetInstance().showBounds);
+	//}
 
-	// Model State
-	if (Input::GetInstance().KeyPressed(KEY_MODEL_STATE_DEFAULT)) {
-		modelRenderer->SetModelState(ModelState::Default);
-		PRINT("Model State: Default");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_MODEL_STATE_SCALED)) {
-		modelRenderer->SetModelState(ModelState::Scaled);
-		PRINT("Model State: Scaled");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_MODEL_STATE_TRANSFORMED)) {
-		modelRenderer->SetModelState(ModelState::Transformed);
-		PRINT("Model State: Transformed");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_MODEL_STATE_SCAPESPACE)) {
-		modelRenderer->SetModelState(ModelState::ScapeSpace);
-		PRINT("Model State: ScapeSpace");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_OSIM_STATE_DEFAULT)) {
-		osimRenderer->SetOsimState(OsimState::Default);
-		PRINT("OSIM State: Default");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_OSIM_STATE_SCAPE)) {
-		osimRenderer->SetOsimState(OsimState::Scape);
-		PRINT("OSIM State: Scape");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_OSIM_STATE_ANIMATION)) {
-		osimRenderer->SetOsimState(OsimState::Animation);
-		PRINT("OSIM State: Animation");
-	}
+	//// Model State
+	//if (Input::GetInstance().KeyPressed(KEY_MODEL_STATE_DEFAULT)) {
+	//	modelRenderer->SetModelState(ModelState::Default);
+	//	PRINT("Model State: Default");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_MODEL_STATE_SCALED)) {
+	//	modelRenderer->SetModelState(ModelState::Scaled);
+	//	PRINT("Model State: Scaled");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_MODEL_STATE_TRANSFORMED)) {
+	//	modelRenderer->SetModelState(ModelState::Transformed);
+	//	PRINT("Model State: Transformed");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_MODEL_STATE_SCAPESPACE)) {
+	//	modelRenderer->SetModelState(ModelState::ScapeSpace);
+	//	PRINT("Model State: ScapeSpace");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_OSIM_STATE_DEFAULT)) {
+	//	osimRenderer->SetOsimState(OsimState::Default);
+	//	PRINT("OSIM State: Default");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_OSIM_STATE_SCAPE)) {
+	//	osimRenderer->SetOsimState(OsimState::Scape);
+	//	PRINT("OSIM State: Scape");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_OSIM_STATE_ANIMATION)) {
+	//	osimRenderer->SetOsimState(OsimState::Animation);
+	//	PRINT("OSIM State: Animation");
+	//}
 
-	// Model: OSIM
-	if (Input::GetInstance().KeyPressedContinously(KEY_MODEL_OSIM)) {
-		// model
-		if (Input::GetInstance().KeyPressed(KEY_TOOGLE_MODEL)) {
-			Settings::GetInstance().showModelOsim = !Settings::GetInstance().showModelOsim;
-			if (Settings::GetInstance().showModelOsim) {
-				Settings::GetInstance().showBonesOsim = true;
-				Settings::GetInstance().showMarkersOsim = true;
-				Settings::GetInstance().showMusclesOsim = true;
-			} else {
-				Settings::GetInstance().showBonesOsim = false;
-				Settings::GetInstance().showMarkersOsim = false;
-				Settings::GetInstance().showMusclesOsim = false;
-			}
-			PRINT_VAR(Settings::GetInstance().showModelOsim);
-		}
-		// bones
-		if (Input::GetInstance().KeyPressed(KEY_TOOGLE_BONES)) {
-			Settings::GetInstance().showBonesOsim = !Settings::GetInstance().showBonesOsim;
-			if (Settings::GetInstance().showBonesOsim) {
-				Settings::GetInstance().showModelOsim = true;
-			}
-			PRINT_VAR(Settings::GetInstance().showBonesOsim);
-		}
-		// markers
-		if (Input::GetInstance().KeyPressed(KEY_TOOGLE_MARKERS)) {
-			Settings::GetInstance().showMarkersOsim = !Settings::GetInstance().showMarkersOsim;
-			if (Settings::GetInstance().showMarkersOsim) {
-				Settings::GetInstance().showModelOsim = true;
-			}
-			PRINT_VAR(Settings::GetInstance().showMarkersOsim);
-		}
-		// muscles
-		if (Input::GetInstance().KeyPressed(KEY_TOOGLE_MUSCLES)) {
-			Settings::GetInstance().showMusclesOsim = !Settings::GetInstance().showMusclesOsim;
-			if (Settings::GetInstance().showMusclesOsim) {
-				Settings::GetInstance().showModelOsim = true;
-			}
-			PRINT_VAR(Settings::GetInstance().showMusclesOsim);
-		}
-	} else { // Model
-		// model
-		if (Input::GetInstance().KeyPressed(KEY_TOOGLE_MODEL)) {
-			Settings::GetInstance().showModel = !Settings::GetInstance().showModel;
-			PRINT_VAR(Settings::GetInstance().showModel);
-		}
-		// body parts
-		if (Input::GetInstance().KeyPressed(KEY_TOOGLE_BONES)) {
-			Settings::GetInstance().showBodyParts = !Settings::GetInstance().showBodyParts;
-			PRINT_VAR(Settings::GetInstance().showBodyParts);
-			if (Settings::GetInstance().showBodyParts) {
-				Settings::GetInstance().showModel = true;
-			}
-		}
-		// markers
-		if (Input::GetInstance().KeyPressed(KEY_TOOGLE_MARKERS)) {
-			Settings::GetInstance().showMarkers = !Settings::GetInstance().showMarkers;
-			PRINT_VAR(Settings::GetInstance().showMarkers);
-		}
-		// muscles
-		if (Input::GetInstance().KeyPressed(KEY_TOOGLE_MUSCLES)) {
-			if (Settings::GetInstance().visualizeMuscleActivity) {
-				Settings::GetInstance().showMuscles = !Settings::GetInstance().showMuscles;
-				if (Settings::GetInstance().showMuscles) {
-					Settings::GetInstance().showModel = true;
-				}
-				PRINT_VAR(Settings::GetInstance().showMuscles);
-			} else {
-				PRINT_WAR("No muscle activity data is available for visualization...")
-			}
-		}
-	}
+	//// Model: OSIM
+	//if (Input::GetInstance().KeyPressedContinously(KEY_MODEL_OSIM)) {
+	//	// model
+	//	if (Input::GetInstance().KeyPressed(KEY_TOOGLE_MODEL)) {
+	//		Settings::GetInstance().showModelOsim = !Settings::GetInstance().showModelOsim;
+	//		if (Settings::GetInstance().showModelOsim) {
+	//			Settings::GetInstance().showBonesOsim = true;
+	//			Settings::GetInstance().showMarkersOsim = true;
+	//			Settings::GetInstance().showMusclesOsim = true;
+	//		} else {
+	//			Settings::GetInstance().showBonesOsim = false;
+	//			Settings::GetInstance().showMarkersOsim = false;
+	//			Settings::GetInstance().showMusclesOsim = false;
+	//		}
+	//		PRINT_VAR(Settings::GetInstance().showModelOsim);
+	//	}
+	//	// bones
+	//	if (Input::GetInstance().KeyPressed(KEY_TOOGLE_BONES)) {
+	//		Settings::GetInstance().showBonesOsim = !Settings::GetInstance().showBonesOsim;
+	//		if (Settings::GetInstance().showBonesOsim) {
+	//			Settings::GetInstance().showModelOsim = true;
+	//		}
+	//		PRINT_VAR(Settings::GetInstance().showBonesOsim);
+	//	}
+	//	// markers
+	//	if (Input::GetInstance().KeyPressed(KEY_TOOGLE_MARKERS)) {
+	//		Settings::GetInstance().showMarkersOsim = !Settings::GetInstance().showMarkersOsim;
+	//		if (Settings::GetInstance().showMarkersOsim) {
+	//			Settings::GetInstance().showModelOsim = true;
+	//		}
+	//		PRINT_VAR(Settings::GetInstance().showMarkersOsim);
+	//	}
+	//	// muscles
+	//	if (Input::GetInstance().KeyPressed(KEY_TOOGLE_MUSCLES)) {
+	//		Settings::GetInstance().showMusclesOsim = !Settings::GetInstance().showMusclesOsim;
+	//		if (Settings::GetInstance().showMusclesOsim) {
+	//			Settings::GetInstance().showModelOsim = true;
+	//		}
+	//		PRINT_VAR(Settings::GetInstance().showMusclesOsim);
+	//	}
+	//} else { // Model
+	//	// model
+	//	if (Input::GetInstance().KeyPressed(KEY_TOOGLE_MODEL)) {
+	//		Settings::GetInstance().showModel = !Settings::GetInstance().showModel;
+	//		PRINT_VAR(Settings::GetInstance().showModel);
+	//	}
+	//	// body parts
+	//	if (Input::GetInstance().KeyPressed(KEY_TOOGLE_BONES)) {
+	//		Settings::GetInstance().showBodyParts = !Settings::GetInstance().showBodyParts;
+	//		PRINT_VAR(Settings::GetInstance().showBodyParts);
+	//		if (Settings::GetInstance().showBodyParts) {
+	//			Settings::GetInstance().showModel = true;
+	//		}
+	//	}
+	//	// markers
+	//	if (Input::GetInstance().KeyPressed(KEY_TOOGLE_MARKERS)) {
+	//		Settings::GetInstance().showMarkers = !Settings::GetInstance().showMarkers;
+	//		PRINT_VAR(Settings::GetInstance().showMarkers);
+	//	}
+	//	// muscles
+	//	if (Input::GetInstance().KeyPressed(KEY_TOOGLE_MUSCLES)) {
+	//		if (Settings::GetInstance().visualizeMuscleActivity) {
+	//			Settings::GetInstance().showMuscles = !Settings::GetInstance().showMuscles;
+	//			if (Settings::GetInstance().showMuscles) {
+	//				Settings::GetInstance().showModel = true;
+	//			}
+	//			PRINT_VAR(Settings::GetInstance().showMuscles);
+	//		} else {
+	//			PRINT_WAR("No muscle activity data is available for visualization...")
+	//		}
+	//	}
+	//}
 
 	// Set incrementFrame to True so that it runs by itself
 	incrementFrame = true;
@@ -495,70 +495,70 @@ void World::ProcessInput() {
 	//	}
 	//}
 
-	// defined camera states
-	if (Input::GetInstance().KeyPressed(KEY_RESET_CAMERA)) {
-		orbitCameraControl->SetDefault();
-		orbitCameraControl->distance = Settings::GetInstance().cameraDistance;
-		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
-		orbitCameraControl->Update();
-		PRINT("Reset camera");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_CAMERA_FRONT)) {
-		orbitCameraControl->RotateToFront();
-		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
-		orbitCameraControl->Update();
-		PRINT("Camera to front");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_CAMERA_BACK)) {
-		orbitCameraControl->RotateToBack();
-		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
-		orbitCameraControl->Update();
-		PRINT("Camera to back");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_CAMERA_45RIGHTSIDE)) {
-		orbitCameraControl->Rotate45ToRightSide();
-		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
-		orbitCameraControl->Update();
-		PRINT("Camera to right side - 45 deg");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_CAMERA_90RIGHTSIDE)) {
-		orbitCameraControl->Rotate90ToRightSide();
-		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
-		orbitCameraControl->Update();
-		PRINT("Camera to right side - 90 deg");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_CAMERA_135RIGHTSIDE)) {
-		orbitCameraControl->Rotate135ToRightSide();
-		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
-		orbitCameraControl->Update();
-		PRINT("Camera to right side - 135 deg");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_CAMERA_45LEFTSIDE)) {
-		orbitCameraControl->Rotate45ToLeftSide();
-		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
-		orbitCameraControl->Update();
-		PRINT("Camera to left side - 45 deg");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_CAMERA_90LEFTSIDE)) {
-		orbitCameraControl->Rotate90ToLeftSide();
-		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
-		orbitCameraControl->Update();
-		PRINT("Camera to left side - 90 deg");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_CAMERA_135LEFTSIDE)) {
-		orbitCameraControl->Rotate135ToLeftSide();
-		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
-		orbitCameraControl->Update();
-		PRINT("Camera to left side - 135 deg");
-	}
-	if (Input::GetInstance().KeyPressed(KEY_CAMERA_DEFINED)) {
-		orbitCameraControl->theta = 0.6f;
-		orbitCameraControl->phi = 1.8f;
-		orbitCameraControl->distance = Settings::GetInstance().cameraDistance;
-		orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
-		orbitCameraControl->Update();
-		PRINT("Camera to defined");
-	}
+	//// defined camera states
+	//if (Input::GetInstance().KeyPressed(KEY_RESET_CAMERA)) {
+	//	orbitCameraControl->SetDefault();
+	//	orbitCameraControl->distance = Settings::GetInstance().cameraDistance;
+	//	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+	//	orbitCameraControl->Update();
+	//	PRINT("Reset camera");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_CAMERA_FRONT)) {
+	//	orbitCameraControl->RotateToFront();
+	//	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+	//	orbitCameraControl->Update();
+	//	PRINT("Camera to front");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_CAMERA_BACK)) {
+	//	orbitCameraControl->RotateToBack();
+	//	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+	//	orbitCameraControl->Update();
+	//	PRINT("Camera to back");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_CAMERA_45RIGHTSIDE)) {
+	//	orbitCameraControl->Rotate45ToRightSide();
+	//	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+	//	orbitCameraControl->Update();
+	//	PRINT("Camera to right side - 45 deg");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_CAMERA_90RIGHTSIDE)) {
+	//	orbitCameraControl->Rotate90ToRightSide();
+	//	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+	//	orbitCameraControl->Update();
+	//	PRINT("Camera to right side - 90 deg");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_CAMERA_135RIGHTSIDE)) {
+	//	orbitCameraControl->Rotate135ToRightSide();
+	//	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+	//	orbitCameraControl->Update();
+	//	PRINT("Camera to right side - 135 deg");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_CAMERA_45LEFTSIDE)) {
+	//	orbitCameraControl->Rotate45ToLeftSide();
+	//	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+	//	orbitCameraControl->Update();
+	//	PRINT("Camera to left side - 45 deg");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_CAMERA_90LEFTSIDE)) {
+	//	orbitCameraControl->Rotate90ToLeftSide();
+	//	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+	//	orbitCameraControl->Update();
+	//	PRINT("Camera to left side - 90 deg");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_CAMERA_135LEFTSIDE)) {
+	//	orbitCameraControl->Rotate135ToLeftSide();
+	//	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+	//	orbitCameraControl->Update();
+	//	PRINT("Camera to left side - 135 deg");
+	//}
+	//if (Input::GetInstance().KeyPressed(KEY_CAMERA_DEFINED)) {
+	//	orbitCameraControl->theta = 0.6f;
+	//	orbitCameraControl->phi = 1.8f;
+	//	orbitCameraControl->distance = Settings::GetInstance().cameraDistance;
+	//	orbitCameraControl->orbitCenter = modelRenderer->bounds.GetCenter();
+	//	orbitCameraControl->Update();
+	//	PRINT("Camera to defined");
+	//}
 
 }
 
@@ -576,12 +576,12 @@ void World::ProcessMouseInput(sf::Vector2i mousePos, int mouseButton, int mouseW
 		orbitCameraControl->phi = clamp(orbitCameraControl->phi + ((mousePos.y - oldMousePos.y) * CAMERA_ROTATION_SENSITIVITY), glm::epsilon<float>(), glm::pi<float>() - glm::epsilon<float>());
 		orbitCameraControl->Update();
 	}
-	if (mouseButton == MOUSE_BUTTON_ROTATE_PRESSED) {
-		camRotate = true;
-	}
-	if (mouseButton == MOUSE_BUTTON_ROTATE_RELEASED) {
-		camRotate = false;
-	}
+	//if (mouseButton == MOUSE_BUTTON_ROTATE_PRESSED) {
+	//	camRotate = true;
+	//}
+	//if (mouseButton == MOUSE_BUTTON_ROTATE_RELEASED) {
+	//	camRotate = false;
+	//}
 	
 	// pan camera
 	if (camPan) {
@@ -591,12 +591,12 @@ void World::ProcessMouseInput(sf::Vector2i mousePos, int mouseButton, int mouseW
 		orbitCameraControl->orbitCenter += transX + transY;
 		orbitCameraControl->Update();
 	}
-	if (mouseButton == MOUSE_BUTTON_PAN_PPRESSED) {
-		camPan = true;
-	}
-	if (mouseButton == MOUSE_BUTTON_PAN_RELEASED) {
-		camPan = false;
-	}
+	//if (mouseButton == MOUSE_BUTTON_PAN_PPRESSED) {
+	//	camPan = true;
+	//}
+	//if (mouseButton == MOUSE_BUTTON_PAN_RELEASED) {
+	//	camPan = false;
+	//}
 
 
 	oldMousePos = mousePos;
