@@ -112,10 +112,10 @@ def getBASHAnimation(camera):
         os.makedirs(pathVideosCam)
     
     # %% Generate images
-    # command = '"{}" --osim {} --mot {} --model {} --output {} --camera {} --distance {} --fov {} --iktaskset {}'.format(
-    #     pathExe, pathScaledModelBASH, pathMotFile, baseModelDir, pathVideosCam, camera, distance, fov, iktaskset)
-    command = '"{}" --osim {} --mot {} --model {} --output {} --camera {} --distance {} --fov {} --scapespace {}'.format(
-        pathExe, pathScaledModelBASH, pathMotFile, baseModelDir, pathVideosCam, camera, distance, fov, float(scapespace))
+    command = '"{}" --osim {} --mot {} --model {} --output {} --camera {} --distance {} --fov {} --iktaskset {} --scapespace {}'.format(
+        pathExe, pathScaledModelBASH, pathMotFile, baseModelDir, pathVideosCam, camera, distance, fov, iktaskset, float(scapespace))
+    # command = '"{}" --osim {} --mot {} --model {} --output {} --camera {} --distance {} --fov {} --scapespace {}'.format(
+    #     pathExe, pathScaledModelBASH, pathMotFile, baseModelDir, pathVideosCam, camera, distance, fov, float(scapespace))
     os.system(command)
     
     # %% Create video from images
