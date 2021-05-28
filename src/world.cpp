@@ -466,13 +466,17 @@ void World::ProcessInput() {
 	//	PRINT_VAR(Settings::GetInstance().repeatPlayback);
 	//}
 
+	// Do not do the SCAPE pace transformation is scapeSpace != 1.
+	if (Settings::GetInstance().scapeSpace != 1.0f)	{
+		modelRenderer->SetModelState(ModelState::Transformed);
+	}
 	glClearColor(PRESENTATION_COLOR);
 	Settings::GetInstance().showFloor = false;
 	Settings::GetInstance().showOrigin = false;
-	Settings::GetInstance().showModelOsim = false;
-	Settings::GetInstance().showBonesOsim = false;
-	Settings::GetInstance().showMarkersOsim = false;
-	Settings::GetInstance().showMusclesOsim = false;
+	Settings::GetInstance().showModelOsim = true;
+	Settings::GetInstance().showBonesOsim = true;
+	Settings::GetInstance().showMarkersOsim = true;
+	Settings::GetInstance().showMusclesOsim = true;
 	Settings::GetInstance().showBodyParts = false;
 	Settings::GetInstance().showBounds = false;
 	Settings::GetInstance().showNormals = false;

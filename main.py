@@ -52,7 +52,7 @@ useMultiProcessing = True
 nThreads = 3
 
 # Clean image and text files.
-cleanPgnTxt = True
+cleanPgnTxt = False
 
 # %% Paths
 
@@ -70,12 +70,12 @@ pathExe = os.path.join(pathBuild, 'Release', 'SCAPE.exe')
 # Generate model with BASH markers
 referenceModelName = "referenceScaledModel"
 pathReferenceModel = os.path.join(pathOsim, referenceModelName + ".osim")
-scaledModelName = 'testModel'
+scaledModelName = 'referenceScaledModel'
 pathScaledModel = os.path.join(pathOsim, scaledModelName + ".osim")   
 pathScaledModelBASH = os.path.join(pathOsim, scaledModelName + "_markersBASH.osim")
 addMarkers(pathReferenceModel, pathScaledModel, pathScaledModelBASH)
 
-motFileName = 'testMotion.mot'
+motFileName = 'referenceMotion.mot'
 pathMotFile = os.path.join(pathOsim, motFileName)
 
 motion = storage2numpy(pathMotFile)
@@ -83,9 +83,7 @@ time = motion['time']
 if fixPelvis:    
     headers = motion.dtype.names
     # set pelvis coordinates to 0
-    pelvis_headers = ['pelvis_tilt', 'pelvis_list', 'pelvis_rotation',
-                      'pelvis_tx', 'pelvis_ty', 'pelvis_tz',
-                      'pelvis_obliquity']
+    pelvis_headers = ['pelvis_tx', 'pelvis_ty', 'pelvis_tz']
     
     motion_fixedPelvis = np.zeros((time.shape[0], len(headers)))
     for count, header in enumerate(headers):
@@ -102,6 +100,10 @@ pathVideosTrial = os.path.join(pathVideosSubject, 'TrialTest')
 
 baseModelDir = os.path.join(pathData, 'baselineModel/')
 
+# TODO
+iktaskset = os.path.join(pathOsim, "ik_taskSet.xml") 
+scapespace = False
+
 # %% Main function
    
 def getBASHAnimation(camera):
@@ -110,8 +112,10 @@ def getBASHAnimation(camera):
         os.makedirs(pathVideosCam)
     
     # %% Generate images
-    command = '"{}" --osim {} --mot {} --model {} --output {} --camera {} --distance {} --fov {}'.format(
-        pathExe, pathScaledModelBASH, pathMotFile, baseModelDir, pathVideosCam, camera, distance, fov)
+    # command = '"{}" --osim {} --mot {} --model {} --output {} --camera {} --distance {} --fov {} --iktaskset {}'.format(
+    #     pathExe, pathScaledModelBASH, pathMotFile, baseModelDir, pathVideosCam, camera, distance, fov, iktaskset)
+    command = '"{}" --osim {} --mot {} --model {} --output {} --camera {} --distance {} --fov {} --scapespace {}'.format(
+        pathExe, pathScaledModelBASH, pathMotFile, baseModelDir, pathVideosCam, camera, distance, fov, float(scapespace))
     os.system(command)
     
     # %% Create video from images
@@ -202,8 +206,8 @@ if __name__ == "__main__":
         Njobs = 1
     # Get animation and camera parameters.
     getBASHAnimation(cameras[0])
-    Parallel(n_jobs=Njobs)(delayed(getBASHAnimation)(camera) 
-                            for camera in cameras[1:])
+    # Parallel(n_jobs=Njobs)(delayed(getBASHAnimation)(camera) 
+    #                         for camera in cameras[1:])
     # Clean folder.
     if cleanPgnTxt:
         Njobs = 1

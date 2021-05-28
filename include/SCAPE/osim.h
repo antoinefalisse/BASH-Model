@@ -89,6 +89,7 @@ public:
 	int GetNumFrames();
 
 	void LoadScaleFactors(const std::string& filepath_scaleConfig);
+	void InverseKinematics(const std::string& filepath_input_trc, const std::string& filepath_ik_taskSet, const std::string& filepath_output_mot);
 	void InverseKinematics(const std::string& filepath_input_trc, const std::string& filepath_output_mot);
 
 	std::map<std::string, glm::vec3> GetScaleFactors();

@@ -42,7 +42,16 @@ void Model::InitModel() {
 	IO::GetInstance().WriteTRC_Markers(std::string(Settings::GetInstance().cacheMappingDir) + std::string(FILENAME_MARKERSONSCAPE_TRC), markers_scaled);
 
 	// compute inverse kinematics and store the inverse pose mapping matrix in a .mot file
-	osimInput.InverseKinematics(std::string(Settings::GetInstance().cacheMappingDir) + std::string(FILENAME_MARKERSONSCAPE_TRC), std::string(Settings::GetInstance().cacheMappingDir) + std::string(FILENAME_POSEMAPPING_MOT));
+	if (Settings::GetInstance().ikTaskSetPath.empty())
+	{
+		osimInput.InverseKinematics(std::string(Settings::GetInstance().cacheMappingDir) + std::string(FILENAME_MARKERSONSCAPE_TRC), std::string(Settings::GetInstance().cacheMappingDir) + std::string(FILENAME_POSEMAPPING_MOT));
+	}
+	else
+	{
+		osimInput.InverseKinematics(std::string(Settings::GetInstance().cacheMappingDir) + std::string(FILENAME_MARKERSONSCAPE_TRC),
+			Settings::GetInstance().ikTaskSetPath, std::string(Settings::GetInstance().cacheMappingDir) + std::string(FILENAME_POSEMAPPING_MOT));
+	}
+	
 
 	// receive OSIM model that stores the inverse pose mapping transformed components in the first frame
 	OSIM osimInScapePose(Settings::GetInstance().inputModelOSIM, Settings::GetInstance().inputModelScale, std::string(Settings::GetInstance().cacheMappingDir) + std::string(FILENAME_POSEMAPPING_MOT));
@@ -348,8 +357,8 @@ std::map<std::string, glm::vec3> Model::EstimateBoneScales(const std::map<std::s
 	// TODO: maybe generate automatically? -> all combinations of the markers that belong to a bone
 	std::map<std::string, std::vector<std::pair<std::string, std::string>>> measurementSet;
 	measurementSet["pelvis"] = { std::make_pair("RASI_BASH", "LASI_BASH"), std::make_pair("SACR_BASH", "RASI_BASH"), std::make_pair("SACR_BASH", "LASI_BASH") };
-	/*measurementSet["torso"] = { std::make_pair("SACR_BASH", "C7_BASH"), std::make_pair("STRN_BASH", "CLAV_BASH") };*/
-	measurementSet["torso"] = { std::make_pair("SACR_BASH", "C7_BASH"), std::make_pair("RSHO_BASH", "RASI_BASH"), std::make_pair("LSHO_BASH", "LASI_BASH") };
+	measurementSet["torso"] = { std::make_pair("SACR_BASH", "C7_BASH"), std::make_pair("STRN_BASH", "CLAV_BASH") };
+	//measurementSet["torso"] = { std::make_pair("SACR_BASH", "C7_BASH"), std::make_pair("RSHO_BASH", "RASI_BASH"), std::make_pair("LSHO_BASH", "LASI_BASH") };
 
 	measurementSet["humerus_r"] = { std::make_pair("RSHO_BASH", "RELB_BASH"), std::make_pair("RSHO_BASH", "RUPA_BASH") };
 	measurementSet["ulna_r"] = { std::make_pair("RELB_BASH", "RFRA_BASH"), std::make_pair("RELB_BASH", "RWRB_BASH") };

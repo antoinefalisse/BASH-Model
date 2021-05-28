@@ -48,6 +48,7 @@ enum class MuscleMode { LoadFromFile, kNN };
 #define FILEPATH_CACHE_MAPPING "./data/cache/mapping/"
 #define FILENAME_MARKERSONSCAPE_TRC "markersOnSCAPE.trc" // temporary file that stores the markers in a specific format required for the OpenSim API
 #define FILENAME_POSEMAPPING_MOT "OSIMinSCAPEpose.mot" // here the joint angles are stored that define the mapping from the static baseline model to the OSIM model
+#define FILENAME_SETUPIK_XML "SetupIK_OSIMinSCAPEpose.xml" // Inverse kinematics setup file used for the mapping from the static baseline model to the OSIM model 
 
 // Shader
 #define BIND_ID_BUFFER_POINTLIGHTS 1
@@ -75,6 +76,8 @@ enum class MuscleMode { LoadFromFile, kNN };
 //#define MOUSE_BUTTON_ROTATE_RELEASED MouseButton::LeftReleased
 //#define MOUSE_BUTTON_PAN_PPRESSED MouseButton::MiddlePressed
 //#define MOUSE_BUTTON_PAN_RELEASED MouseButton::MiddleReleased
+
+#define DEFAULT_SCAPE_SPACE_TRANSFORMATION 1.0f
 
 // OpenGL
 #define DEFAULT_POINT_SIZE 1.0f
@@ -151,6 +154,7 @@ public:
 	std::string inputModelScale;
 	std::string inputModelMOT;
 	std::string inputModelSTO;
+	std::string ikTaskSetPath;
 	std::string baselineModelDir = FILEPATH_DEFAULT_BASELINEMODEL_DIR;
 	std::string scapeDataDir = FILEPATH_SCAPE_DATADIRECTORY;
 	std::string cacheMeshDir = FILEPATH_CACHE_MESH;
@@ -160,6 +164,7 @@ public:
 	std::string idxCamera = DEFAULT_INDEX_CAMERA;
 	float cameraDistance = DEFAULT_CAMERA_DISTANCE;
 	float fov = DEFAULT_CAMERA_FOV;
+	float scapeSpace = DEFAULT_SCAPE_SPACE_TRANSFORMATION;
 
 	// other parameters
 	int limitFrames = -1;

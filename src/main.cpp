@@ -167,6 +167,21 @@ int main(int argc, char* argv[]) {
 	}
 	PRINT("Cache-mapping directory: " << Settings::GetInstance().cacheMappingDir);
 
+	// IK task set
+	if (args.Exists("--iktaskset")) {
+		const std::string& iktaskset = args.Get("--iktaskset");
+		if (!iktaskset.empty()) {
+			Settings::GetInstance().ikTaskSetPath = iktaskset;
+			PRINT("IK task set: " << Settings::GetInstance().ikTaskSetPath);
+		}
+		else {
+			PRINT("No IK task set was specified. No IK tasks during pose matching.");
+		}
+	}
+	else {
+		PRINT("No IK task set was specified. No IK tasks during pose matching.");
+	}
+
 	// Cache mesh dir
 	if (args.Exists("--cachemesh")) {
 		const std::string& cachemesh = args.Get("--cachemesh");
@@ -190,6 +205,21 @@ int main(int argc, char* argv[]) {
 			PRINT("Limited animation to " << Settings::GetInstance().limitFrames << " frames.");
 		}
 	}
+
+	// Transformation to SCAPE space
+	if (args.Exists("--scapespace")) {
+		const std::string& scapespace = args.Get("--scapespace");
+		if (!scapespace.empty()) {
+			Settings::GetInstance().scapeSpace = std::stof(scapespace);
+		}
+		else {
+			PRINT("No boolean for SCAPE space transformation was specified. Using default...");
+		}
+	}
+	else {
+		PRINT("No boolean for SCAPE space transformation was specified. Using default...");
+	}
+	PRINT("SCAPE space transformation: " << Settings::GetInstance().scapeSpace);
 
 	// Output
 	if (args.Exists("--output")) {

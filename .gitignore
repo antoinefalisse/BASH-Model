@@ -3,3 +3,4 @@ data/cache/*
 data/videos/*
 *.log
 *_fixedPelvis.mot
+*_markersBASH.osim
