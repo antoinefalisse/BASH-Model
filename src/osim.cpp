@@ -81,7 +81,6 @@ void OSIM::InverseKinematics(const std::string& filepath_input_trc, const std::s
 		ik_tool.setOutputMotionFileName(filepath_output_mot);
 		ik_tool.setResultsDir(Settings::GetInstance().cacheMappingDir);
 		ik_tool.set_IKTaskSet(filepath_ik_taskSet);
-		/*ik_tool.print(std::string(Settings::GetInstance().cacheMappingDir) + std::string(FILENAME_SETUPIK_XML));*/
 		ik_tool.print(std::string(FILENAME_SETUPIK_XML));
 		ik_tool.run();
 	} catch (const std::exception & ex) {
@@ -96,7 +95,6 @@ void OSIM::InverseKinematics(const std::string& filepath_input_trc, const std::s
 		ik_tool.setMarkerDataFileName(filepath_input_trc); // temporarily store the marker file
 		ik_tool.setOutputMotionFileName(filepath_output_mot);
 		ik_tool.setResultsDir(Settings::GetInstance().cacheMappingDir);
-		/*ik_tool.print(std::string(Settings::GetInstance().cacheMappingDir) + std::string(FILENAME_SETUPIK_XML));*/
 		ik_tool.print(std::string(FILENAME_SETUPIK_XML));
 		ik_tool.run();
 	}
