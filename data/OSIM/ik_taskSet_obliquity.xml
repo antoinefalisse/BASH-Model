@@ -2,7 +2,7 @@
 <OpenSimDocument Version="30000">
     <IKTaskSet name="tasks_pose_matching">
 		<objects>
-			<IKCoordinateTask name="pelvis_list">
+			<IKCoordinateTask name="pelvis_obliquity">
 				<!--Whether or not this task will be used during inverse kinematics solve, default is true.-->
 				<apply>true</apply>
 				<!--Weight given to the task when solving inverse kinematics problems, default is 0.-->

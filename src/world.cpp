@@ -473,10 +473,10 @@ void World::ProcessInput() {
 	glClearColor(PRESENTATION_COLOR);
 	Settings::GetInstance().showFloor = false;
 	Settings::GetInstance().showOrigin = false;
-	Settings::GetInstance().showModelOsim = true;
-	Settings::GetInstance().showBonesOsim = true;
-	Settings::GetInstance().showMarkersOsim = true;
-	Settings::GetInstance().showMusclesOsim = true;
+	Settings::GetInstance().showModelOsim = false;
+	Settings::GetInstance().showBonesOsim = false;
+	Settings::GetInstance().showMarkersOsim = false;
+	Settings::GetInstance().showMusclesOsim = false;
 	Settings::GetInstance().showBodyParts = false;
 	Settings::GetInstance().showBounds = false;
 	Settings::GetInstance().showNormals = false;

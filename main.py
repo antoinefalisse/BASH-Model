@@ -101,7 +101,7 @@ pathVideosTrial = os.path.join(pathVideosSubject, 'TrialTest')
 baseModelDir = os.path.join(pathData, 'baselineModel/')
 
 # TODO
-iktaskset = os.path.join(pathOsim, "ik_taskSet.xml") 
+iktaskset = os.path.join(pathOsim, "ik_taskSet_obliquity.xml") 
 scapespace = False
 
 # %% Main function
