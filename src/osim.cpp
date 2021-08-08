@@ -80,6 +80,7 @@ void OSIM::InverseKinematics(const std::string& filepath_input_trc, const std::s
 		ik_tool.setMarkerDataFileName(filepath_input_trc); // temporarily store the marker file
 		ik_tool.setOutputMotionFileName(filepath_output_mot);
 		ik_tool.setResultsDir(Settings::GetInstance().cacheMappingDir);
+		ik_tool.print("SetupIK.xml");
 		ik_tool.run();
 	} catch (const std::exception & ex) {
 		PRINT_ERR(ex.what());

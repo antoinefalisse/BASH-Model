@@ -726,24 +726,6 @@
 										<!--Flag indicating whether or not the values of the coordinates should be prescribed according to the function above. It is ignored if the no prescribed function is specified.-->
 										<prescribed>false</prescribed>
 									</Coordinate>
-                                    <Coordinate name="knee_add_r">
-										<!--Coordinate can describe rotational, translational, or coupled motion. Defaults to rotational.-->
-										<motion_type>rotational</motion_type>
-										<!--The value of this coordinate before any value has been set. Rotational coordinate value is in radians and Translational in meters.-->
-										<default_value>0</default_value>
-										<!--The speed value of this coordinate before any value has been set. Rotational coordinate value is in rad/s and Translational in m/s.-->
-										<default_speed_value>0</default_speed_value>
-										<!--The minimum and maximum values that the coordinate can range between. Rotational coordinate range in radians and Translational in meters.-->
-										<range>-2.7925268 2.7925268</range>
-										<!--Flag indicating whether or not the values of the coordinates should be limited to the range, above.-->
-										<clamped>true</clamped>
-										<!--Flag indicating whether or not the values of the coordinates should be constrained to the current (e.g. default) value, above.-->
-										<locked>false</locked>
-										<!--If specified, the coordinate can be prescribed by a function of time. It can be any OpenSim Function with valid second order derivatives.-->
-										<prescribed_function />
-										<!--Flag indicating whether or not the values of the coordinates should be prescribed according to the function above. It is ignored if the no prescribed function is specified.-->
-										<prescribed>false</prescribed>
-									</Coordinate>
 								</objects>
 								<groups />
 							</CoordinateSet>
@@ -778,14 +760,14 @@
 								</TransformAxis>
 								<TransformAxis name="rotation3">
 									<!--Names of the coordinates that serve as the independent variables         of the transform function.-->
-									<coordinates>knee_add_r</coordinates>
+									<coordinates></coordinates>
 									<!--Rotation or translation axis for the transform.-->
 									<axis>1 0 0</axis>
 									<!--Transform function of the generalized coordinates used to        represent the amount of transformation along a specified axis.-->
 									<function>
-                                        <LinearFunction>
-											<coefficients> 1 0</coefficients>
-										</LinearFunction>
+										<Constant>
+											<value>0</value>
+										</Constant>
 									</function>
 								</TransformAxis>
 								<!--3 Axes for translations are listed next.-->
@@ -1683,24 +1665,6 @@
 										<!--Flag indicating whether or not the values of the coordinates should be prescribed according to the function above. It is ignored if the no prescribed function is specified.-->
 										<prescribed>false</prescribed>
 									</Coordinate>
-                                    <Coordinate name="knee_add_l">
-										<!--Coordinate can describe rotational, translational, or coupled motion. Defaults to rotational.-->
-										<motion_type>rotational</motion_type>
-										<!--The value of this coordinate before any value has been set. Rotational coordinate value is in radians and Translational in meters.-->
-										<default_value>0</default_value>
-										<!--The speed value of this coordinate before any value has been set. Rotational coordinate value is in rad/s and Translational in m/s.-->
-										<default_speed_value>0</default_speed_value>
-										<!--The minimum and maximum values that the coordinate can range between. Rotational coordinate range in radians and Translational in meters.-->
-										<range>-2.7925268 2.7925268</range>
-										<!--Flag indicating whether or not the values of the coordinates should be limited to the range, above.-->
-										<clamped>true</clamped>
-										<!--Flag indicating whether or not the values of the coordinates should be constrained to the current (e.g. default) value, above.-->
-										<locked>false</locked>
-										<!--If specified, the coordinate can be prescribed by a function of time. It can be any OpenSim Function with valid second order derivatives.-->
-										<prescribed_function />
-										<!--Flag indicating whether or not the values of the coordinates should be prescribed according to the function above. It is ignored if the no prescribed function is specified.-->
-										<prescribed>false</prescribed>
-									</Coordinate>
 								</objects>
 								<groups />
 							</CoordinateSet>
@@ -1735,14 +1699,14 @@
 								</TransformAxis>
 								<TransformAxis name="rotation3">
 									<!--Names of the coordinates that serve as the independent variables         of the transform function.-->
-									<coordinates>knee_add_l</coordinates>
+									<coordinates></coordinates>
 									<!--Rotation or translation axis for the transform.-->
-									<axis>-1 0 0</axis>
+									<axis>1 0 0</axis>
 									<!--Transform function of the generalized coordinates used to        represent the amount of transformation along a specified axis.-->
 									<function>
-										<LinearFunction>
-											<coefficients> 1 0</coefficients>
-										</LinearFunction>
+										<Constant>
+											<value>0</value>
+										</Constant>
 									</function>
 								</TransformAxis>
 								<!--3 Axes for translations are listed next.-->
@@ -11377,7 +11341,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>torso</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0.118677 0.25884 -0.00395959</location>
+					<location> 0.118677 0.25884 0</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11393,7 +11357,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>torso</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0.0012914 0.503554 -0.166947</location>
+					<location> -0.00792224 0.485388 -0.16658</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11401,7 +11365,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>torso</body>
 					<!--Location of a marker on the body segment.-->
-					<location> -0.0405052 0.491721 0.000293491</location>
+					<location> -0.0405052 0.491721 0</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11409,7 +11373,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>torso</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0.0930161 0.408968 -1.24912e-05</location>
+					<location> 0.0930161 0.408968 0</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11457,7 +11421,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>humerus_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0.0158481 -0.0780511 -0.0646028</location>
+					<location> 0.0170662 -0.14173 -0.0349179</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11465,7 +11429,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>humerus_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0.0131475 -0.270943 -0.0346053</location>
+					<location> 0.0152299 -0.274448 -0.0310107</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11473,7 +11437,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>ulna_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> -0.0373877 -0.123453 -0.0224037</location>
+					<location> -0.0244699 -0.0744526 -0.0329819</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11481,7 +11445,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>radius_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> -0.0395308 -0.233506 0.00606415</location>
+					<location> -0.0426324 -0.241451 0.00367371</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11489,7 +11453,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>radius_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> -0.00943855 -0.236121 -0.0645278</location>
+					<location> -0.0140836 -0.251502 -0.072031</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11505,7 +11469,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>pelvis</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0.0201222 0.0118587 -0.117626</location>
+					<location> 0.0212898 0.00950465 -0.12163</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11513,7 +11477,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>pelvis</body>
 					<!--Location of a marker on the body segment.-->
-					<location> -0.173206 0.0233147 -0.00306274</location>
+					<location> -0.173206 0.0233147 0</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11609,7 +11573,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>femur_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0.00514413 -0.0235324 -0.108191</location>
+					<location> 0.0139289 -0.0190326 -0.116076</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11617,7 +11581,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>femur_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> -0.00862103 -0.466618 -0.0704465</location>
+					<location> -0.00497411 -0.468543 -0.0738779</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11625,7 +11589,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>femur_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> -0.00620532 -0.469949 0.0452917</location>
+					<location> -0.00577508 -0.466941 0.0409429</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11633,7 +11597,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>tibia_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> -0.0110887 -0.481429 -0.0552465</location>
+					<location> -0.0196002 -0.484244 -0.053894</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11641,7 +11605,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>tibia_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0.00531002 -0.451651 0.0372707</location>
+					<location> 0.00109396 -0.466952 0.0399077</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11649,7 +11613,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>calcn_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> -0.0321176 0.0496709 0.0136211</location>
+					<location> -0.0316238 0.0499572 0.00778763</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11665,7 +11629,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>calcn_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0.101273 0.0344704 -0.0533705</location>
+					<location> 0.0933669 0.0307352 -0.0561129</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11673,7 +11637,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>calcn_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0.105467 0.0324716 0.0513158</location>
+					<location> 0.107866 0.0336312 0.0526373</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11681,7 +11645,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>toes_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0 0 -0.0621953</location>
+					<location> -0.003743 0.00676926 -0.05763</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>true</fixed>
 				</Marker>
@@ -11689,7 +11653,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>toes_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0.00888505 0.0177701 0.0444252</location>
+					<location> 0.0116475 0.016714 0.0450025</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>true</fixed>
 				</Marker>
@@ -11697,7 +11661,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>femur_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0.0574751 -0.452193 -0.0228244</location>
+					<location> 0.0588106 -0.453552 -0.0170488</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11729,7 +11693,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>calcn_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0.0399163 0.0132633 -0.0496523</location>
+					<location> 0.0404717 0.0149205 -0.0503874</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>
@@ -11737,7 +11701,7 @@
 					<!--Body segment in the model on which the marker resides.-->
 					<body>calcn_l</body>
 					<!--Location of a marker on the body segment.-->
-					<location> 0.034997 0.0215868 0.0554724</location>
+					<location> 0.0391915 0.0243148 0.0566816</location>
 					<!--Flag (true or false) specifying whether or not a marker should be kept fixed in the marker placement step.  i.e. If false, the marker is allowed to move.-->
 					<fixed>false</fixed>
 				</Marker>

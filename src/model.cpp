@@ -221,6 +221,10 @@ void Model::ComputeModelPose_Scaled() {
 
 	std::vector<glm::mat4> S = modelData->GetBoneTransformations_scalePerBone(scaleFactors);
 	vertices_scaled = TransformMeshInPose(vertices_default, S);
+
+	//PRINT("markers_default " << markers_default);
+	//PRINT("S " << S);
+
 	markers_scaled = TransformMarkersInPose(markers_default, S);
 
 	if (CACHE_ALL_MESHES) {
@@ -348,30 +352,48 @@ std::map<std::string, glm::vec3> Model::EstimateBoneScales(const std::map<std::s
 	// TODO: maybe generate automatically? -> all combinations of the markers that belong to a bone
 	std::map<std::string, std::vector<std::pair<std::string, std::string>>> measurementSet;
 	measurementSet["pelvis"] = { std::make_pair("RASI_BASH", "LASI_BASH"), std::make_pair("SACR_BASH", "RASI_BASH"), std::make_pair("SACR_BASH", "LASI_BASH") };
-	/*measurementSet["torso"] = { std::make_pair("SACR_BASH", "C7_BASH"), std::make_pair("STRN_BASH", "CLAV_BASH") };*/
-	measurementSet["torso"] = { std::make_pair("SACR_BASH", "C7_BASH"), std::make_pair("RSHO_BASH", "RASI_BASH"), std::make_pair("LSHO_BASH", "LASI_BASH") };
+	measurementSet["torso"] = { std::make_pair("SACR_BASH", "C7_BASH"), std::make_pair("STRN_BASH", "CLAV_BASH") };
+	//measurementSet["torso"] = { std::make_pair("SACR_BASH", "C7_BASH"), std::make_pair("RSHO_BASH", "RASI_BASH"), std::make_pair("LSHO_BASH", "LASI_BASH") };
 
-	measurementSet["humerus_r"] = { std::make_pair("RSHO_BASH", "RELB_BASH"), std::make_pair("RSHO_BASH", "RUPA_BASH") };
-	measurementSet["ulna_r"] = { std::make_pair("RELB_BASH", "RFRA_BASH"), std::make_pair("RELB_BASH", "RWRB_BASH") };
-	measurementSet["radius_r"] = { std::make_pair("RELB_BASH", "RFRA_BASH"), std::make_pair("RELB_BASH", "RWRB_BASH") };
-	measurementSet["hand_r"] = { std::make_pair("RWRB_BASH", "RWBA_BASH") };
+	measurementSet["humerus_r"] = { std::make_pair("RSHO_BASH", "RELB_BASH"), std::make_pair("RSHO_BASH", "RUPA_BASH"),
+									std::make_pair("LSHO_BASH", "LELB_BASH"), std::make_pair("LSHO_BASH", "LUPA_BASH") };
+	measurementSet["ulna_r"] = { std::make_pair("RELB_BASH", "RFRA_BASH"), std::make_pair("RELB_BASH", "RWRB_BASH"),
+								 std::make_pair("LELB_BASH", "LFRA_BASH"), std::make_pair("LELB_BASH", "LWRE_BASH") };
+	measurementSet["radius_r"] = { std::make_pair("RELB_BASH", "RFRA_BASH"), std::make_pair("RELB_BASH", "RWRB_BASH"),
+								   std::make_pair("LELB_BASH", "LFRA_BASH"), std::make_pair("LELB_BASH", "LWRE_BASH") };
+	measurementSet["hand_r"] = { std::make_pair("RWRB_BASH", "RWBA_BASH"),
+								 std::make_pair("LWRE_BASH", "LWRA_BASH") };
 
-	measurementSet["humerus_l"] = { std::make_pair("LSHO_BASH", "LELB_BASH"), std::make_pair("LSHO_BASH", "LUPA_BASH") };
-	measurementSet["ulna_l"] = { std::make_pair("LELB_BASH", "LFRA_BASH"), std::make_pair("LELB_BASH", "LWRE_BASH") };
-	measurementSet["radius_l"] = { std::make_pair("LELB_BASH", "LFRA_BASH"), std::make_pair("LELB_BASH", "LWRE_BASH") };
-	measurementSet["hand_l"] = { std::make_pair("LWRE_BASH", "LWRA_BASH") };
+	measurementSet["humerus_l"] = { std::make_pair("RSHO_BASH", "RELB_BASH"), std::make_pair("RSHO_BASH", "RUPA_BASH"),
+									std::make_pair("LSHO_BASH", "LELB_BASH"), std::make_pair("LSHO_BASH", "LUPA_BASH") };
+	measurementSet["ulna_l"] = { std::make_pair("RELB_BASH", "RFRA_BASH"), std::make_pair("RELB_BASH", "RWRB_BASH"),
+								 std::make_pair("LELB_BASH", "LFRA_BASH"), std::make_pair("LELB_BASH", "LWRE_BASH") };
+	measurementSet["radius_l"] = { std::make_pair("RELB_BASH", "RFRA_BASH"), std::make_pair("RELB_BASH", "RWRB_BASH"),
+								   std::make_pair("LELB_BASH", "LFRA_BASH"), std::make_pair("LELB_BASH", "LWRE_BASH") };
+	measurementSet["hand_l"] = { std::make_pair("RWRB_BASH", "RWBA_BASH"),
+								 std::make_pair("LWRE_BASH", "LWRA_BASH") };
 
-	measurementSet["femur_r"] = { std::make_pair("TRO_BASH", "KneL_BASH"), std::make_pair("KneL_BASH", "KneM_BASH") };
-	measurementSet["tibia_r"] = { std::make_pair("Pat_BASH", "AnkM_BASH"), std::make_pair("KneL_BASH", "KneM_BASH"), std::make_pair("AnkL_BASH", "AnkM_BASH") };
-	measurementSet["talus_r"] = { std::make_pair("AnkL_BASH", "AnkM_BASH"), std::make_pair("AnkL_BASH", "Hee_BASH") };
-	measurementSet["calcn_r"] = { std::make_pair("ToeM_BASH", "CalM_BASH"), std::make_pair("ToeL_BASH", "CalL_BASH"), std::make_pair("MFM_BASH", "MFL_BASH") };
-	measurementSet["toes_r"] = { std::make_pair("ToeM_BASH", "ToeL_BASH"), std::make_pair("ToeM_BASH", "Toe2_BASH") };
+	measurementSet["femur_r"] = { std::make_pair("TRO_BASH", "KneL_BASH"), std::make_pair("KneL_BASH", "KneM_BASH"),
+								  std::make_pair("LTRO_BASH", "LKneL_BASH"), std::make_pair("LKneL_BASH", "LKneM_BASH") };
+	measurementSet["tibia_r"] = { std::make_pair("LPat_BASH", "LAnkM_BASH"), std::make_pair("LKneL_BASH", "LKneM_BASH"), std::make_pair("LAnkL_BASH", "LAnkM_BASH"),
+								  std::make_pair("Pat_BASH", "AnkM_BASH"), std::make_pair("KneL_BASH", "KneM_BASH"), std::make_pair("AnkL_BASH", "AnkM_BASH") };
+	measurementSet["talus_r"] = { std::make_pair("AnkL_BASH", "AnkM_BASH"), std::make_pair("AnkL_BASH", "Hee_BASH"),
+								  std::make_pair("LAnkL_BASH", "LAnkM_BASH"), std::make_pair("LAnkL_BASH", "LHee_BASH") };
+	measurementSet["calcn_r"] = { std::make_pair("ToeM_BASH", "CalM_BASH"), std::make_pair("ToeL_BASH", "CalL_BASH"), std::make_pair("MFM_BASH", "MFL_BASH"),
+							      std::make_pair("LToeM_BASH", "LCalM_BASH"), std::make_pair("LToeL_BASH", "LCalL_BASH"), std::make_pair("LMFM_BASH", "LMFL_BASH") };
+	measurementSet["toes_r"] = { std::make_pair("LToeM_BASH", "LToeL_BASH"), std::make_pair("LToeM_BASH", "LToe2_BASH"),
+								 std::make_pair("ToeM_BASH", "ToeL_BASH"), std::make_pair("ToeM_BASH", "Toe2_BASH") };
 
-	measurementSet["femur_l"] = { std::make_pair("LTRO_BASH", "LKneL_BASH"), std::make_pair("LKneL_BASH", "LKneM_BASH") };
-	measurementSet["tibia_l"] = { std::make_pair("LPat_BASH", "LAnkM_BASH"), std::make_pair("LKneL_BASH", "LKneM_BASH"), std::make_pair("LAnkL_BASH", "LAnkM_BASH") };
-	measurementSet["talus_l"] = { std::make_pair("LAnkL_BASH", "LAnkM_BASH"), std::make_pair("LAnkL_BASH", "LHee_BASH") };
-	measurementSet["calcn_l"] = { std::make_pair("LToeM_BASH", "LCalM_BASH"), std::make_pair("LToeL_BASH", "LCalL_BASH"), std::make_pair("LMFM_BASH", "LMFL_BASH") };
-	measurementSet["toes_l"] = { std::make_pair("LToeM_BASH", "LToeL_BASH"), std::make_pair("LToeM_BASH", "LToe2_BASH") };
+	measurementSet["femur_l"] = { std::make_pair("TRO_BASH", "KneL_BASH"), std::make_pair("KneL_BASH", "KneM_BASH"),
+								  std::make_pair("LTRO_BASH", "LKneL_BASH"), std::make_pair("LKneL_BASH", "LKneM_BASH") };
+	measurementSet["tibia_l"] = { std::make_pair("LPat_BASH", "LAnkM_BASH"), std::make_pair("LKneL_BASH", "LKneM_BASH"), std::make_pair("LAnkL_BASH", "LAnkM_BASH"),
+								  std::make_pair("Pat_BASH", "AnkM_BASH"), std::make_pair("KneL_BASH", "KneM_BASH"), std::make_pair("AnkL_BASH", "AnkM_BASH") };
+	measurementSet["talus_l"] = { std::make_pair("AnkL_BASH", "AnkM_BASH"), std::make_pair("AnkL_BASH", "Hee_BASH"),
+								  std::make_pair("LAnkL_BASH", "LAnkM_BASH"), std::make_pair("LAnkL_BASH", "LHee_BASH") };
+	measurementSet["calcn_l"] = { std::make_pair("ToeM_BASH", "CalM_BASH"), std::make_pair("ToeL_BASH", "CalL_BASH"), std::make_pair("MFM_BASH", "MFL_BASH"),
+								  std::make_pair("LToeM_BASH", "LCalM_BASH"), std::make_pair("LToeL_BASH", "LCalL_BASH"), std::make_pair("LMFM_BASH", "LMFL_BASH") };
+	measurementSet["toes_l"] = { std::make_pair("LToeM_BASH", "LToeL_BASH"), std::make_pair("LToeM_BASH", "LToe2_BASH"),
+								 std::make_pair("ToeM_BASH", "ToeL_BASH"), std::make_pair("ToeM_BASH", "Toe2_BASH") };
 
 
 	for (const auto& measurement : measurementSet) {
